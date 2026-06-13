@@ -1,0 +1,35 @@
+{
+  "stations": {
+    "N3": { "id": "N3", "nameEN": "Phaya Thai", "nameTH": "พญาไท", "line": "BTS_GREEN" },
+    "N1": { "id": "N1", "nameEN": "Ratchathewi", "nameTH": "ราชเทวี", "line": "BTS_GREEN" },
+    "CEN": { "id": "CEN", "nameEN": "Siam", "nameTH": "สยาม", "line": "BTS_GREEN" },
+    "E1": { "id": "E1", "nameEN": "Chit Lom", "nameTH": "ชิดลม", "line": "BTS_GREEN" },
+    "E4": { "id": "E4", "nameEN": "Asok", "nameTH": "อโศก", "line": "BTS_GREEN" },
+    
+    "BL20": { "id": "BL20", "nameEN": "Phra Ram 9", "nameTH": "พระราม 9", "line": "MRT_BLUE" },
+    "BL21": { "id": "BL21", "nameEN": "Phetchaburi", "nameTH": "เพชรบุรี", "line": "MRT_BLUE" },
+    "BL22": { "id": "BL22", "nameEN": "Sukhumvit", "nameTH": "สุขุมวิท", "line": "MRT_BLUE" },
+    "BL23": { "id": "BL23", "nameEN": "Queen Sirikit Center", "nameTH": "ศูนย์ฯ สิริกิติ์", "line": "MRT_BLUE" },
+    
+    "A8": { "id": "A8", "nameEN": "Phaya Thai", "nameTH": "พญาไท", "line": "ARL" },
+    "A7": { "id": "A7", "nameEN": "Ratchaprarop", "nameTH": "ราชปรารภ", "line": "ARL" },
+    "A6": { "id": "A6", "nameEN": "Makkasan", "nameTH": "มักกะสัน", "line": "ARL" }
+  },
+  "edges": [
+    { "from": "N3", "to": "N1", "weight": 2, "fare": 17 },
+    { "from": "N1", "to": "CEN", "weight": 2, "fare": 17 },
+    { "from": "CEN", "to": "E1", "weight": 2, "fare": 17 },
+    { "from": "E1", "to": "E4", "weight": 6, "fare": 28 },
+    
+    { "from": "BL20", "to": "BL21", "weight": 3, "fare": 19 },
+    { "from": "BL21", "to": "BL22", "weight": 2, "fare": 17 },
+    { "from": "BL22", "to": "BL23", "weight": 3, "fare": 19 },
+    
+    { "from": "A8", "to": "A7", "weight": 2, "fare": 15 },
+    { "from": "A7", "to": "A6", "weight": 3, "fare": 20 },
+    
+    { "from": "N3", "to": "A8", "weight": 3, "fare": 0, "type": "interchange" },
+    { "from": "E4", "to": "BL22", "weight": 3, "fare": 0, "type": "interchange" },
+    { "from": "BL21", "to": "A6", "weight": 4, "fare": 0, "type": "interchange" }
+  ]
+}
