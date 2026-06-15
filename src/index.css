@@ -21,12 +21,7 @@
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
   
-  .dark .glass {
-    background: rgba(15, 15, 15, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
+  
   
   .glass-card {
     background: rgba(255, 255, 255, 0.6);
@@ -35,12 +30,7 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
   
-  .dark .glass-card {
-    background: rgba(30, 30, 30, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
+  
 }
 
 /* Custom scrollbars for minimalist layout */
@@ -58,9 +48,7 @@
   border-radius: 99px;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-}
+
 
 /* Map hover animation styles */
 .map-station {
@@ -92,10 +80,7 @@ body {
   font-family: var(--font-sans);
 }
 
-.dark body {
-  background-color: #000000;
-  color: #f5f5f7;
-}
+
 
 #root {
   width: 100%;
