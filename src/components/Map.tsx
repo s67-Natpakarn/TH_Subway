@@ -787,6 +787,17 @@ export const Map: React.FC<MapProps> = ({
  calculatedRoute,
 }) => {
  const [scale, setScale] = useState(1);
+ const [popupGroup, setPopupGroup] = useState<{ stations: Station[], coords: {x: number, y: number} } | null>(null);
+
+  const stationsByCoord: Record<string, Station[]> = {};
+  stations.forEach(st => {
+    const coords = stationCoords[st.id];
+    if (!coords) return;
+    const key = `${coords.x},${coords.y}`;
+    if (!stationsByCoord[key]) stationsByCoord[key] = [];
+    stationsByCoord[key].push(st);
+  });
+
  const isStationInRoute = (stationId: string) => {
  if (!calculatedRoute) return false;
  return calculatedRoute.path.some((s) => s.id === stationId);
@@ -846,6 +857,7 @@ export const Map: React.FC<MapProps> = ({
           <svg
             viewBox="-50 -150 1200 1300"
             className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
+            onClick={() => setPopupGroup(null)}
           >
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse" x="0" y="0">
@@ -940,7 +952,20 @@ export const Map: React.FC<MapProps> = ({
  const strokeColor = getLineColor(st.line);
 
  return (
- <g key={`map-node-${st.id}`} className="cursor-pointer" onClick={() => onSelectStation(st)}>
+ <g 
+   key={`map-node-${st.id}`} 
+   className="cursor-pointer group" 
+   onClick={(e) => {
+     e.stopPropagation();
+     const group = stationsByCoord[`${coords.x},${coords.y}`];
+     if (group && group.length > 1) {
+       setPopupGroup({ stations: group, coords });
+     } else {
+       setPopupGroup(null);
+       onSelectStation(st);
+     }
+   }}
+ >
  {/* Ripple Glow */}
  {(isStart || isEnd) && (
  <circle
@@ -1009,6 +1034,34 @@ export const Map: React.FC<MapProps> = ({
  </g>
  );
  })}
+          {/* --- STAGE 4: Interchange Line Selector Popup --- */}
+          {popupGroup && (
+            <foreignObject
+              x={popupGroup.coords.x - 30}
+              y={popupGroup.coords.y + 10}
+              width="60"
+              height="80"
+              className="overflow-visible"
+            >
+              <div className="bg-white/95 backdrop-blur-sm rounded-md shadow-2xl border border-gray-200/50 p-1.5 flex flex-col gap-0.5 w-[60px] transform -translate-x-1/2 left-1/2 relative z-50">
+                <div className="text-[3.5px] font-bold text-gray-500 mb-0.5 px-1 uppercase tracking-wider">Select Line</div>
+                {popupGroup.stations.map((st) => (
+                  <button
+                    key={st.id}
+                    className="text-[4px] text-left px-1.5 py-1 hover:bg-gray-100/80 rounded-[2px] text-gray-800 font-semibold truncate flex items-center gap-1 transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSelectStation(st);
+                      setPopupGroup(null);
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: getLineColor(st.line) }}></span>
+                    {st.line.replace('BTS_', '').replace('MRT_', '').replace('SRT_', '')}
+                  </button>
+                ))}
+              </div>
+            </foreignObject>
+          )}
  </svg>
         </TransformComponent>
       );
