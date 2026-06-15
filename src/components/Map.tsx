@@ -14,768 +14,768 @@ interface MapProps {
 // Coordinate layout of all nodes inside SVG viewBox="0 0 1000 580"
 export const stationCoords: Record<string, { x: number; y: number }> = {
   "N24": {
-    "x": 600,
-    "y": -120
+    "x": 1000,
+    "y": 40
   },
   "N23": {
-    "x": 600,
-    "y": -90
+    "x": 1000,
+    "y": 80
   },
   "N22": {
-    "x": 600,
-    "y": -60
+    "x": 1000,
+    "y": 120
   },
   "N21": {
-    "x": 600,
-    "y": -30
+    "x": 1000,
+    "y": 160
   },
   "N20": {
-    "x": 600,
-    "y": 0
+    "x": 1000,
+    "y": 200
   },
   "N19": {
-    "x": 600,
-    "y": 30
+    "x": 1000,
+    "y": 240
   },
   "N18": {
-    "x": 600,
-    "y": 60
+    "x": 1000,
+    "y": 280
   },
   "N17": {
-    "x": 600,
-    "y": 90
+    "x": 1000,
+    "y": 320
   },
   "N16": {
-    "x": 600,
-    "y": 120
+    "x": 1000,
+    "y": 360
   },
   "N15": {
-    "x": 600,
-    "y": 150
-  },
-  "N14": {
-    "x": 600,
-    "y": 180
-  },
-  "N13": {
-    "x": 600,
-    "y": 210
-  },
-  "N12": {
-    "x": 600,
-    "y": 240
-  },
-  "N11": {
-    "x": 600,
-    "y": 270
-  },
-  "N10": {
-    "x": 600,
-    "y": 300
-  },
-  "N9": {
-    "x": 600,
-    "y": 330
-  },
-  "N8": {
-    "x": 600,
-    "y": 360
-  },
-  "N7": {
-    "x": 600,
-    "y": 397.5
-  },
-  "N5": {
-    "x": 600,
-    "y": 435
-  },
-  "N4": {
-    "x": 600,
-    "y": 472.5
-  },
-  "N3": {
-    "x": 600,
-    "y": 510
-  },
-  "N2": {
-    "x": 600,
-    "y": 540
-  },
-  "N1": {
-    "x": 600,
-    "y": 570
-  },
-  "CEN_S": {
-    "x": 600,
-    "y": 600
-  },
-  "E1": {
-    "x": 630,
-    "y": 600
-  },
-  "E2": {
-    "x": 660,
-    "y": 600
-  },
-  "E3": {
-    "x": 690,
-    "y": 600
-  },
-  "E4": {
-    "x": 720,
-    "y": 600
-  },
-  "E5": {
-    "x": 750,
-    "y": 600
-  },
-  "E6": {
-    "x": 780,
-    "y": 600
-  },
-  "E7": {
-    "x": 810,
-    "y": 600
-  },
-  "E8": {
-    "x": 840,
-    "y": 600
-  },
-  "E9": {
-    "x": 870,
-    "y": 600
-  },
-  "E10": {
-    "x": 890,
-    "y": 620
-  },
-  "E11": {
-    "x": 910,
-    "y": 640
-  },
-  "E12": {
-    "x": 930,
-    "y": 660
-  },
-  "E13": {
-    "x": 950,
-    "y": 680
-  },
-  "E14": {
-    "x": 970,
-    "y": 700
-  },
-  "E15": {
-    "x": 990,
-    "y": 720
-  },
-  "E16": {
-    "x": 990,
-    "y": 750
-  },
-  "E17": {
-    "x": 990,
-    "y": 780
-  },
-  "E18": {
-    "x": 990,
-    "y": 810
-  },
-  "E19": {
-    "x": 990,
-    "y": 840
-  },
-  "E20": {
-    "x": 990,
-    "y": 870
-  },
-  "E21": {
-    "x": 990,
-    "y": 900
-  },
-  "E22": {
-    "x": 990,
-    "y": 930
-  },
-  "E23": {
-    "x": 990,
-    "y": 960
-  },
-  "W1": {
-    "x": 570,
-    "y": 600
-  },
-  "CEN_L": {
-    "x": 600,
-    "y": 600
-  },
-  "S1": {
-    "x": 600,
-    "y": 630
-  },
-  "S2": {
-    "x": 600,
-    "y": 660
-  },
-  "S3": {
-    "x": 570,
-    "y": 690
-  },
-  "S4": {
-    "x": 540,
-    "y": 720
-  },
-  "S5": {
-    "x": 510,
-    "y": 750
-  },
-  "S6": {
-    "x": 480,
-    "y": 780
-  },
-  "S7": {
-    "x": 450,
-    "y": 780
-  },
-  "S8": {
-    "x": 420,
-    "y": 780
-  },
-  "S9": {
-    "x": 390,
-    "y": 780
-  },
-  "S10": {
-    "x": 360,
-    "y": 780
-  },
-  "S11": {
-    "x": 330,
-    "y": 780
-  },
-  "S12": {
-    "x": 300,
-    "y": 780
-  },
-  "BL01": {
-    "x": 480,
-    "y": 720
-  },
-  "BL02": {
-    "x": 476.7,
-    "y": 680
-  },
-  "BL03": {
-    "x": 473.3,
-    "y": 640
-  },
-  "BL04": {
-    "x": 470,
-    "y": 600
-  },
-  "BL05": {
-    "x": 466.7,
-    "y": 560
-  },
-  "BL06": {
-    "x": 463.3,
-    "y": 520
-  },
-  "BL07": {
-    "x": 460,
-    "y": 480
-  },
-  "BL08": {
-    "x": 456.7,
-    "y": 440
-  },
-  "BL09": {
-    "x": 453.3,
+    "x": 1000,
     "y": 400
   },
-  "BL10": {
-    "x": 450,
-    "y": 360
+  "N14": {
+    "x": 1000,
+    "y": 440
   },
-  "BL11": {
-    "x": 480,
-    "y": 360
-  },
-  "BL12": {
-    "x": 540,
-    "y": 360
-  },
-  "BL13": {
-    "x": 600,
-    "y": 360
-  },
-  "BL14": {
-    "x": 660,
-    "y": 360
-  },
-  "BL15": {
-    "x": 720,
-    "y": 360
-  },
-  "BL16": {
-    "x": 720,
-    "y": 395
-  },
-  "BL17": {
-    "x": 720,
-    "y": 430
-  },
-  "BL18": {
-    "x": 720,
-    "y": 465
-  },
-  "BL19": {
-    "x": 720,
-    "y": 500
-  },
-  "BL20": {
-    "x": 720,
-    "y": 535
-  },
-  "BL21": {
-    "x": 720,
-    "y": 570
-  },
-  "BL22": {
-    "x": 720,
-    "y": 600
-  },
-  "BL23": {
-    "x": 690,
-    "y": 615
-  },
-  "BL24": {
-    "x": 660,
-    "y": 630
-  },
-  "BL25": {
-    "x": 630,
-    "y": 645
-  },
-  "BL26": {
-    "x": 600,
-    "y": 660
-  },
-  "BL27": {
-    "x": 570,
-    "y": 660
-  },
-  "BL28": {
-    "x": 540,
-    "y": 660
-  },
-  "BL29": {
-    "x": 528,
-    "y": 672
-  },
-  "BL30": {
-    "x": 516,
-    "y": 684
-  },
-  "BL31": {
-    "x": 504,
-    "y": 696
-  },
-  "BL32": {
-    "x": 492,
-    "y": 708
-  },
-  "BL01_2": {
-    "x": 480,
-    "y": 720
-  },
-  "BL33": {
-    "x": 390,
-    "y": 750
-  },
-  "BL34": {
-    "x": 300,
-    "y": 780
-  },
-  "BL35": {
-    "x": 270,
-    "y": 780
-  },
-  "BL36": {
-    "x": 240,
-    "y": 780
-  },
-  "BL37": {
-    "x": 210,
-    "y": 780
-  },
-  "BL38": {
-    "x": 180,
-    "y": 780
-  },
-  "PP01": {
-    "x": 240,
-    "y": 120
-  },
-  "PP02": {
-    "x": 240,
-    "y": 150
-  },
-  "PP03": {
-    "x": 240,
-    "y": 180
-  },
-  "PP04": {
-    "x": 240,
-    "y": 210
-  },
-  "PP05": {
-    "x": 240,
-    "y": 240
-  },
-  "PP06": {
-    "x": 240,
-    "y": 270
-  },
-  "PP07": {
-    "x": 270,
-    "y": 270
-  },
-  "PP08": {
-    "x": 300,
-    "y": 270
-  },
-  "PP09": {
-    "x": 330,
-    "y": 270
-  },
-  "PP10": {
-    "x": 360,
-    "y": 270
-  },
-  "PP11": {
-    "x": 390,
-    "y": 270
-  },
-  "PP12": {
-    "x": 390,
-    "y": 300
-  },
-  "PP13": {
-    "x": 390,
-    "y": 330
-  },
-  "PP14": {
-    "x": 390,
-    "y": 360
-  },
-  "PP15": {
-    "x": 420,
-    "y": 360
-  },
-  "PP16": {
-    "x": 450,
-    "y": 360
-  },
-  "YL01": {
-    "x": 720,
-    "y": 360
-  },
-  "YL02": {
-    "x": 758.6,
-    "y": 360
-  },
-  "YL03": {
-    "x": 797.1,
-    "y": 360
-  },
-  "YL04": {
-    "x": 835.7,
-    "y": 360
-  },
-  "YL05": {
-    "x": 874.3,
-    "y": 360
-  },
-  "YL06": {
-    "x": 912.9,
-    "y": 360
-  },
-  "YL07": {
-    "x": 951.4,
-    "y": 360
-  },
-  "YL08": {
-    "x": 990,
-    "y": 360
-  },
-  "YL09": {
-    "x": 990,
-    "y": 384
-  },
-  "YL10": {
-    "x": 990,
-    "y": 408
-  },
-  "YL11": {
-    "x": 990,
-    "y": 432
-  },
-  "YL12": {
-    "x": 990,
-    "y": 456
-  },
-  "YL13": {
-    "x": 990,
+  "N13": {
+    "x": 1000,
     "y": 480
   },
-  "YL14": {
-    "x": 990,
-    "y": 504
+  "N12": {
+    "x": 1000,
+    "y": 520
   },
-  "YL15": {
-    "x": 990,
-    "y": 528
+  "N11": {
+    "x": 1000,
+    "y": 560
   },
-  "YL16": {
-    "x": 990,
-    "y": 552
-  },
-  "YL17": {
-    "x": 990,
-    "y": 576
-  },
-  "YL18": {
-    "x": 990,
+  "N10": {
+    "x": 1000,
     "y": 600
   },
-  "YL19": {
-    "x": 990,
-    "y": 624
-  },
-  "YL20": {
-    "x": 990,
-    "y": 648
-  },
-  "YL21": {
-    "x": 990,
-    "y": 672
-  },
-  "YL22": {
-    "x": 990,
-    "y": 696
-  },
-  "YL23": {
-    "x": 990,
-    "y": 720
-  },
-  "PK01": {
-    "x": 390,
-    "y": 270
-  },
-  "PK02": {
-    "x": 390,
-    "y": 234
-  },
-  "PK03": {
-    "x": 390,
-    "y": 198
-  },
-  "PK04": {
-    "x": 390,
-    "y": 162
-  },
-  "PK05": {
-    "x": 390,
-    "y": 126
-  },
-  "PK06": {
-    "x": 390,
-    "y": 90
-  },
-  "PK07": {
-    "x": 420,
-    "y": 90
-  },
-  "PK08": {
-    "x": 450,
-    "y": 90
-  },
-  "PK09": {
-    "x": 480,
-    "y": 90
-  },
-  "PK10": {
-    "x": 510,
-    "y": 90
-  },
-  "PK11": {
-    "x": 540,
-    "y": 90
-  },
-  "PK12": {
-    "x": 570,
-    "y": 90
-  },
-  "PK13": {
-    "x": 600,
-    "y": 90
-  },
-  "PK14": {
-    "x": 630,
-    "y": 90
-  },
-  "PK15": {
-    "x": 615,
-    "y": 90
-  },
-  "PK16": {
-    "x": 600,
-    "y": 90
-  },
-  "PK17": {
-    "x": 630,
-    "y": 90
-  },
-  "PK18": {
-    "x": 660,
-    "y": 90
-  },
-  "PK19": {
-    "x": 690,
-    "y": 90
-  },
-  "PK20": {
-    "x": 720,
-    "y": 90
-  },
-  "PK21": {
-    "x": 750,
-    "y": 90
-  },
-  "PK22": {
-    "x": 780,
-    "y": 90
-  },
-  "PK23": {
-    "x": 810,
-    "y": 90
-  },
-  "PK24": {
-    "x": 840,
-    "y": 90
-  },
-  "PK25": {
-    "x": 870,
-    "y": 90
-  },
-  "PK26": {
-    "x": 900,
-    "y": 90
-  },
-  "PK27": {
-    "x": 930,
-    "y": 90
-  },
-  "PK28": {
-    "x": 960,
-    "y": 90
-  },
-  "PK29": {
-    "x": 990,
-    "y": 90
-  },
-  "PK30": {
-    "x": 1020,
-    "y": 90
-  },
-  "A8": {
-    "x": 600,
-    "y": 540
-  },
-  "A7": {
-    "x": 660,
-    "y": 555
-  },
-  "A6": {
-    "x": 720,
-    "y": 570
-  },
-  "A5": {
-    "x": 855,
-    "y": 600
-  },
-  "A4": {
-    "x": 990,
-    "y": 630
-  },
-  "A3": {
-    "x": 1020,
+  "N9": {
+    "x": 1000,
     "y": 640
   },
-  "A2": {
-    "x": 1050,
-    "y": 650
+  "N8": {
+    "x": 1000,
+    "y": 680
   },
-  "A1": {
+  "N7": {
+    "x": 1000,
+    "y": 730
+  },
+  "N5": {
+    "x": 1000,
+    "y": 780
+  },
+  "N4": {
+    "x": 1000,
+    "y": 830
+  },
+  "N3": {
+    "x": 1000,
+    "y": 880
+  },
+  "N2": {
+    "x": 1000,
+    "y": 920
+  },
+  "N1": {
+    "x": 1000,
+    "y": 960
+  },
+  "CEN_S": {
+    "x": 1000,
+    "y": 1000
+  },
+  "E1": {
+    "x": 1040,
+    "y": 1000
+  },
+  "E2": {
     "x": 1080,
-    "y": 660
+    "y": 1000
   },
-  "RN10": {
-    "x": 630,
-    "y": -30
+  "E3": {
+    "x": 1120,
+    "y": 1000
   },
-  "RN09": {
-    "x": 630,
-    "y": 0
+  "E4": {
+    "x": 1160,
+    "y": 1000
   },
-  "RN08": {
-    "x": 630,
-    "y": 30
+  "E5": {
+    "x": 1200,
+    "y": 1000
   },
-  "RN07": {
-    "x": 630,
-    "y": 60
+  "E6": {
+    "x": 1240,
+    "y": 1000
   },
-  "RN06": {
-    "x": 630,
-    "y": 90
+  "E7": {
+    "x": 1280,
+    "y": 1000
   },
-  "RN05": {
+  "E8": {
+    "x": 1320,
+    "y": 1000
+  },
+  "E9": {
+    "x": 1360,
+    "y": 1000
+  },
+  "E10": {
+    "x": 1400,
+    "y": 1040
+  },
+  "E11": {
+    "x": 1440,
+    "y": 1080
+  },
+  "E12": {
+    "x": 1480,
+    "y": 1120
+  },
+  "E13": {
+    "x": 1520,
+    "y": 1160
+  },
+  "E14": {
+    "x": 1560,
+    "y": 1200
+  },
+  "E15": {
+    "x": 1600,
+    "y": 1240
+  },
+  "E16": {
+    "x": 1600,
+    "y": 1280
+  },
+  "E17": {
+    "x": 1600,
+    "y": 1320
+  },
+  "E18": {
+    "x": 1600,
+    "y": 1360
+  },
+  "E19": {
+    "x": 1600,
+    "y": 1400
+  },
+  "E20": {
+    "x": 1600,
+    "y": 1440
+  },
+  "E21": {
+    "x": 1600,
+    "y": 1480
+  },
+  "E22": {
+    "x": 1600,
+    "y": 1520
+  },
+  "E23": {
+    "x": 1600,
+    "y": 1560
+  },
+  "W1": {
+    "x": 960,
+    "y": 1000
+  },
+  "CEN_L": {
+    "x": 1000,
+    "y": 1000
+  },
+  "S1": {
+    "x": 1000,
+    "y": 1040
+  },
+  "S2": {
+    "x": 1000,
+    "y": 1080
+  },
+  "S3": {
+    "x": 960,
+    "y": 1080
+  },
+  "S4": {
+    "x": 920,
+    "y": 1080
+  },
+  "S5": {
+    "x": 880,
+    "y": 1080
+  },
+  "S6": {
+    "x": 840,
+    "y": 1080
+  },
+  "S7": {
+    "x": 800,
+    "y": 1080
+  },
+  "S8": {
+    "x": 760,
+    "y": 1080
+  },
+  "S9": {
+    "x": 720,
+    "y": 1080
+  },
+  "S10": {
+    "x": 680,
+    "y": 1080
+  },
+  "S11": {
+    "x": 640,
+    "y": 1080
+  },
+  "S12": {
     "x": 600,
-    "y": 144
+    "y": 1080
   },
-  "RN04": {
-    "x": 570,
-    "y": 198
+  "BL01": {
+    "x": 720,
+    "y": 1080
   },
-  "RN03": {
-    "x": 540,
-    "y": 252
+  "BL02": {
+    "x": 760,
+    "y": 1040
   },
-  "RN02": {
-    "x": 510,
-    "y": 306
+  "BL03": {
+    "x": 800,
+    "y": 1000
   },
-  "RW01": {
+  "BL04": {
+    "x": 840,
+    "y": 960
+  },
+  "BL05": {
+    "x": 880,
+    "y": 920
+  },
+  "BL06": {
+    "x": 920,
+    "y": 880
+  },
+  "BL07": {
+    "x": 920,
+    "y": 840
+  },
+  "BL08": {
+    "x": 920,
+    "y": 800
+  },
+  "BL09": {
+    "x": 920,
+    "y": 760
+  },
+  "BL10": {
+    "x": 920,
+    "y": 720
+  },
+  "BL11": {
+    "x": 920,
+    "y": 680
+  },
+  "BL12": {
+    "x": 960,
+    "y": 680
+  },
+  "BL13": {
+    "x": 1000,
+    "y": 680
+  },
+  "BL14": {
+    "x": 1040,
+    "y": 680
+  },
+  "BL15": {
+    "x": 1080,
+    "y": 720
+  },
+  "BL16": {
+    "x": 1120,
+    "y": 760
+  },
+  "BL17": {
+    "x": 1160,
+    "y": 800
+  },
+  "BL18": {
+    "x": 1160,
+    "y": 840
+  },
+  "BL19": {
+    "x": 1160,
+    "y": 880
+  },
+  "BL20": {
+    "x": 1160,
+    "y": 920
+  },
+  "BL21": {
+    "x": 1160,
+    "y": 960
+  },
+  "BL22": {
+    "x": 1160,
+    "y": 1000
+  },
+  "BL23": {
+    "x": 1120,
+    "y": 1000
+  },
+  "BL24": {
+    "x": 1080,
+    "y": 1000
+  },
+  "BL25": {
+    "x": 1040,
+    "y": 1040
+  },
+  "BL26": {
+    "x": 1000,
+    "y": 1080
+  },
+  "BL27": {
+    "x": 960,
+    "y": 1080
+  },
+  "BL28": {
+    "x": 920,
+    "y": 1080
+  },
+  "BL29": {
+    "x": 880,
+    "y": 1080
+  },
+  "BL30": {
+    "x": 840,
+    "y": 1080
+  },
+  "BL31": {
+    "x": 800,
+    "y": 1080
+  },
+  "BL32": {
+    "x": 760,
+    "y": 1080
+  },
+  "BL01_2": {
+    "x": 720,
+    "y": 1080
+  },
+  "BL33": {
+    "x": 660,
+    "y": 1080
+  },
+  "BL34": {
+    "x": 600,
+    "y": 1080
+  },
+  "BL35": {
+    "x": 560,
+    "y": 1080
+  },
+  "BL36": {
+    "x": 520,
+    "y": 1080
+  },
+  "BL37": {
     "x": 480,
+    "y": 1080
+  },
+  "BL38": {
+    "x": 440,
+    "y": 1080
+  },
+  "PP01": {
+    "x": 400,
+    "y": 280
+  },
+  "PP02": {
+    "x": 440,
+    "y": 280
+  },
+  "PP03": {
+    "x": 480,
+    "y": 280
+  },
+  "PP04": {
+    "x": 520,
+    "y": 280
+  },
+  "PP05": {
+    "x": 560,
+    "y": 280
+  },
+  "PP06": {
+    "x": 600,
+    "y": 280
+  },
+  "PP07": {
+    "x": 640,
+    "y": 320
+  },
+  "PP08": {
+    "x": 680,
     "y": 360
   },
+  "PP09": {
+    "x": 720,
+    "y": 400
+  },
+  "PP10": {
+    "x": 760,
+    "y": 440
+  },
+  "PP11": {
+    "x": 800,
+    "y": 480
+  },
+  "PP12": {
+    "x": 800,
+    "y": 520
+  },
+  "PP13": {
+    "x": 800,
+    "y": 560
+  },
+  "PP14": {
+    "x": 800,
+    "y": 600
+  },
+  "PP15": {
+    "x": 840,
+    "y": 640
+  },
+  "PP16": {
+    "x": 880,
+    "y": 680
+  },
+  "YL01": {
+    "x": 1080,
+    "y": 720
+  },
+  "YL02": {
+    "x": 1120,
+    "y": 720
+  },
+  "YL03": {
+    "x": 1160,
+    "y": 720
+  },
+  "YL04": {
+    "x": 1200,
+    "y": 720
+  },
+  "YL05": {
+    "x": 1240,
+    "y": 720
+  },
+  "YL06": {
+    "x": 1280,
+    "y": 720
+  },
+  "YL07": {
+    "x": 1320,
+    "y": 720
+  },
+  "YL08": {
+    "x": 1360,
+    "y": 720
+  },
+  "YL09": {
+    "x": 1400,
+    "y": 720
+  },
+  "YL10": {
+    "x": 1440,
+    "y": 720
+  },
+  "YL11": {
+    "x": 1480,
+    "y": 760
+  },
+  "YL12": {
+    "x": 1520,
+    "y": 800
+  },
+  "YL13": {
+    "x": 1560,
+    "y": 840
+  },
+  "YL14": {
+    "x": 1600,
+    "y": 880
+  },
+  "YL15": {
+    "x": 1600,
+    "y": 920
+  },
+  "YL16": {
+    "x": 1600,
+    "y": 960
+  },
+  "YL17": {
+    "x": 1600,
+    "y": 1000
+  },
+  "YL18": {
+    "x": 1600,
+    "y": 1040
+  },
+  "YL19": {
+    "x": 1600,
+    "y": 1080
+  },
+  "YL20": {
+    "x": 1600,
+    "y": 1120
+  },
+  "YL21": {
+    "x": 1600,
+    "y": 1160
+  },
+  "YL22": {
+    "x": 1600,
+    "y": 1200
+  },
+  "YL23": {
+    "x": 1600,
+    "y": 1240
+  },
+  "PK01": {
+    "x": 800,
+    "y": 480
+  },
+  "PK02": {
+    "x": 800,
+    "y": 440
+  },
+  "PK03": {
+    "x": 800,
+    "y": 400
+  },
+  "PK04": {
+    "x": 800,
+    "y": 360
+  },
+  "PK05": {
+    "x": 800,
+    "y": 320
+  },
+  "PK06": {
+    "x": 813.3,
+    "y": 320
+  },
+  "PK07": {
+    "x": 826.7,
+    "y": 320
+  },
+  "PK08": {
+    "x": 840,
+    "y": 320
+  },
+  "PK09": {
+    "x": 853.3,
+    "y": 320
+  },
+  "PK10": {
+    "x": 866.7,
+    "y": 320
+  },
+  "PK11": {
+    "x": 880,
+    "y": 320
+  },
+  "PK12": {
+    "x": 893.3,
+    "y": 320
+  },
+  "PK13": {
+    "x": 906.7,
+    "y": 320
+  },
+  "PK14": {
+    "x": 920,
+    "y": 320
+  },
+  "PK15": {
+    "x": 960,
+    "y": 320
+  },
+  "PK16": {
+    "x": 1000,
+    "y": 320
+  },
+  "PK17": {
+    "x": 1040,
+    "y": 320
+  },
+  "PK18": {
+    "x": 1080,
+    "y": 320
+  },
+  "PK19": {
+    "x": 1120,
+    "y": 320
+  },
+  "PK20": {
+    "x": 1160,
+    "y": 320
+  },
+  "PK21": {
+    "x": 1200,
+    "y": 320
+  },
+  "PK22": {
+    "x": 1240,
+    "y": 320
+  },
+  "PK23": {
+    "x": 1280,
+    "y": 320
+  },
+  "PK24": {
+    "x": 1320,
+    "y": 320
+  },
+  "PK25": {
+    "x": 1360,
+    "y": 320
+  },
+  "PK26": {
+    "x": 1400,
+    "y": 320
+  },
+  "PK27": {
+    "x": 1440,
+    "y": 320
+  },
+  "PK28": {
+    "x": 1480,
+    "y": 320
+  },
+  "PK29": {
+    "x": 1520,
+    "y": 320
+  },
+  "PK30": {
+    "x": 1560,
+    "y": 320
+  },
+  "A8": {
+    "x": 1000,
+    "y": 920
+  },
+  "A7": {
+    "x": 1040,
+    "y": 960
+  },
+  "A6": {
+    "x": 1160,
+    "y": 960
+  },
+  "A5": {
+    "x": 1200,
+    "y": 960
+  },
+  "A4": {
+    "x": 1240,
+    "y": 960
+  },
+  "A3": {
+    "x": 1280,
+    "y": 960
+  },
+  "A2": {
+    "x": 1320,
+    "y": 960
+  },
+  "A1": {
+    "x": 1360,
+    "y": 960
+  },
+  "RN10": {
+    "x": 920,
+    "y": 160
+  },
+  "RN09": {
+    "x": 920,
+    "y": 200
+  },
+  "RN08": {
+    "x": 920,
+    "y": 240
+  },
+  "RN07": {
+    "x": 920,
+    "y": 280
+  },
+  "RN06": {
+    "x": 920,
+    "y": 320
+  },
+  "RN05": {
+    "x": 920,
+    "y": 392
+  },
+  "RN04": {
+    "x": 920,
+    "y": 464
+  },
+  "RN03": {
+    "x": 920,
+    "y": 536
+  },
+  "RN02": {
+    "x": 920,
+    "y": 608
+  },
+  "RW01": {
+    "x": 920,
+    "y": 680
+  },
   "RW02": {
-    "x": 435,
-    "y": 375
+    "x": 860,
+    "y": 680
   },
   "RW03": {
-    "x": 390,
-    "y": 390
+    "x": 800,
+    "y": 680
   },
   "RW05": {
-    "x": 345,
-    "y": 405
+    "x": 740,
+    "y": 680
   },
   "RW06": {
-    "x": 300,
-    "y": 420
+    "x": 680,
+    "y": 680
   }
 };
 
@@ -855,7 +855,7 @@ export const Map: React.FC<MapProps> = ({
       return (
         <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
           <svg
-            viewBox="-50 -150 1200 1300"
+            viewBox="200 -50 1500 1700"
             className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
             onClick={() => setPopupGroup(null)}
           >
@@ -864,7 +864,7 @@ export const Map: React.FC<MapProps> = ({
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-black/[0.015]" />
               </pattern>
             </defs>
-            <rect x="-100" y="-200" width="1400" height="1500" fill="url(#grid)" rx="20" />
+            <rect x="0" y="-100" width="1800" height="1800" fill="url(#grid)" rx="20" />
 
  {/* --- STAGE 1: Standard Rail Tracks (Static) --- */}
  {transitData.edges.map((edge, i) => {
@@ -883,8 +883,8 @@ export const Map: React.FC<MapProps> = ({
  key={`edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke="#94a3b8"
- strokeWidth={edge.type === 'cross-platform' ? "2" : "3.5"}
- strokeDasharray={edge.type === 'cross-platform' ? "2 2" : "3 3"}
+ strokeWidth={edge.type === 'cross-platform' ? "3" : "4.5"}
+ strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "4 4"}
  strokeLinecap="round"
  />
  );
@@ -895,7 +895,7 @@ export const Map: React.FC<MapProps> = ({
  key={`edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke={getLineColor(lineName)}
- strokeWidth="6"
+ strokeWidth="8"
  strokeLinecap="round"
  className="opacity-30"
  />
@@ -920,8 +920,8 @@ export const Map: React.FC<MapProps> = ({
  key={`active-edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke="#f59e0b"
- strokeWidth={edge.type === 'cross-platform' ? "3.5" : "5"}
- strokeDasharray={edge.type === 'cross-platform' ? "2 2" : "4 4"}
+ strokeWidth={edge.type === 'cross-platform' ? "5" : "6.5"}
+ strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "5 5"}
  strokeLinecap="round"
  />
  );
@@ -932,7 +932,7 @@ export const Map: React.FC<MapProps> = ({
  key={`active-edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke={getLineColor(lineName)}
- strokeWidth="7.5"
+ strokeWidth="10"
  strokeLinecap="round"
  className="map-line"
  />
@@ -971,9 +971,9 @@ export const Map: React.FC<MapProps> = ({
  <circle
  cx={coords.x}
  cy={coords.y}
- r="12" fill="none"
+ r="18" fill="none"
  stroke={isStart ? '#159E40' : '#003399'}
- strokeWidth="2"
+ strokeWidth="3"
  className="animate-ping opacity-40"
  style={{ animationDuration: '2s' }}
  />
@@ -983,19 +983,19 @@ export const Map: React.FC<MapProps> = ({
  <circle
  cx={coords.x}
  cy={coords.y}
- r={isStart || isEnd ? '7.5' : inRoute ? '6.5' : '5'}
+ r={isStart || isEnd ? '11' : inRoute ? '9' : '7.5'}
  fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
  stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
- strokeWidth={isStart || isEnd ? '3' : '2'}
+ strokeWidth={isStart || isEnd ? '4' : '2.5'}
  className="map-station"
  />
 
  {/* Station Code inside the dot */}
  <text
  x={coords.x}
- y={coords.y + 1.2}
+ y={coords.y + 1.6}
  textAnchor="middle"
- className={`text-[3.5px] font-extrabold select-none pointer-events-none transition-opacity ${
+ className={`text-[5px] font-extrabold select-none pointer-events-none transition-opacity ${
  isStart || isEnd ? (isStart ? 'fill-[#159E40]' : 'fill-[#003399]') : inRoute ? 'fill-white' : 'fill-black/80'
  }`}
  >
@@ -1006,12 +1006,12 @@ export const Map: React.FC<MapProps> = ({
  {isZoomedIn && (
  <text
  x={coords.x}
- y={coords.y + (i % 2 === 0 ? -12 : 11)}
+ y={coords.y + (i % 2 === 0 ? -16 : 15)}
  textAnchor="middle"
- className={`text-[6.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 ${
- isStart || isEnd ? 'font-extrabold text-[7.5px]' : ''
+ className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 ${
+ isStart || isEnd ? 'font-extrabold text-[10px]' : ''
  }`}
- style={{ textShadow: '0 0 4px white, 0 0 4px white, 0 0 4px white' }}
+ style={{ textShadow: '0 0 5px white, 0 0 5px white, 0 0 5px white' }}
  >
  {st.nameEN}
  </text>
@@ -1021,12 +1021,12 @@ export const Map: React.FC<MapProps> = ({
  {isZoomedIn && (
  <text
  x={coords.x}
- y={coords.y + (i % 2 === 0 ? -7 : 16)}
+ y={coords.y + (i % 2 === 0 ? -9 : 21)}
  textAnchor="middle"
- className={`text-[5.5px] font-semibold select-none pointer-events-none fill-black/80 ${
- isStart || isEnd ? 'font-bold text-[6.5px]' : ''
+ className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 ${
+ isStart || isEnd ? 'font-bold text-[8.5px]' : ''
  }`}
- style={{ textShadow: '0 0 4px white, 0 0 4px white, 0 0 4px white' }}
+ style={{ textShadow: '0 0 5px white, 0 0 5px white, 0 0 5px white' }}
  >
  {st.nameTH}
  </text>
@@ -1037,25 +1037,25 @@ export const Map: React.FC<MapProps> = ({
           {/* --- STAGE 4: Interchange Line Selector Popup --- */}
           {popupGroup && (
             <foreignObject
-              x={popupGroup.coords.x - 30}
-              y={popupGroup.coords.y + 10}
-              width="60"
-              height="80"
+              x={popupGroup.coords.x - 45}
+              y={popupGroup.coords.y + 15}
+              width="90"
+              height="110"
               className="overflow-visible"
             >
-              <div className="bg-white/95 backdrop-blur-sm rounded-md shadow-2xl border border-gray-200/50 p-1.5 flex flex-col gap-0.5 w-[60px] transform -translate-x-1/2 left-1/2 relative z-50">
-                <div className="text-[3.5px] font-bold text-gray-500 mb-0.5 px-1 uppercase tracking-wider">Select Line</div>
+              <div className="bg-white/95 backdrop-blur-sm rounded-md shadow-2xl border border-gray-200/50 p-2 flex flex-col gap-1 w-[90px] transform -translate-x-1/2 left-1/2 relative z-50">
+                <div className="text-[5px] font-bold text-gray-500 mb-0.5 px-1 uppercase tracking-wider">Select Line</div>
                 {popupGroup.stations.map((st) => (
                   <button
                     key={st.id}
-                    className="text-[4px] text-left px-1.5 py-1 hover:bg-gray-100/80 rounded-[2px] text-gray-800 font-semibold truncate flex items-center gap-1 transition-colors"
+                    className="text-[6px] text-left px-2 py-1.5 hover:bg-gray-100/80 rounded-[3px] text-gray-800 font-semibold truncate flex items-center gap-1.5 transition-colors"
                     onClick={(e) => {
                       e.stopPropagation();
                       onSelectStation(st);
                       setPopupGroup(null);
                     }}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: getLineColor(st.line) }}></span>
+                    <span className="w-2 h-2 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: getLineColor(st.line) }}></span>
                     {st.line.replace('BTS_', '').replace('MRT_', '').replace('SRT_', '')}
                   </button>
                 ))}
