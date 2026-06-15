@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Station, RouteResult } from '../utils/pathfinder';
 import transitData from '../data/transitGraph.json';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 interface MapProps {
  stations: Station[];
@@ -827,16 +828,27 @@ export const Map: React.FC<MapProps> = ({
  <span className="text-[10px] opacity-45 block mt-0.5">คลิกสถานีเพื่อระบุ ต้นทาง ↔ ปลายทาง</span>
  </div>
 
- <svg
- viewBox="0 0 1020 540"
- className="w-full max-w-[960px] aspect-[1020/540] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
- >
- <defs>
- <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
- <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-black/[0.015]" />
- </pattern>
- </defs>
- <rect width="100%" height="100%" fill="url(#grid)" rx="20" />
+ <TransformWrapper
+    initialScale={1}
+    minScale={0.5}
+    maxScale={6}
+    wheel={{ step: 0.1 }}
+    doubleClick={{ disabled: true }}
+  >
+    {({ state }) => {
+      const isZoomedIn = state.scale >= 2.2;
+      return (
+        <TransformComponent wrapperClass="w-full h-full !flex items-center justify-center cursor-grab active:cursor-grabbing">
+          <svg
+            viewBox="0 0 1020 540"
+            className="w-full max-w-[960px] aspect-[1020/540] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
+          >
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-black/[0.015]" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" rx="20" />
 
  {/* --- STAGE 1: Standard Rail Tracks (Static) --- */}
  {transitData.edges.map((edge, i) => {
@@ -940,34 +952,46 @@ export const Map: React.FC<MapProps> = ({
  <circle
  cx={coords.x}
  cy={coords.y}
- r={isStart || isEnd ? '6' : inRoute ? '4.5' : '3'}
+ r={isStart || isEnd ? '6.5' : inRoute ? '5.5' : '4'}
  fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
  stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
- strokeWidth={isStart || isEnd ? '3' : '2'}
+ strokeWidth={isStart || isEnd ? '2.5' : '1.5'}
  className="map-station"
  />
 
- {/* Station English Label */}
+ {/* Station Code inside the dot */}
+ <text
+ x={coords.x}
+ y={coords.y + 1}
+ textAnchor="middle"
+ className={`text-[2.8px] font-extrabold select-none pointer-events-none transition-opacity ${
+ isStart || isEnd ? (isStart ? 'fill-[#159E40]' : 'fill-[#003399]') : inRoute ? 'fill-white' : 'fill-black/80'
+ }`}
+ >
+ {st.id.split('_')[0]}
+ </text>
+
+ {/* Station English Label (Only show when zoomed in) */}
  <text
  x={coords.x}
  y={coords.y - 7}
  textAnchor="middle"
- className={`text-[5.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 ${
- isStart || isEnd ? 'opacity-100 font-extrabold text-[6.5px]' : inRoute ? 'opacity-100' : 'opacity-60'
- }`}
+ className={`text-[5.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${
+ isZoomedIn || isStart || isEnd ? 'opacity-100' : 'opacity-0'
+ } ${isStart || isEnd ? 'font-extrabold text-[6.5px]' : ''}`}
  style={{ textShadow: '0 0 3px white, 0 0 3px white, 0 0 3px white' }}
  >
  {st.nameEN}
  </text>
 
- {/* Station Thai Label */}
+ {/* Station Thai Label (Only show when zoomed in) */}
  <text
  x={coords.x}
  y={coords.y + 9}
  textAnchor="middle"
- className={`text-[5px] font-semibold select-none pointer-events-none fill-black/75 ${
- isStart || isEnd ? 'opacity-100 font-bold text-[6px]' : inRoute ? 'opacity-100' : 'opacity-50'
- }`}
+ className={`text-[5px] font-semibold select-none pointer-events-none fill-black/75 transition-opacity duration-300 ${
+ isZoomedIn || isStart || isEnd ? 'opacity-100' : 'opacity-0'
+ } ${isStart || isEnd ? 'font-bold text-[6px]' : ''}`}
  style={{ textShadow: '0 0 3px white, 0 0 3px white, 0 0 3px white' }}
  >
  {st.nameTH}
@@ -976,6 +1000,10 @@ export const Map: React.FC<MapProps> = ({
  );
  })}
  </svg>
+        </TransformComponent>
+      );
+    }}
+  </TransformWrapper>
  </div>
  );
 };
