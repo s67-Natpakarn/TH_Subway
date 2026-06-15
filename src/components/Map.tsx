@@ -845,7 +845,7 @@ export const Map: React.FC<MapProps> = ({
 
   <TransformWrapper
     initialScale={0.8}
-    minScale={0.2}
+    minScale={0.5}
     maxScale={4}
     centerOnInit={true}
     onTransform={(ref) => {
@@ -856,7 +856,7 @@ export const Map: React.FC<MapProps> = ({
       return (
         <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
           <svg
-            viewBox="200 -50 1500 1700"
+            viewBox="100 -50 1600 1700"
             className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
             onClick={() => setPopupGroup(null)}
           >
@@ -910,8 +910,8 @@ export const Map: React.FC<MapProps> = ({
     if (!c1 || !c2) return null;
 
     if (isEdgeInRoute(edge.from, edge.to)) {
-      const fromSt = (transitData.stations as any)[edge.from];
-      const toSt = (transitData.stations as any)[edge.to];
+      const fromSt = stations.find(s => s.id === edge.from);
+      const toSt = stations.find(s => s.id === edge.to);
       const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
       const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
 
