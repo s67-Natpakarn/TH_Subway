@@ -414,64 +414,64 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 1080
   },
   "PP01": {
-    "x": 400,
-    "y": 280
+    "x": 160,
+    "y": 480
   },
   "PP02": {
-    "x": 440,
-    "y": 280
+    "x": 200,
+    "y": 480
   },
   "PP03": {
-    "x": 480,
-    "y": 280
+    "x": 240,
+    "y": 480
   },
   "PP04": {
-    "x": 520,
-    "y": 280
+    "x": 280,
+    "y": 480
   },
   "PP05": {
-    "x": 560,
-    "y": 280
+    "x": 320,
+    "y": 480
   },
   "PP06": {
-    "x": 600,
-    "y": 280
+    "x": 360,
+    "y": 480
   },
   "PP07": {
-    "x": 640,
-    "y": 320
+    "x": 400,
+    "y": 480
   },
   "PP08": {
-    "x": 680,
-    "y": 360
+    "x": 440,
+    "y": 480
   },
   "PP09": {
-    "x": 720,
-    "y": 400
+    "x": 480,
+    "y": 480
   },
   "PP10": {
-    "x": 760,
-    "y": 440
+    "x": 520,
+    "y": 480
   },
   "PP11": {
-    "x": 800,
+    "x": 560,
     "y": 480
   },
   "PP12": {
-    "x": 800,
-    "y": 520
+    "x": 620,
+    "y": 480
   },
   "PP13": {
-    "x": 800,
-    "y": 560
+    "x": 680,
+    "y": 480
   },
   "PP14": {
-    "x": 800,
-    "y": 600
+    "x": 746.7,
+    "y": 546.7
   },
   "PP15": {
-    "x": 840,
-    "y": 640
+    "x": 813.3,
+    "y": 613.3
   },
   "PP16": {
     "x": 880,
@@ -570,55 +570,55 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 1240
   },
   "PK01": {
-    "x": 800,
+    "x": 560,
     "y": 480
   },
   "PK02": {
-    "x": 800,
+    "x": 560,
     "y": 440
   },
   "PK03": {
-    "x": 800,
+    "x": 560,
     "y": 400
   },
   "PK04": {
-    "x": 800,
+    "x": 560,
     "y": 360
   },
   "PK05": {
-    "x": 800,
+    "x": 560,
     "y": 320
   },
   "PK06": {
-    "x": 813.3,
+    "x": 600,
     "y": 320
   },
   "PK07": {
-    "x": 826.7,
+    "x": 640,
     "y": 320
   },
   "PK08": {
-    "x": 840,
+    "x": 680,
     "y": 320
   },
   "PK09": {
-    "x": 853.3,
+    "x": 720,
     "y": 320
   },
   "PK10": {
-    "x": 866.7,
+    "x": 760,
     "y": 320
   },
   "PK11": {
-    "x": 880,
+    "x": 800,
     "y": 320
   },
   "PK12": {
-    "x": 893.3,
+    "x": 840,
     "y": 320
   },
   "PK13": {
-    "x": 906.7,
+    "x": 880,
     "y": 320
   },
   "PK14": {
@@ -902,44 +902,55 @@ export const Map: React.FC<MapProps> = ({
  );
  })}
 
- {/* --- STAGE 2: Route Overlay Highlighting (Pulsing flow paths) --- */}
- {calculatedRoute && transitData.edges.map((edge, i) => {
- const c1 = stationCoords[edge.from];
- const c2 = stationCoords[edge.to];
- if (!c1 || !c2) return null;
+  {/* --- STAGE 2: Route Overlay Highlighting (Pulsing flow paths) --- */}
+  {calculatedRoute && transitData.edges.map((edge, i) => {
+    const c1 = stationCoords[edge.from];
+    const c2 = stationCoords[edge.to];
+    if (!c1 || !c2) return null;
 
- if (isEdgeInRoute(edge.from, edge.to)) {
- const fromSt = (transitData.stations as any)[edge.from];
- const toSt = (transitData.stations as any)[edge.to];
- const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
- const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
+    if (isEdgeInRoute(edge.from, edge.to)) {
+      const fromSt = (transitData.stations as any)[edge.from];
+      const toSt = (transitData.stations as any)[edge.to];
+      const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
+      const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
 
- if (isInterchange) {
- return (
- <line
- key={`active-edge-${i}`}
- x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
- stroke="#f59e0b"
- strokeWidth={edge.type === 'cross-platform' ? "5" : "6.5"}
- strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "5 5"}
- strokeLinecap="round"
- />
- );
- }
+      let startC = c1;
+      let endC = c2;
+      if (calculatedRoute?.path) {
+        const idxFrom = calculatedRoute.path.findIndex(s => s.id === edge.from);
+        const idxTo = calculatedRoute.path.findIndex(s => s.id === edge.to);
+        if (idxFrom > -1 && idxTo > -1 && idxFrom > idxTo) {
+          startC = c2;
+          endC = c1;
+        }
+      }
 
- return (
- <line
- key={`active-edge-${i}`}
- x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
- stroke={getLineColor(lineName)}
- strokeWidth="10"
- strokeLinecap="round"
- className="map-line"
- />
- );
- }
- return null;
- })}
+      if (isInterchange) {
+        return (
+          <line
+            key={`active-edge-${i}`}
+            x1={startC.x} y1={startC.y} x2={endC.x} y2={endC.y}
+            stroke="#f59e0b"
+            strokeWidth={edge.type === 'cross-platform' ? "5" : "6.5"}
+            strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "5 5"}
+            strokeLinecap="round"
+          />
+        );
+      }
+
+      return (
+        <line
+          key={`active-edge-${i}`}
+          x1={startC.x} y1={startC.y} x2={endC.x} y2={endC.y}
+          stroke={getLineColor(lineName)}
+          strokeWidth="10"
+          strokeLinecap="round"
+          className="map-line"
+        />
+      );
+    }
+    return null;
+  })}
 
  {/* --- STAGE 3: Station Circles & Hover Details --- */}
  {stations.map((st, i) => {
@@ -966,18 +977,17 @@ export const Map: React.FC<MapProps> = ({
      }
    }}
  >
- {/* Ripple Glow */}
- {(isStart || isEnd) && (
- <circle
- cx={coords.x}
- cy={coords.y}
- r="18" fill="none"
- stroke={isStart ? '#159E40' : '#003399'}
- strokeWidth="3"
- className="animate-ping opacity-40"
- style={{ animationDuration: '2s' }}
- />
- )}
+            {/* Ripple Glow */}
+            {(isStart || isEnd) && (
+              <circle
+                cx={coords.x}
+                cy={coords.y}
+                r="18" fill="none"
+                stroke={isStart ? '#159E40' : '#003399'}
+                strokeWidth="3"
+                className="opacity-40"
+              />
+            )}
 
  {/* Station Circle Body */}
  <circle

@@ -51,21 +51,26 @@ const BL_anchors = {
   BL01_2: BL01 // Loop closure
 };
 
-// MRT Purple Line
-const PP16 = { x: BL11.x - 1 * UNIT, y: BL11.y }; // dx=-1U, dy=0
-const PP14 = { x: PP16.x - 2 * UNIT, y: PP16.y - 2 * UNIT }; // dx=-2U, dy=-2U
-const PP11 = { x: PP14.x, y: PP14.y - 3 * UNIT }; // dx=0, dy=-3U
-const PP06 = { x: PP11.x - 5 * UNIT, y: PP11.y - 5 * UNIT }; // dx=-5U, dy=-5U
-const PP01 = { x: PP06.x - 5 * UNIT, y: PP06.y }; // dx=-5U, dy=0
-const PP_anchors = { PP16, PP14, PP11, PP06, PP01 };
-
-// MRT Pink Line
-const PK01 = PP11;
-const PK16 = N_anchors.N17;
-const PK05 = { x: PK01.x, y: PK16.y }; // dx=0
-const PK14 = { x: PK16.x - 2 * UNIT, y: PK16.y }; // dx=-2U, dy=0
+// MRT Pink Line (Calculated first to anchor PP11)
+const PK16 = N_anchors.N17; // (1000, 320)
+const PK14 = { x: PK16.x - 2 * UNIT, y: PK16.y }; // (920, 320)
+const PK05 = { x: PK14.x - 9 * UNIT, y: PK14.y }; // (560, 320)
+const PK01 = { x: PK05.x, y: PK05.y + 4 * UNIT }; // (560, 480)
 const PK30 = { x: PK16.x + 14 * UNIT, y: PK16.y };
 const PK_anchors = { PK01, PK05, PK14, PK16, PK30 };
+
+// MRT Purple Line
+const PP16 = { x: BL11.x - 1 * UNIT, y: BL11.y }; // (880, 680)
+const PP11 = PK01; // (560, 480)
+// PP16(880, 680) to PP11(560, 480). Go NW 3 units, then West 3 units. Wait, dx=-320(-8U), dy=-200(-5U).
+// If dy = -200, NW requires dx = -200.
+// So corner is (880-200, 680-200) = (680, 480).
+// Let's make this PP13 (3 stations from PP16).
+const PP13 = { x: PP16.x - 5 * UNIT, y: PP16.y - 5 * UNIT }; // Wait! 200 = 5 * UNIT!
+// So PP13 = { x: PP16.x - 5U, y: PP16.y - 5U } = (680, 480).
+const PP06 = { x: PP11.x - 5 * UNIT, y: PP11.y }; // dx=-5U, dy=0
+const PP01 = { x: PP06.x - 5 * UNIT, y: PP06.y }; // dx=-5U, dy=0
+const PP_anchors = { PP16, PP13, PP11, PP06, PP01 };
 
 // MRT Yellow Line
 const YL01 = { x: BL14.x + 1 * UNIT, y: BL14.y + 1 * UNIT };
@@ -82,8 +87,8 @@ const A1 = { x: A6.x + 5 * UNIT, y: A6.y };
 const ARL_anchors = { A8, A7, A6, A1 };
 
 // SRT Red
-const SRT_RW01 = BL11;
-const SRT_RN06 = PK14;
+const SRT_RW01 = BL11; // (920, 680)
+const SRT_RN06 = PK14; // (920, 320)
 const SRT_RN10 = { x: SRT_RN06.x, y: SRT_RN06.y - 4 * UNIT };
 const SRT_RW06 = { x: SRT_RW01.x - 6 * UNIT, y: SRT_RW01.y };
 const SRT_anchors = { RW01: SRT_RW01, RN06: SRT_RN06, RN10: SRT_RN10, RW06: SRT_RW06 };
@@ -97,4 +102,4 @@ const regex = /const anchorCoords = \{[\s\S]*?\n\};\n\nconst finalCoords/;
 const replacement = `const anchorCoords = ${JSON.stringify(anchorCoords, null, 2)};\n\nconst finalCoords`;
 gd = gd.replace(regex, replacement);
 fs.writeFileSync('generate_data.cjs', gd);
-console.log("Updated generate_data.cjs with perfectly scaled and strict anchors.");
+console.log("Updated generate_data.cjs with uniformly spaced anchors.");
