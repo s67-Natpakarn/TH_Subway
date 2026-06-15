@@ -4,93 +4,88 @@ const UNIT = 40;
 const CEN_X = 1000;
 const CEN_Y = 1000;
 
-// BTS Sukhumvit
+// Blue Line is the master layout loop!
+const BL13 = { x: CEN_X, y: CEN_Y - 320 }; // (1000, 680)
+const BL14 = { x: BL13.x + 1 * UNIT, y: BL13.y }; // (1040, 680)
+const BL15 = { x: BL14.x + 1 * UNIT, y: BL14.y }; // (1080, 680)
+const BL16 = { x: BL15.x + 2 * UNIT, y: BL15.y + 2 * UNIT }; // (1160, 760)
+const BL22 = { x: BL16.x, y: BL16.y + 6 * UNIT }; // (1160, 1000)
+const BL23 = { x: BL22.x, y: BL22.y + 1 * UNIT }; // (1160, 1040)
+const BL24 = { x: BL23.x - 1 * UNIT, y: BL23.y + 1 * UNIT }; // (1120, 1080)
+const BL26 = { x: BL24.x - 3 * UNIT, y: BL24.y }; // (1000, 1080)
+const BL30 = { x: BL26.x - 4 * UNIT, y: BL26.y }; // (840, 1080)
+const BL31 = { x: BL30.x - 1 * UNIT, y: BL30.y + 1 * UNIT }; // (800, 1120)
+const BL01 = { x: BL31.x - 2 * UNIT, y: BL31.y }; // (720, 1120)
+const BL08 = { x: BL01.x, y: BL01.y - 8 * UNIT }; // (720, 800)
+const BL09 = { x: BL08.x + 3 * UNIT, y: BL08.y - 3 * UNIT }; // (840, 680)
+const BL11 = { x: BL09.x + 2 * UNIT, y: BL09.y }; // (920, 680)
+const BL34 = { x: BL01.x - 3 * UNIT, y: BL01.y }; // (600, 1120)
+const BL38 = { x: BL34.x - 4 * UNIT, y: BL34.y }; // (440, 1120)
+
+const BL_anchors = {
+  BL13, BL14, BL15, BL16, BL22, BL23, BL24, BL26, BL30, BL31, BL01, BL08, BL09, BL11, BL34, BL38,
+  BL01_2: BL01 // Loop closure
+};
+
+// BTS Sukhumvit aligns to Blue line!
 const N_anchors = {
-  CEN_S: { x: CEN_X, y: CEN_Y },
-  N2: { x: CEN_X, y: CEN_Y - 2 * UNIT }, // Phaya Thai
-  N3: { x: CEN_X, y: CEN_Y - 3 * UNIT },
-  N8: { x: CEN_X, y: CEN_Y - 8 * UNIT },
-  N17: { x: CEN_X, y: CEN_Y - 17 * UNIT },
-  N24: { x: CEN_X, y: CEN_Y - 24 * UNIT },
+  CEN_S: { x: BL13.x, y: BL22.y }, // (1000, 1000)
+  N2: { x: BL13.x, y: 1000 - 2 * UNIT }, // (1000, 920)
+  N3: { x: BL13.x, y: 1000 - 3 * UNIT }, // (1000, 880)
+  N8: BL13, // (1000, 680)
+  N17: { x: BL13.x, y: 1000 - 17 * UNIT }, // (1000, 320)
+  N24: { x: BL13.x, y: 1000 - 24 * UNIT }, // (1000, 40)
   
-  E4: { x: CEN_X + 4 * UNIT, y: CEN_Y },
-  E9: { x: CEN_X + 9 * UNIT, y: CEN_Y },
-  E15: { x: CEN_X + 15 * UNIT, y: CEN_Y + 6 * UNIT }, // dx=6U, dy=6U
-  E23: { x: CEN_X + 15 * UNIT, y: CEN_Y + 14 * UNIT }, // dx=0, dy=8U
+  E4: BL22, // (1160, 1000)
+  E9: { x: 1160 + 5 * UNIT, y: 1000 }, // (1360, 1000)
+  E15: { x: 1360 + 4 * UNIT, y: 1000 + 4 * UNIT }, // (1520, 1160)
+  E23: { x: 1520, y: 1160 + 8 * UNIT }, // (1520, 1480)
 };
 
 // BTS Silom
 const S_anchors = {
-  CEN_L: { x: CEN_X, y: CEN_Y },
-  W1: { x: CEN_X - 1 * UNIT, y: CEN_Y },
-  S2: { x: CEN_X, y: CEN_Y + 2 * UNIT },
-  S12: { x: CEN_X - 10 * UNIT, y: CEN_Y + 2 * UNIT }, // dx=-10U, dy=0
+  CEN_L: N_anchors.CEN_S, // (1000, 1000)
+  W1: { x: 1000 - 1 * UNIT, y: 1000 }, // (960, 1000)
+  S2: BL26, // (1000, 1080)
+  S3: { x: 1000 - 1 * UNIT, y: 1080 + 1 * UNIT }, // (960, 1120)
+  S12: BL34, // (600, 1120)
 };
 
-// MRT Blue Line Loop
-const BL13 = N_anchors.N8;
-const BL22 = N_anchors.E4;
-const BL26 = S_anchors.S2;
-const BL34 = S_anchors.S12;
-
-const BL14 = { x: BL13.x + 1 * UNIT, y: BL13.y }; // dx=1U, dy=0
-const BL17 = { x: BL14.x + 3 * UNIT, y: BL14.y + 3 * UNIT }; // dx=3U, dy=3U
-
-const BL24 = { x: BL22.x - 2 * UNIT, y: BL22.y }; // dx=-2U, dy=0
-const BL28 = { x: BL26.x - 2 * UNIT, y: BL26.y }; // dx=-2U, dy=0
-const BL01 = { x: BL28.x - 5 * UNIT, y: BL28.y }; // dx=-5U, dy=0
-
-const BL11 = { x: BL13.x - 2 * UNIT, y: BL13.y }; // dx=-2U, dy=0
-const BL06 = { x: BL11.x, y: BL11.y + 5 * UNIT }; // dx=0, dy=5U
-
-const BL38 = { x: BL34.x - 4 * UNIT, y: BL34.y };
-
-const BL_anchors = {
-  BL13, BL22, BL26, BL34,
-  BL14, BL17, BL24, BL28, BL01, BL06, BL11, BL38,
-  BL01_2: BL01 // Loop closure
-};
-
-// MRT Pink Line (Calculated first to anchor PP11)
+// Pink Line
 const PK16 = N_anchors.N17; // (1000, 320)
-const PK14 = { x: PK16.x - 2 * UNIT, y: PK16.y }; // (920, 320)
-const PK05 = { x: PK14.x - 9 * UNIT, y: PK14.y }; // (560, 320)
-const PK01 = { x: PK05.x, y: PK05.y + 4 * UNIT }; // (560, 480)
-const PK30 = { x: PK16.x + 14 * UNIT, y: PK16.y };
+const PK14 = { x: 1000 - 2 * UNIT, y: 320 }; // (920, 320)
+const PK05 = { x: 920 - 9 * UNIT, y: 320 }; // (560, 320)
+const PK01 = { x: 560, y: 320 + 4 * UNIT }; // (560, 480)
+const PK30 = { x: 1000 + 14 * UNIT, y: 320 }; // (1560, 320)
 const PK_anchors = { PK01, PK05, PK14, PK16, PK30 };
 
-// MRT Purple Line
-const PP16 = { x: BL11.x - 1 * UNIT, y: BL11.y }; // (880, 680)
+// Purple Line
+const PP16 = { x: 880, y: 680 }; // BL10
 const PP11 = PK01; // (560, 480)
-// PP16(880, 680) to PP11(560, 480). Go NW 3 units, then West 3 units. Wait, dx=-320(-8U), dy=-200(-5U).
-// If dy = -200, NW requires dx = -200.
-// So corner is (880-200, 680-200) = (680, 480).
-// Let's make this PP13 (3 stations from PP16).
-const PP13 = { x: PP16.x - 5 * UNIT, y: PP16.y - 5 * UNIT }; // Wait! 200 = 5 * UNIT!
-// So PP13 = { x: PP16.x - 5U, y: PP16.y - 5U } = (680, 480).
-const PP06 = { x: PP11.x - 5 * UNIT, y: PP11.y }; // dx=-5U, dy=0
-const PP01 = { x: PP06.x - 5 * UNIT, y: PP06.y }; // dx=-5U, dy=0
+const PP13 = { x: 880 - 5 * UNIT, y: 680 - 5 * UNIT }; // (680, 480)
+const PP06 = { x: 560 - 5 * UNIT, y: 480 }; // (360, 480)
+const PP01 = { x: 360 - 5 * UNIT, y: 480 }; // (160, 480)
 const PP_anchors = { PP16, PP13, PP11, PP06, PP01 };
 
-// MRT Yellow Line
-const YL01 = { x: BL14.x + 1 * UNIT, y: BL14.y + 1 * UNIT };
-const YL10 = { x: YL01.x + 9 * UNIT, y: YL01.y }; // dx=9U, dy=0
-const YL14 = { x: YL10.x + 4 * UNIT, y: YL10.y + 4 * UNIT }; // dx=4U, dy=4U
-const YL23 = N_anchors.E15; // dx=0, dy=9U
+// Yellow Line
+const YL01 = BL15; // (1080, 680)
+const YL10 = { x: 1080 + 7 * UNIT, y: 680 }; // (1360, 680)
+const YL14 = { x: 1360 + 4 * UNIT, y: 680 + 4 * UNIT }; // (1520, 840)
+const YL23 = N_anchors.E15; // (1520, 1160)
 const YL_anchors = { YL01, YL10, YL14, YL23 };
 
 // ARL
-const A8 = N_anchors.N2;
-const A6 = { x: BL22.x, y: BL22.y - 1 * UNIT };
-const A7 = { x: A8.x + 1 * UNIT, y: A8.y + 1 * UNIT }; // dx=1U, dy=1U. (45 degrees!)
-const A1 = { x: A6.x + 5 * UNIT, y: A6.y };
+const A8 = N_anchors.N2; // (1000, 920)
+const A6 = { x: 1160, y: 1000 - 1 * UNIT }; // (1160, 960) (BL21)
+const A7 = { x: 1000 + 1 * UNIT, y: 920 + 1 * UNIT }; // (1040, 960)
+const A1 = { x: 1160 + 7 * UNIT, y: 960 }; // (1440, 960)
 const ARL_anchors = { A8, A7, A6, A1 };
 
 // SRT Red
 const SRT_RW01 = BL11; // (920, 680)
 const SRT_RN06 = PK14; // (920, 320)
-const SRT_RN10 = { x: SRT_RN06.x, y: SRT_RN06.y - 4 * UNIT };
-const SRT_RW06 = { x: SRT_RW01.x - 6 * UNIT, y: SRT_RW01.y };
+const SRT_RN10 = { x: 920, y: 320 - 4 * UNIT }; // (920, 160)
+const SRT_RW06 = { x: 920 - 6 * UNIT, y: 680 }; // (680, 680)
 const SRT_anchors = { RW01: SRT_RW01, RN06: SRT_RN06, RN10: SRT_RN10, RW06: SRT_RW06 };
 
 const anchorCoords = {
@@ -102,4 +97,4 @@ const regex = /const anchorCoords = \{[\s\S]*?\n\};\n\nconst finalCoords/;
 const replacement = `const anchorCoords = ${JSON.stringify(anchorCoords, null, 2)};\n\nconst finalCoords`;
 gd = gd.replace(regex, replacement);
 fs.writeFileSync('generate_data.cjs', gd);
-console.log("Updated generate_data.cjs with uniformly spaced anchors.");
+console.log("Updated generate_data.cjs with Official Blue Line Shape anchors.");

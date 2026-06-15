@@ -146,60 +146,60 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 1000
   },
   "E10": {
-    "x": 1400,
-    "y": 1040
+    "x": 1386.7,
+    "y": 1026.7
   },
   "E11": {
+    "x": 1413.3,
+    "y": 1053.3
+  },
+  "E12": {
     "x": 1440,
     "y": 1080
   },
-  "E12": {
-    "x": 1480,
-    "y": 1120
-  },
   "E13": {
+    "x": 1466.7,
+    "y": 1106.7
+  },
+  "E14": {
+    "x": 1493.3,
+    "y": 1133.3
+  },
+  "E15": {
     "x": 1520,
     "y": 1160
   },
-  "E14": {
-    "x": 1560,
+  "E16": {
+    "x": 1520,
     "y": 1200
   },
-  "E15": {
-    "x": 1600,
+  "E17": {
+    "x": 1520,
     "y": 1240
   },
-  "E16": {
-    "x": 1600,
+  "E18": {
+    "x": 1520,
     "y": 1280
   },
-  "E17": {
-    "x": 1600,
+  "E19": {
+    "x": 1520,
     "y": 1320
   },
-  "E18": {
-    "x": 1600,
+  "E20": {
+    "x": 1520,
     "y": 1360
   },
-  "E19": {
-    "x": 1600,
+  "E21": {
+    "x": 1520,
     "y": 1400
   },
-  "E20": {
-    "x": 1600,
+  "E22": {
+    "x": 1520,
     "y": 1440
   },
-  "E21": {
-    "x": 1600,
-    "y": 1480
-  },
-  "E22": {
-    "x": 1600,
-    "y": 1520
-  },
   "E23": {
-    "x": 1600,
-    "y": 1560
+    "x": 1520,
+    "y": 1480
   },
   "W1": {
     "x": 960,
@@ -219,83 +219,83 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
   },
   "S3": {
     "x": 960,
-    "y": 1080
+    "y": 1120
   },
   "S4": {
     "x": 920,
-    "y": 1080
+    "y": 1120
   },
   "S5": {
     "x": 880,
-    "y": 1080
+    "y": 1120
   },
   "S6": {
     "x": 840,
-    "y": 1080
+    "y": 1120
   },
   "S7": {
     "x": 800,
-    "y": 1080
+    "y": 1120
   },
   "S8": {
     "x": 760,
-    "y": 1080
+    "y": 1120
   },
   "S9": {
     "x": 720,
-    "y": 1080
+    "y": 1120
   },
   "S10": {
     "x": 680,
-    "y": 1080
+    "y": 1120
   },
   "S11": {
     "x": 640,
-    "y": 1080
+    "y": 1120
   },
   "S12": {
     "x": 600,
-    "y": 1080
+    "y": 1120
   },
   "BL01": {
     "x": 720,
-    "y": 1080
+    "y": 1120
   },
   "BL02": {
-    "x": 760,
-    "y": 1040
+    "x": 720,
+    "y": 1074.3
   },
   "BL03": {
-    "x": 800,
-    "y": 1000
+    "x": 720,
+    "y": 1028.6
   },
   "BL04": {
-    "x": 840,
-    "y": 960
+    "x": 720,
+    "y": 982.9
   },
   "BL05": {
-    "x": 880,
-    "y": 920
+    "x": 720,
+    "y": 937.1
   },
   "BL06": {
-    "x": 920,
-    "y": 880
+    "x": 720,
+    "y": 891.4
   },
   "BL07": {
-    "x": 920,
-    "y": 840
+    "x": 720,
+    "y": 845.7
   },
   "BL08": {
-    "x": 920,
+    "x": 720,
     "y": 800
   },
   "BL09": {
-    "x": 920,
-    "y": 760
+    "x": 840,
+    "y": 680
   },
   "BL10": {
-    "x": 920,
-    "y": 720
+    "x": 880,
+    "y": 680
   },
   "BL11": {
     "x": 920,
@@ -315,10 +315,10 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
   },
   "BL15": {
     "x": 1080,
-    "y": 720
+    "y": 680
   },
   "BL16": {
-    "x": 1120,
+    "x": 1160,
     "y": 760
   },
   "BL17": {
@@ -346,16 +346,16 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 1000
   },
   "BL23": {
-    "x": 1120,
-    "y": 1000
+    "x": 1160,
+    "y": 1040
   },
   "BL24": {
-    "x": 1080,
-    "y": 1000
+    "x": 1120,
+    "y": 1080
   },
   "BL25": {
-    "x": 1040,
-    "y": 1040
+    "x": 1060,
+    "y": 1080
   },
   "BL26": {
     "x": 1000,
@@ -379,39 +379,39 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
   },
   "BL31": {
     "x": 800,
-    "y": 1080
+    "y": 1120
   },
   "BL32": {
     "x": 760,
-    "y": 1080
+    "y": 1120
   },
   "BL01_2": {
     "x": 720,
-    "y": 1080
+    "y": 1120
   },
   "BL33": {
     "x": 660,
-    "y": 1080
+    "y": 1120
   },
   "BL34": {
     "x": 600,
-    "y": 1080
+    "y": 1120
   },
   "BL35": {
     "x": 560,
-    "y": 1080
+    "y": 1120
   },
   "BL36": {
     "x": 520,
-    "y": 1080
+    "y": 1120
   },
   "BL37": {
     "x": 480,
-    "y": 1080
+    "y": 1120
   },
   "BL38": {
     "x": 440,
-    "y": 1080
+    "y": 1120
   },
   "PP01": {
     "x": 160,
@@ -479,95 +479,95 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
   },
   "YL01": {
     "x": 1080,
-    "y": 720
+    "y": 680
   },
   "YL02": {
-    "x": 1120,
-    "y": 720
+    "x": 1111.1,
+    "y": 680
   },
   "YL03": {
-    "x": 1160,
-    "y": 720
+    "x": 1142.2,
+    "y": 680
   },
   "YL04": {
-    "x": 1200,
-    "y": 720
+    "x": 1173.3,
+    "y": 680
   },
   "YL05": {
-    "x": 1240,
-    "y": 720
+    "x": 1204.4,
+    "y": 680
   },
   "YL06": {
-    "x": 1280,
-    "y": 720
+    "x": 1235.6,
+    "y": 680
   },
   "YL07": {
-    "x": 1320,
-    "y": 720
+    "x": 1266.7,
+    "y": 680
   },
   "YL08": {
-    "x": 1360,
-    "y": 720
+    "x": 1297.8,
+    "y": 680
   },
   "YL09": {
+    "x": 1328.9,
+    "y": 680
+  },
+  "YL10": {
+    "x": 1360,
+    "y": 680
+  },
+  "YL11": {
     "x": 1400,
     "y": 720
   },
-  "YL10": {
+  "YL12": {
     "x": 1440,
-    "y": 720
-  },
-  "YL11": {
-    "x": 1480,
     "y": 760
   },
-  "YL12": {
-    "x": 1520,
+  "YL13": {
+    "x": 1480,
     "y": 800
   },
-  "YL13": {
-    "x": 1560,
+  "YL14": {
+    "x": 1520,
     "y": 840
   },
-  "YL14": {
-    "x": 1600,
-    "y": 880
-  },
   "YL15": {
-    "x": 1600,
-    "y": 920
+    "x": 1520,
+    "y": 875.6
   },
   "YL16": {
-    "x": 1600,
-    "y": 960
+    "x": 1520,
+    "y": 911.1
   },
   "YL17": {
-    "x": 1600,
-    "y": 1000
+    "x": 1520,
+    "y": 946.7
   },
   "YL18": {
-    "x": 1600,
-    "y": 1040
+    "x": 1520,
+    "y": 982.2
   },
   "YL19": {
-    "x": 1600,
-    "y": 1080
+    "x": 1520,
+    "y": 1017.8
   },
   "YL20": {
-    "x": 1600,
-    "y": 1120
+    "x": 1520,
+    "y": 1053.3
   },
   "YL21": {
-    "x": 1600,
-    "y": 1160
+    "x": 1520,
+    "y": 1088.9
   },
   "YL22": {
-    "x": 1600,
-    "y": 1200
+    "x": 1520,
+    "y": 1124.4
   },
   "YL23": {
-    "x": 1600,
-    "y": 1240
+    "x": 1520,
+    "y": 1160
   },
   "PK01": {
     "x": 560,
@@ -702,23 +702,23 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 960
   },
   "A5": {
-    "x": 1200,
+    "x": 1216,
     "y": 960
   },
   "A4": {
-    "x": 1240,
+    "x": 1272,
     "y": 960
   },
   "A3": {
-    "x": 1280,
+    "x": 1328,
     "y": 960
   },
   "A2": {
-    "x": 1320,
+    "x": 1384,
     "y": 960
   },
   "A1": {
-    "x": 1360,
+    "x": 1440,
     "y": 960
   },
   "RN10": {
@@ -786,8 +786,8 @@ export const Map: React.FC<MapProps> = ({
  onSelectStation,
  calculatedRoute,
 }) => {
- const [scale, setScale] = useState(1);
- const [popupGroup, setPopupGroup] = useState<{ stations: Station[], coords: {x: number, y: number} } | null>(null);
+  const [isZoomedIn, setIsZoomedIn] = useState(false);
+  const [popupGroup, setPopupGroup] = useState<{ stations: Station[], coords: {x: number, y: number} } | null>(null);
 
   const stationsByCoord: Record<string, Station[]> = {};
   stations.forEach(st => {
@@ -797,6 +797,9 @@ export const Map: React.FC<MapProps> = ({
     if (!stationsByCoord[key]) stationsByCoord[key] = [];
     stationsByCoord[key].push(st);
   });
+  const interchangeCoords = Object.values(stationsByCoord)
+    .filter(g => g.length > 1)
+    .map(g => stationCoords[g[0].id]);
 
  const isStationInRoute = (stationId: string) => {
  if (!calculatedRoute) return false;
@@ -840,18 +843,16 @@ export const Map: React.FC<MapProps> = ({
  <span className="text-[10px] opacity-45 block mt-0.5">คลิกสถานีเพื่อระบุ ต้นทาง ↔ ปลายทาง</span>
  </div>
 
- <TransformWrapper
-    initialScale={1}
-    minScale={0.3}
-    maxScale={8}
-    wheel={{ step: 0.1 }}
-    doubleClick={{ disabled: true }}
-    onZoom={(ref) => setScale(ref.state.scale)}
-    onInit={(ref) => setScale(ref.state.scale)}
-    onPanning={(ref) => setScale(ref.state.scale)}
+  <TransformWrapper
+    initialScale={0.8}
+    minScale={0.2}
+    maxScale={4}
+    centerOnInit={true}
+    onTransform={(ref) => {
+      setIsZoomedIn(ref.state.scale > 1.2);
+    }}
   >
     {() => {
-      const isZoomedIn = scale >= 1.5;
       return (
         <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
           <svg
@@ -952,6 +953,20 @@ export const Map: React.FC<MapProps> = ({
     return null;
   })}
 
+  {/* --- STAGE 2.5: Interchange Background Connectors --- */}
+  {interchangeCoords.map((c, i) => (
+    <circle
+      key={`interchange-bg-${i}`}
+      cx={c.x}
+      cy={c.y}
+      r="16"
+      fill="#ffffff"
+      stroke="#cbd5e1"
+      strokeWidth="2.5"
+      className="pointer-events-none drop-shadow-sm"
+    />
+  ))}
+
  {/* --- STAGE 3: Station Circles & Hover Details --- */}
  {stations.map((st, i) => {
  const coords = stationCoords[st.id];
@@ -1012,35 +1027,37 @@ export const Map: React.FC<MapProps> = ({
  {st.id.split('_')[0]}
  </text>
 
- {/* Station English Label (Only show when zoomed in) */}
- {isZoomedIn && (
- <text
- x={coords.x}
- y={coords.y + (i % 2 === 0 ? -16 : 15)}
- textAnchor="middle"
- className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 ${
- isStart || isEnd ? 'font-extrabold text-[10px]' : ''
- }`}
- style={{ textShadow: '0 0 5px white, 0 0 5px white, 0 0 5px white' }}
- >
- {st.nameEN}
- </text>
- )}
+            {/* Station EN Label */}
+            <text
+              x={coords.x}
+              y={coords.y + (i % 2 === 0 ? -16 : 15)}
+              textAnchor="middle"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              paintOrder="stroke"
+              className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${
+                isStart || isEnd ? 'font-extrabold text-[10px]' : ''
+              } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
+            >
+              {st.nameEN}
+            </text>
 
- {/* Station Thai Label (Only show when zoomed in) */}
- {isZoomedIn && (
- <text
- x={coords.x}
- y={coords.y + (i % 2 === 0 ? -9 : 21)}
- textAnchor="middle"
- className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 ${
- isStart || isEnd ? 'font-bold text-[8.5px]' : ''
- }`}
- style={{ textShadow: '0 0 5px white, 0 0 5px white, 0 0 5px white' }}
- >
- {st.nameTH}
- </text>
- )}
+            {/* Station Thai Label */}
+            <text
+              x={coords.x}
+              y={coords.y + (i % 2 === 0 ? -9 : 21)}
+              textAnchor="middle"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              paintOrder="stroke"
+              className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 transition-opacity duration-300 ${
+                isStart || isEnd ? 'font-bold text-[8.5px]' : ''
+              } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
+            >
+              {st.nameTH}
+            </text>
  </g>
  );
  })}
