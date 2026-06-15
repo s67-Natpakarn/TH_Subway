@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Station, RouteResult } from '../utils/pathfinder';
 import transitData from '../data/transitGraph.json';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
@@ -786,6 +786,7 @@ export const Map: React.FC<MapProps> = ({
  onSelectStation,
  calculatedRoute,
 }) => {
+ const [scale, setScale] = useState(1);
  const isStationInRoute = (stationId: string) => {
  if (!calculatedRoute) return false;
  return calculatedRoute.path.some((s) => s.id === stationId);
@@ -830,18 +831,21 @@ export const Map: React.FC<MapProps> = ({
 
  <TransformWrapper
     initialScale={1}
-    minScale={0.5}
-    maxScale={6}
+    minScale={0.3}
+    maxScale={8}
     wheel={{ step: 0.1 }}
     doubleClick={{ disabled: true }}
+    onZoom={(ref) => setScale(ref.state.scale)}
+    onInit={(ref) => setScale(ref.state.scale)}
+    onPanning={(ref) => setScale(ref.state.scale)}
   >
-    {({ state }) => {
-      const isZoomedIn = state.scale >= 2.2;
+    {() => {
+      const isZoomedIn = scale >= 1.5;
       return (
-        <TransformComponent wrapperClass="w-full h-full !flex items-center justify-center cursor-grab active:cursor-grabbing">
+        <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
           <svg
             viewBox="0 0 1020 540"
-            className="w-full max-w-[960px] aspect-[1020/540] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
+            className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
           >
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -940,7 +944,7 @@ export const Map: React.FC<MapProps> = ({
  <circle
  cx={coords.x}
  cy={coords.y}
- r="10" fill="none"
+ r="12" fill="none"
  stroke={isStart ? '#159E40' : '#003399'}
  strokeWidth="2"
  className="animate-ping opacity-40"
@@ -952,19 +956,19 @@ export const Map: React.FC<MapProps> = ({
  <circle
  cx={coords.x}
  cy={coords.y}
- r={isStart || isEnd ? '6.5' : inRoute ? '5.5' : '4'}
+ r={isStart || isEnd ? '7.5' : inRoute ? '6.5' : '5'}
  fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
  stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
- strokeWidth={isStart || isEnd ? '2.5' : '1.5'}
+ strokeWidth={isStart || isEnd ? '3' : '2'}
  className="map-station"
  />
 
  {/* Station Code inside the dot */}
  <text
  x={coords.x}
- y={coords.y + 1}
+ y={coords.y + 1.2}
  textAnchor="middle"
- className={`text-[2.8px] font-extrabold select-none pointer-events-none transition-opacity ${
+ className={`text-[3.5px] font-extrabold select-none pointer-events-none transition-opacity ${
  isStart || isEnd ? (isStart ? 'fill-[#159E40]' : 'fill-[#003399]') : inRoute ? 'fill-white' : 'fill-black/80'
  }`}
  >
@@ -972,30 +976,34 @@ export const Map: React.FC<MapProps> = ({
  </text>
 
  {/* Station English Label (Only show when zoomed in) */}
+ {isZoomedIn && (
  <text
  x={coords.x}
- y={coords.y - 7}
+ y={coords.y - 8}
  textAnchor="middle"
- className={`text-[5.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${
- isZoomedIn || isStart || isEnd ? 'opacity-100' : 'opacity-0'
- } ${isStart || isEnd ? 'font-extrabold text-[6.5px]' : ''}`}
- style={{ textShadow: '0 0 3px white, 0 0 3px white, 0 0 3px white' }}
+ className={`text-[6.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 ${
+ isStart || isEnd ? 'font-extrabold text-[7.5px]' : ''
+ }`}
+ style={{ textShadow: '0 0 4px white, 0 0 4px white, 0 0 4px white' }}
  >
  {st.nameEN}
  </text>
+ )}
 
  {/* Station Thai Label (Only show when zoomed in) */}
+ {isZoomedIn && (
  <text
  x={coords.x}
- y={coords.y + 9}
+ y={coords.y + 11}
  textAnchor="middle"
- className={`text-[5px] font-semibold select-none pointer-events-none fill-black/75 transition-opacity duration-300 ${
- isZoomedIn || isStart || isEnd ? 'opacity-100' : 'opacity-0'
- } ${isStart || isEnd ? 'font-bold text-[6px]' : ''}`}
- style={{ textShadow: '0 0 3px white, 0 0 3px white, 0 0 3px white' }}
+ className={`text-[5.5px] font-semibold select-none pointer-events-none fill-black/80 ${
+ isStart || isEnd ? 'font-bold text-[6.5px]' : ''
+ }`}
+ style={{ textShadow: '0 0 4px white, 0 0 4px white, 0 0 4px white' }}
  >
  {st.nameTH}
  </text>
+ )}
  </g>
  );
  })}
