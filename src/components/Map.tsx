@@ -4,11 +4,11 @@ import transitData from '../data/transitGraph.json';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 interface MapProps {
- stations: Station[];
- startStation: Station | null;
- endStation: Station | null;
- onSelectStation: (station: Station) => void;
- calculatedRoute: RouteResult | null;
+  stations: Station[];
+  startStation: Station | null;
+  endStation: Station | null;
+  onSelectStation: (station: Station) => void;
+  calculatedRoute: RouteResult | null;
 }
 
 // Coordinate layout of all nodes inside SVG viewBox="0 0 1000 580"
@@ -780,14 +780,14 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
 };
 
 export const Map: React.FC<MapProps> = ({
- stations,
- startStation,
- endStation,
- onSelectStation,
- calculatedRoute,
+  stations,
+  startStation,
+  endStation,
+  onSelectStation,
+  calculatedRoute,
 }) => {
   const [isZoomedIn, setIsZoomedIn] = useState(false);
-  const [popupGroup, setPopupGroup] = useState<{ stations: Station[], coords: {x: number, y: number} } | null>(null);
+  const [popupGroup, setPopupGroup] = useState<{ stations: Station[], coords: { x: number, y: number } } | null>(null);
 
   const stationsByCoord: Record<string, Station[]> = {};
   stations.forEach(st => {
@@ -801,299 +801,296 @@ export const Map: React.FC<MapProps> = ({
     .filter(g => g.length > 1)
     .map(g => stationCoords[g[0].id]);
 
- const isStationInRoute = (stationId: string) => {
- if (!calculatedRoute) return false;
- return calculatedRoute.path.some((s) => s.id === stationId);
- };
+  const isStationInRoute = (stationId: string) => {
+    if (!calculatedRoute) return false;
+    return calculatedRoute.path.some((s) => s.id === stationId);
+  };
 
- const isEdgeInRoute = (fromId: string, toId: string) => {
- if (!calculatedRoute) return false;
- const path = calculatedRoute.path;
- for (let i = 0; i < path.length - 1; i++) {
- if (
- (path[i].id === fromId && path[i + 1].id === toId) ||
- (path[i].id === toId && path[i + 1].id === fromId)
- ) {
- return true;
- }
- }
- return false;
- };
-
- // Helper to get line colors dynamically
- const getLineColor = (lineName: string) => {
- switch (lineName.toUpperCase()) {
- case 'BTS_SUKHUMVIT': return '#159E40';
- case 'BTS_SILOM': return '#006432';
- case 'MRT_BLUE': return '#003399';
- case 'MRT_PURPLE': return '#800080';
- case 'MRT_YELLOW': return '#FCD116';
- case 'MRT_PINK': return '#FF66B2';
- case 'ARL': return '#800000';
- case 'SRT_RED': return '#E60000';
- default: return '#94a3b8';
- }
- };
-
- return (
- <div className="w-full h-full flex items-center justify-center p-4 relative select-none">
- {/* Dynamic Map Title */}
- <div className="absolute top-6 right-6 text-right hidden lg:block">
- <h2 className="text-lg font-bold tracking-tight">แผนที่เดินรถไฟฟ้ารวม</h2>
- <span className="text-[10px] opacity-45 block mt-0.5">คลิกสถานีเพื่อระบุ ต้นทาง ↔ ปลายทาง</span>
- </div>
-
-  <TransformWrapper
-    initialScale={0.8}
-    minScale={0.3}
-    maxScale={4}
-    centerOnInit={true}
-    onTransform={(ref) => {
-      setIsZoomedIn(ref.state.scale > 1.2);
-    }}
-  >
-    {() => {
-      return (
-        <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
-          <svg
-            viewBox="-100 -150 2000 2000"
-            className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
-            onClick={() => setPopupGroup(null)}
-          >
-            <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse" x="0" y="0">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-black/[0.015]" />
-              </pattern>
-            </defs>
-            <rect x="0" y="-100" width="1800" height="1800" fill="url(#grid)" rx="20" />
-
- {/* --- STAGE 1: Standard Rail Tracks (Static) --- */}
- {transitData.edges.map((edge, i) => {
- const c1 = stationCoords[edge.from];
- const c2 = stationCoords[edge.to];
- if (!c1 || !c2) return null;
-
- const fromSt = (transitData.stations as any)[edge.from];
- const toSt = (transitData.stations as any)[edge.to];
- const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
- const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
-
- if (isInterchange) {
- return (
- <line
- key={`edge-${i}`}
- x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
- stroke="#94a3b8"
- strokeWidth={edge.type === 'cross-platform' ? "3" : "4.5"}
- strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "4 4"}
- strokeLinecap="round"
- />
- );
- }
-
- return (
- <line
- key={`edge-${i}`}
- x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
- stroke={getLineColor(lineName)}
- strokeWidth="8"
- strokeLinecap="round"
- className="opacity-30"
- />
- );
- })}
-
-  {/* --- STAGE 2: Route Overlay Highlighting (Pulsing flow paths) --- */}
-  {calculatedRoute && transitData.edges.map((edge, i) => {
-    const c1 = stationCoords[edge.from];
-    const c2 = stationCoords[edge.to];
-    if (!c1 || !c2) return null;
-
-    if (isEdgeInRoute(edge.from, edge.to)) {
-      const fromSt = stations.find(s => s.id === edge.from);
-      const toSt = stations.find(s => s.id === edge.to);
-      const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
-      const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
-
-      let startC = c1;
-      let endC = c2;
-      if (calculatedRoute?.path) {
-        const idxFrom = calculatedRoute.path.findIndex(s => s.id === edge.from);
-        const idxTo = calculatedRoute.path.findIndex(s => s.id === edge.to);
-        if (idxFrom > -1 && idxTo > -1 && idxFrom > idxTo) {
-          startC = c2;
-          endC = c1;
-        }
+  const isEdgeInRoute = (fromId: string, toId: string) => {
+    if (!calculatedRoute) return false;
+    const path = calculatedRoute.path;
+    for (let i = 0; i < path.length - 1; i++) {
+      if (
+        (path[i].id === fromId && path[i + 1].id === toId) ||
+        (path[i].id === toId && path[i + 1].id === fromId)
+      ) {
+        return true;
       }
-
-      if (isInterchange) {
-        return (
-          <line
-            key={`active-edge-${i}`}
-            x1={startC.x} y1={startC.y} x2={endC.x} y2={endC.y}
-            stroke="#f59e0b"
-            strokeWidth={edge.type === 'cross-platform' ? "5" : "6.5"}
-            strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "5 5"}
-            strokeLinecap="round"
-          />
-        );
-      }
-
-      return (
-        <line
-          key={`active-edge-${i}`}
-          x1={startC.x} y1={startC.y} x2={endC.x} y2={endC.y}
-          stroke={getLineColor(lineName)}
-          strokeWidth="10"
-          strokeLinecap="round"
-          className="map-line"
-        />
-      );
     }
-    return null;
-  })}
+    return false;
+  };
 
-  {/* --- STAGE 2.5: Interchange Background Connectors --- */}
-  {interchangeCoords.map((c, i) => (
-    <circle
-      key={`interchange-bg-${i}`}
-      cx={c.x}
-      cy={c.y}
-      r="16"
-      fill="#ffffff"
-      stroke="#cbd5e1"
-      strokeWidth="2.5"
-      className="pointer-events-none drop-shadow-sm"
-    />
-  ))}
+  // Helper to get line colors dynamically
+  const getLineColor = (lineName: string) => {
+    switch (lineName.toUpperCase()) {
+      case 'BTS_SUKHUMVIT': return '#159E40';
+      case 'BTS_SILOM': return '#006432';
+      case 'MRT_BLUE': return '#003399';
+      case 'MRT_PURPLE': return '#800080';
+      case 'MRT_YELLOW': return '#FCD116';
+      case 'MRT_PINK': return '#FF66B2';
+      case 'ARL': return '#800000';
+      case 'SRT_RED': return '#E60000';
+      default: return '#94a3b8';
+    }
+  };
 
- {/* --- STAGE 3: Station Circles & Hover Details --- */}
- {stations.map((st, i) => {
- const coords = stationCoords[st.id];
- if (!coords) return null;
+  return (
+    <div className="w-full h-full flex items-center justify-center p-4 relative select-none">
+      {/* Dynamic Map Title */}
+      <div className="absolute top-6 right-6 text-right hidden lg:block">
+        <h2 className="text-lg font-bold tracking-tight">แผนที่เดินรถไฟฟ้ารวม</h2>
+        <span className="text-[10px] opacity-45 block mt-0.5">คลิกสถานีเพื่อระบุ ต้นทาง ↔ ปลายทาง</span>
+      </div>
 
- const isStart = startStation?.id === st.id;
- const isEnd = endStation?.id === st.id;
- const inRoute = isStationInRoute(st.id);
- const strokeColor = getLineColor(st.line);
+      <TransformWrapper
+        initialScale={0.8}
+        minScale={0.3}
+        maxScale={4}
+        centerOnInit={true}
+        onTransform={(ref) => {
+          setIsZoomedIn(ref.state.scale > 1.2);
+        }}
+      >
+        {() => {
+          return (
+            <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
+              <svg
+                viewBox="-100 -150 2000 2000"
+                className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
+                onClick={() => setPopupGroup(null)}
+              >
+                <defs>
+                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse" x="0" y="0">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-black/[0.015]" />
+                  </pattern>
+                </defs>
+                <rect x="0" y="-100" width="1800" height="1800" fill="url(#grid)" rx="20" />
 
- return (
- <g 
-   key={`map-node-${st.id}`} 
-   className="cursor-pointer group" 
-   onClick={(e) => {
-     e.stopPropagation();
-     const group = stationsByCoord[`${coords.x},${coords.y}`];
-     if (group && group.length > 1) {
-       setPopupGroup({ stations: group, coords });
-     } else {
-       setPopupGroup(null);
-       onSelectStation(st);
-     }
-   }}
- >
-            {/* Ripple Glow */}
-            {(isStart || isEnd) && (
-              <circle
-                cx={coords.x}
-                cy={coords.y}
-                r="18" fill="none"
-                stroke={isStart ? '#159E40' : '#003399'}
-                strokeWidth="3"
-                className="opacity-40"
-              />
-            )}
+                {/* --- STAGE 1: Standard Rail Tracks (Static) --- */}
+                {transitData.edges.map((edge, i) => {
+                  const c1 = stationCoords[edge.from];
+                  const c2 = stationCoords[edge.to];
+                  if (!c1 || !c2) return null;
 
- {/* Station Circle Body */}
- <circle
- cx={coords.x}
- cy={coords.y}
- r={isStart || isEnd ? '11' : inRoute ? '9' : '7.5'}
- fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
- stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
- strokeWidth={isStart || isEnd ? '4' : '2.5'}
- className="map-station"
- />
+                  const fromSt = (transitData.stations as any)[edge.from];
+                  const toSt = (transitData.stations as any)[edge.to];
+                  const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
+                  const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
 
- {/* Station Code inside the dot */}
- <text
- x={coords.x}
- y={coords.y + 1.6}
- textAnchor="middle"
- className={`text-[5px] font-extrabold select-none pointer-events-none transition-opacity ${
- isStart || isEnd ? (isStart ? 'fill-[#159E40]' : 'fill-[#003399]') : inRoute ? 'fill-white' : 'fill-black/80'
- }`}
- >
- {st.id.split('_')[0]}
- </text>
+                  if (isInterchange) {
+                    return (
+                      <line
+                        key={`edge-${i}`}
+                        x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
+                        stroke="#94a3b8"
+                        strokeWidth={edge.type === 'cross-platform' ? "3" : "4.5"}
+                        strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "4 4"}
+                        strokeLinecap="round"
+                      />
+                    );
+                  }
 
-            {/* Station EN Label */}
-            <text
-              x={coords.x}
-              y={coords.y + (i % 2 === 0 ? -16 : 15)}
-              textAnchor="middle"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinejoin="round"
-              paintOrder="stroke"
-              className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${
-                isStart || isEnd ? 'font-extrabold text-[10px]' : ''
-              } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
-            >
-              {st.nameEN}
-            </text>
+                  return (
+                    <line
+                      key={`edge-${i}`}
+                      x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
+                      stroke={getLineColor(lineName)}
+                      strokeWidth="8"
+                      strokeLinecap="round"
+                      className="opacity-30"
+                    />
+                  );
+                })}
 
-            {/* Station Thai Label */}
-            <text
-              x={coords.x}
-              y={coords.y + (i % 2 === 0 ? -9 : 21)}
-              textAnchor="middle"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinejoin="round"
-              paintOrder="stroke"
-              className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 transition-opacity duration-300 ${
-                isStart || isEnd ? 'font-bold text-[8.5px]' : ''
-              } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
-            >
-              {st.nameTH}
-            </text>
- </g>
- );
- })}
-          {/* --- STAGE 4: Interchange Line Selector Popup --- */}
-          {popupGroup && (
-            <foreignObject
-              x={popupGroup.coords.x - 45}
-              y={popupGroup.coords.y + 15}
-              width="90"
-              height="110"
-              className="overflow-visible"
-            >
-              <div className="bg-white/95 backdrop-blur-sm rounded-md shadow-2xl border border-gray-200/50 p-2 flex flex-col gap-1 w-[90px] transform -translate-x-1/2 left-1/2 relative z-50">
-                <div className="text-[5px] font-bold text-gray-500 mb-0.5 px-1 uppercase tracking-wider">Select Line</div>
-                {popupGroup.stations.map((st) => (
-                  <button
-                    key={st.id}
-                    className="text-[6px] text-left px-2 py-1.5 hover:bg-gray-100/80 rounded-[3px] text-gray-800 font-semibold truncate flex items-center gap-1.5 transition-colors"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectStation(st);
-                      setPopupGroup(null);
-                    }}
-                  >
-                    <span className="w-2 h-2 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: getLineColor(st.line) }}></span>
-                    {st.line.replace('BTS_', '').replace('MRT_', '').replace('SRT_', '')}
-                  </button>
+                {/* --- STAGE 2: Route Overlay Highlighting (Pulsing flow paths) --- */}
+                {calculatedRoute && transitData.edges.map((edge, i) => {
+                  const c1 = stationCoords[edge.from];
+                  const c2 = stationCoords[edge.to];
+                  if (!c1 || !c2) return null;
+
+                  if (isEdgeInRoute(edge.from, edge.to)) {
+                    const fromSt = stations.find(s => s.id === edge.from);
+                    const toSt = stations.find(s => s.id === edge.to);
+                    const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
+                    const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
+
+                    let startC = c1;
+                    let endC = c2;
+                    if (calculatedRoute?.path) {
+                      const idxFrom = calculatedRoute.path.findIndex(s => s.id === edge.from);
+                      const idxTo = calculatedRoute.path.findIndex(s => s.id === edge.to);
+                      if (idxFrom > -1 && idxTo > -1 && idxFrom > idxTo) {
+                        startC = c2;
+                        endC = c1;
+                      }
+                    }
+
+                    if (isInterchange) {
+                      return (
+                        <line
+                          key={`active-edge-${i}`}
+                          x1={startC.x} y1={startC.y} x2={endC.x} y2={endC.y}
+                          stroke="#f59e0b"
+                          strokeWidth={edge.type === 'cross-platform' ? "5" : "6.5"}
+                          strokeDasharray={edge.type === 'cross-platform' ? "3 3" : "5 5"}
+                          strokeLinecap="round"
+                        />
+                      );
+                    }
+
+                    return (
+                      <line
+                        key={`active-edge-${i}`}
+                        x1={startC.x} y1={startC.y} x2={endC.x} y2={endC.y}
+                        stroke={getLineColor(lineName)}
+                        strokeWidth="10"
+                        strokeLinecap="round"
+                        className="map-line"
+                      />
+                    );
+                  }
+                  return null;
+                })}
+
+                {/* --- STAGE 2.5: Interchange Background Connectors --- */}
+                {interchangeCoords.map((c, i) => (
+                  <circle
+                    key={`interchange-bg-${i}`}
+                    cx={c.x}
+                    cy={c.y}
+                    r="16"
+                    fill="#ffffff"
+                    stroke="#cbd5e1"
+                    strokeWidth="2.5"
+                    className="pointer-events-none drop-shadow-sm"
+                  />
                 ))}
-              </div>
-            </foreignObject>
-          )}
- </svg>
-        </TransformComponent>
-      );
-    }}
-  </TransformWrapper>
- </div>
- );
+
+                {/* --- STAGE 3: Station Circles & Hover Details --- */}
+                {stations.map((st, i) => {
+                  const coords = stationCoords[st.id];
+                  if (!coords) return null;
+
+                  const isStart = startStation?.id === st.id;
+                  const isEnd = endStation?.id === st.id;
+                  const inRoute = isStationInRoute(st.id);
+                  const strokeColor = getLineColor(st.line);
+
+                  return (
+                    <g
+                      key={`map-node-${st.id}`}
+                      className="cursor-pointer group"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const group = stationsByCoord[`${coords.x},${coords.y}`];
+                        if (group && group.length > 1) {
+                          setPopupGroup({ stations: group, coords });
+                        } else {
+                          setPopupGroup(null);
+                          onSelectStation(st);
+                        }
+                      }}
+                    >
+                      {/* Ripple Glow */}
+                      {(isStart || isEnd) && (
+                        <circle
+                          cx={coords.x}
+                          cy={coords.y}
+                          r="18" fill="none"
+                          stroke={isStart ? '#159E40' : '#003399'}
+                          strokeWidth="3"
+                          className="opacity-40"
+                        />
+                      )}
+
+                      {/* Station Circle Body */}
+                      <circle
+                        cx={coords.x}
+                        cy={coords.y}
+                        r={isStart || isEnd ? '11' : inRoute ? '9' : '7.5'}
+                        fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
+                        stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
+                        strokeWidth={isStart || isEnd ? '4' : '2.5'}
+                        className="map-station"
+                      />
+
+                      {/* Station Code inside the dot */}
+                      <text
+                        x={coords.x}
+                        y={coords.y + 1.6}
+                        textAnchor="middle"
+                        className={`text-[5px] font-extrabold select-none pointer-events-none transition-opacity ${isStart || isEnd ? (isStart ? 'fill-[#159E40]' : 'fill-[#003399]') : inRoute ? 'fill-white' : 'fill-black/80'
+                          }`}
+                      >
+                        {st.id.split('_')[0]}
+                      </text>
+
+                      {/* Station EN Label */}
+                      <text
+                        x={coords.x}
+                        y={coords.y + (i % 2 === 0 ? -16 : 15)}
+                        textAnchor="middle"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                        paintOrder="stroke"
+                        className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${isStart || isEnd ? 'font-extrabold text-[10px]' : ''
+                          } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
+                      >
+                        {st.nameEN}
+                      </text>
+
+                      {/* Station Thai Label */}
+                      <text
+                        x={coords.x}
+                        y={coords.y + (i % 2 === 0 ? -9 : 21)}
+                        textAnchor="middle"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                        paintOrder="stroke"
+                        className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 transition-opacity duration-300 ${isStart || isEnd ? 'font-bold text-[8.5px]' : ''
+                          } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
+                      >
+                        {st.nameTH}
+                      </text>
+                    </g>
+                  );
+                })}
+                {/* --- STAGE 4: Interchange Line Selector Popup --- */}
+                {popupGroup && (
+                  <foreignObject
+                    x={popupGroup.coords.x - 45}
+                    y={popupGroup.coords.y + 15}
+                    width="90"
+                    height="110"
+                    className="overflow-visible"
+                  >
+                    <div className="bg-white/95 backdrop-blur-sm rounded-md shadow-2xl border border-gray-200/50 p-2 flex flex-col gap-1 w-[90px] transform -translate-x-1/2 left-1/2 relative z-50">
+                      <div className="text-[5px] font-bold text-gray-500 mb-0.5 px-1 uppercase tracking-wider">Select Line</div>
+                      {popupGroup.stations.map((st) => (
+                        <button
+                          key={st.id}
+                          className="text-[6px] text-left px-2 py-1.5 hover:bg-gray-100/80 rounded-[3px] text-gray-800 font-semibold truncate flex items-center gap-1.5 transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectStation(st);
+                            setPopupGroup(null);
+                          }}
+                        >
+                          <span className="w-2 h-2 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: getLineColor(st.line) }}></span>
+                          {st.line.replace('BTS_', '').replace('MRT_', '').replace('SRT_', '')}
+                        </button>
+                      ))}
+                    </div>
+                  </foreignObject>
+                )}
+              </svg>
+            </TransformComponent>
+          );
+        }}
+      </TransformWrapper>
+    </div>
+  );
 };
