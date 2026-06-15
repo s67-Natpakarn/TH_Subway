@@ -1,111 +1,2336 @@
 {
   "stations": {
-    "N24": { "id": "N24", "nameEN": "Khu Khot", "nameTH": "คูคต", "line": "BTS_SUKHUMVIT" },
-    "N17": { "id": "N17", "nameEN": "Wat Phra Sri Mahathat", "nameTH": "วัดพระศรีมหาธาตุ", "line": "BTS_SUKHUMVIT" },
-    "N8": { "id": "N8", "nameEN": "Mo Chit", "nameTH": "หมอชิต", "line": "BTS_SUKHUMVIT" },
-    "N3": { "id": "N3", "nameEN": "Phaya Thai", "nameTH": "พญาไท", "line": "BTS_SUKHUMVIT" },
-    "CEN_S": { "id": "CEN_S", "nameEN": "Siam (Sukhumvit)", "nameTH": "สยาม (สุขุมวิท)", "line": "BTS_SUKHUMVIT" },
-    "E4": { "id": "E4", "nameEN": "Asok", "nameTH": "อโศก", "line": "BTS_SUKHUMVIT" },
-    "E9": { "id": "E9", "nameEN": "On Nut", "nameTH": "อ่อนนุช", "line": "BTS_SUKHUMVIT" },
-    "E15": { "id": "E15", "nameEN": "Samrong", "nameTH": "สำโรง", "line": "BTS_SUKHUMVIT" },
-    "E23": { "id": "E23", "nameEN": "Kheha", "nameTH": "เคหะฯ", "line": "BTS_SUKHUMVIT" },
-
-    "W1": { "id": "W1", "nameEN": "National Stadium", "nameTH": "สนามกีฬาแห่งชาติ", "line": "BTS_SILOM" },
-    "CEN_L": { "id": "CEN_L", "nameEN": "Siam (Silom)", "nameTH": "สยาม (สีลม)", "line": "BTS_SILOM" },
-    "S2": { "id": "S2", "nameEN": "Sala Daeng", "nameTH": "ศาลาแดง", "line": "BTS_SILOM" },
-    "S7": { "id": "S7", "nameEN": "Krung Thon Buri", "nameTH": "กรุงธนบุรี", "line": "BTS_SILOM" },
-    "S12": { "id": "S12", "nameEN": "Bang Wa", "nameTH": "บางหว้า", "line": "BTS_SILOM" },
-
-    "BL10": { "id": "BL10", "nameEN": "Tao Poon", "nameTH": "เตาปูน", "line": "MRT_BLUE" },
-    "BL11": { "id": "BL11", "nameEN": "Bang Sue", "nameTH": "บางซื่อ", "line": "MRT_BLUE" },
-    "BL13": { "id": "BL13", "nameEN": "Chatuchak Park", "nameTH": "สวนจตุจักร", "line": "MRT_BLUE" },
-    "BL15": { "id": "BL15", "nameEN": "Lat Phrao", "nameTH": "ลาดพร้าว", "line": "MRT_BLUE" },
-    "BL21": { "id": "BL21", "nameEN": "Phetchaburi", "nameTH": "เพชรบุรี", "line": "MRT_BLUE" },
-    "BL22": { "id": "BL22", "nameEN": "Sukhumvit", "nameTH": "สุขุมวิท", "line": "MRT_BLUE" },
-    "BL26": { "id": "BL26", "nameEN": "Si Lom", "nameTH": "สีลม", "line": "MRT_BLUE" },
-    "BL01": { "id": "BL01", "nameEN": "Tha Phra", "nameTH": "ท่าพระ", "line": "MRT_BLUE" },
-    "BL34": { "id": "BL34", "nameEN": "Bang Wa", "nameTH": "บางหว้า", "line": "MRT_BLUE" },
-    "BL38": { "id": "BL38", "nameEN": "Lak Song", "nameTH": "หลักสอง", "line": "MRT_BLUE" },
-
-    "PP01": { "id": "PP01", "nameEN": "Khlong Bang Phai", "nameTH": "คลองบางไผ่", "line": "MRT_PURPLE" },
-    "PP11": { "id": "PP11", "nameEN": "Nonthaburi Civic Center", "nameTH": "ศูนย์ราชการนนทบุรี", "line": "MRT_PURPLE" },
-    "PP16": { "id": "PP16", "nameEN": "Tao Poon", "nameTH": "เตาปูน", "line": "MRT_PURPLE" },
-
-    "YL01": { "id": "YL01", "nameEN": "Lat Phrao", "nameTH": "ลาดพร้าว", "line": "MRT_YELLOW" },
-    "YL23": { "id": "YL23", "nameEN": "Samrong", "nameTH": "สำโรง", "line": "MRT_YELLOW" },
-
-    "PK01": { "id": "PK01", "nameEN": "Nonthaburi Civic Center", "nameTH": "ศูนย์ราชการนนทบุรี", "line": "MRT_PINK" },
-    "PK14": { "id": "PK14", "nameEN": "Lak Si", "nameTH": "หลักสี่", "line": "MRT_PINK" },
-    "PK16": { "id": "PK16", "nameEN": "Wat Phra Sri Mahathat", "nameTH": "วัดพระศรีมหาธาตุ", "line": "MRT_PINK" },
-    "PK30": { "id": "PK30", "nameEN": "Min Buri", "nameTH": "มีนบุรี", "line": "MRT_PINK" },
-
-    "A8": { "id": "A8", "nameEN": "Phaya Thai", "nameTH": "พญาไท", "line": "ARL" },
-    "A6": { "id": "A6", "nameEN": "Makkasan", "nameTH": "มักกะสัน", "line": "ARL" },
-    "A1": { "id": "A1", "nameEN": "Suvarnabhumi", "nameTH": "สุวรรณภูมิ", "line": "ARL" },
-
-    "RN10": { "id": "RN10", "nameEN": "Rangsit", "nameTH": "รังสิต", "line": "SRT_RED" },
-    "RN06": { "id": "RN06", "nameEN": "Lak Si", "nameTH": "หลักสี่", "line": "SRT_RED" },
-    "RW01": { "id": "RW01", "nameEN": "Krung Thep Aphiwat", "nameTH": "กรุงเทพอภิวัฒน์", "line": "SRT_RED" },
-    "RW06": { "id": "RW06", "nameEN": "Taling Chan", "nameTH": "ตลิ่งชัน", "line": "SRT_RED" }
+    "N24": {
+      "id": "N24",
+      "nameEN": "Khu Khot",
+      "nameTH": "คูคต",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N23": {
+      "id": "N23",
+      "nameEN": "Yaek Kor Por Aor",
+      "nameTH": "แยก คปอ.",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N22": {
+      "id": "N22",
+      "nameEN": "Royal Thai Air Force Museum",
+      "nameTH": "พิพิธภัณฑ์กองทัพอากาศ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N21": {
+      "id": "N21",
+      "nameEN": "Bhumibol Adulyadej Hospital",
+      "nameTH": "โรงพยาบาลภูมิพลอดุลยเดช",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N20": {
+      "id": "N20",
+      "nameEN": "Saphan Mai",
+      "nameTH": "สะพานใหม่",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N19": {
+      "id": "N19",
+      "nameEN": "Sai Yud",
+      "nameTH": "สายหยุด",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N18": {
+      "id": "N18",
+      "nameEN": "Phahon Yothin 59",
+      "nameTH": "พหลโยธิน 59",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N17": {
+      "id": "N17",
+      "nameEN": "Wat Phra Sri Mahathat",
+      "nameTH": "วัดพระศรีมหาธาตุ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N16": {
+      "id": "N16",
+      "nameEN": "11th Infantry Regiment",
+      "nameTH": "กรมทหารราบที่ 11",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N15": {
+      "id": "N15",
+      "nameEN": "Bang Bua",
+      "nameTH": "บางบัว",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N14": {
+      "id": "N14",
+      "nameEN": "Royal Forest Department",
+      "nameTH": "กรมป่าไม้",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N13": {
+      "id": "N13",
+      "nameEN": "Kasetsart University",
+      "nameTH": "มหาวิทยาลัยเกษตรศาสตร์",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N12": {
+      "id": "N12",
+      "nameEN": "Sena Nikhom",
+      "nameTH": "เสนานิคม",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N11": {
+      "id": "N11",
+      "nameEN": "Ratchayothin",
+      "nameTH": "รัชโยธิน",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N10": {
+      "id": "N10",
+      "nameEN": "Phahon Yothin 24",
+      "nameTH": "พหลโยธิน 24",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N9": {
+      "id": "N9",
+      "nameEN": "Ha Yaek Lat Phrao",
+      "nameTH": "ห้าแยกลาดพร้าว",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N8": {
+      "id": "N8",
+      "nameEN": "Mo Chit",
+      "nameTH": "หมอชิต",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N7": {
+      "id": "N7",
+      "nameEN": "Saphan Khwai",
+      "nameTH": "สะพานควาย",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N5": {
+      "id": "N5",
+      "nameEN": "Ari",
+      "nameTH": "อารีย์",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N4": {
+      "id": "N4",
+      "nameEN": "Sanam Pao",
+      "nameTH": "สนามเป้า",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N3": {
+      "id": "N3",
+      "nameEN": "Victory Monument",
+      "nameTH": "อนุสาวรีย์ชัยสมรภูมิ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N2": {
+      "id": "N2",
+      "nameEN": "Phaya Thai",
+      "nameTH": "พญาไท",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "N1": {
+      "id": "N1",
+      "nameEN": "Ratchathewi",
+      "nameTH": "ราชเทวี",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "CEN_S": {
+      "id": "CEN_S",
+      "nameEN": "Siam (Sukhumvit)",
+      "nameTH": "สยาม",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E1": {
+      "id": "E1",
+      "nameEN": "Chit Lom",
+      "nameTH": "ชิดลม",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E2": {
+      "id": "E2",
+      "nameEN": "Phloen Chit",
+      "nameTH": "เพลินจิต",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E3": {
+      "id": "E3",
+      "nameEN": "Nana",
+      "nameTH": "นานา",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E4": {
+      "id": "E4",
+      "nameEN": "Asok",
+      "nameTH": "อโศก",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E5": {
+      "id": "E5",
+      "nameEN": "Phrom Phong",
+      "nameTH": "พร้อมพงษ์",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E6": {
+      "id": "E6",
+      "nameEN": "Thong Lo",
+      "nameTH": "ทองหล่อ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E7": {
+      "id": "E7",
+      "nameEN": "Ekkamai",
+      "nameTH": "เอกมัย",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E8": {
+      "id": "E8",
+      "nameEN": "Phra Khanong",
+      "nameTH": "พระโขนง",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E9": {
+      "id": "E9",
+      "nameEN": "On Nut",
+      "nameTH": "อ่อนนุช",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E10": {
+      "id": "E10",
+      "nameEN": "Bang Chak",
+      "nameTH": "บางจาก",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E11": {
+      "id": "E11",
+      "nameEN": "Punnawithi",
+      "nameTH": "ปุณณวิถี",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E12": {
+      "id": "E12",
+      "nameEN": "Udom Suk",
+      "nameTH": "อุดมสุข",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E13": {
+      "id": "E13",
+      "nameEN": "Bang Na",
+      "nameTH": "บางนา",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E14": {
+      "id": "E14",
+      "nameEN": "Bearing",
+      "nameTH": "แบริ่ง",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E15": {
+      "id": "E15",
+      "nameEN": "Samrong",
+      "nameTH": "สำโรง",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E16": {
+      "id": "E16",
+      "nameEN": "Pu Chao",
+      "nameTH": "ปู่เจ้า",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E17": {
+      "id": "E17",
+      "nameEN": "Chang Erawan",
+      "nameTH": "ช้างเอราวัณ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E18": {
+      "id": "E18",
+      "nameEN": "Royal Thai Naval Academy",
+      "nameTH": "โรงเรียนนายเรือ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E19": {
+      "id": "E19",
+      "nameEN": "Pak Nam",
+      "nameTH": "ปากน้ำ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E20": {
+      "id": "E20",
+      "nameEN": "Srinagarindra",
+      "nameTH": "ศรีนครินทร์",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E21": {
+      "id": "E21",
+      "nameEN": "Phraek Sa",
+      "nameTH": "แพรกษา",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E22": {
+      "id": "E22",
+      "nameEN": "Sai Luat",
+      "nameTH": "สายลวด",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "E23": {
+      "id": "E23",
+      "nameEN": "Kheha",
+      "nameTH": "เคหะฯ",
+      "line": "BTS_SUKHUMVIT"
+    },
+    "W1": {
+      "id": "W1",
+      "nameEN": "National Stadium",
+      "nameTH": "สนามกีฬาแห่งชาติ",
+      "line": "BTS_SILOM"
+    },
+    "CEN_L": {
+      "id": "CEN_L",
+      "nameEN": "Siam (Silom)",
+      "nameTH": "สยาม",
+      "line": "BTS_SILOM"
+    },
+    "S1": {
+      "id": "S1",
+      "nameEN": "Ratchadamri",
+      "nameTH": "ราชดำริ",
+      "line": "BTS_SILOM"
+    },
+    "S2": {
+      "id": "S2",
+      "nameEN": "Sala Daeng",
+      "nameTH": "ศาลาแดง",
+      "line": "BTS_SILOM"
+    },
+    "S3": {
+      "id": "S3",
+      "nameEN": "Chong Nonsi",
+      "nameTH": "ช่องนนทรี",
+      "line": "BTS_SILOM"
+    },
+    "S4": {
+      "id": "S4",
+      "nameEN": "Saint Louis",
+      "nameTH": "เซนต์หลุยส์",
+      "line": "BTS_SILOM"
+    },
+    "S5": {
+      "id": "S5",
+      "nameEN": "Surasak",
+      "nameTH": "สุรศักดิ์",
+      "line": "BTS_SILOM"
+    },
+    "S6": {
+      "id": "S6",
+      "nameEN": "Saphan Taksin",
+      "nameTH": "สะพานตากสิน",
+      "line": "BTS_SILOM"
+    },
+    "S7": {
+      "id": "S7",
+      "nameEN": "Krung Thon Buri",
+      "nameTH": "กรุงธนบุรี",
+      "line": "BTS_SILOM"
+    },
+    "S8": {
+      "id": "S8",
+      "nameEN": "Wongwian Yai",
+      "nameTH": "วงเวียนใหญ่",
+      "line": "BTS_SILOM"
+    },
+    "S9": {
+      "id": "S9",
+      "nameEN": "Pho Nimit",
+      "nameTH": "โพธิ์นิมิตร",
+      "line": "BTS_SILOM"
+    },
+    "S10": {
+      "id": "S10",
+      "nameEN": "Talat Phlu",
+      "nameTH": "ตลาดพลู",
+      "line": "BTS_SILOM"
+    },
+    "S11": {
+      "id": "S11",
+      "nameEN": "Wutthakat",
+      "nameTH": "วุฒากาศ",
+      "line": "BTS_SILOM"
+    },
+    "S12": {
+      "id": "S12",
+      "nameEN": "Bang Wa",
+      "nameTH": "บางหว้า",
+      "line": "BTS_SILOM"
+    },
+    "BL01": {
+      "id": "BL01",
+      "nameEN": "Tha Phra",
+      "nameTH": "ท่าพระ",
+      "line": "MRT_BLUE"
+    },
+    "BL02": {
+      "id": "BL02",
+      "nameEN": "Charan 13",
+      "nameTH": "จรัญฯ 13",
+      "line": "MRT_BLUE"
+    },
+    "BL03": {
+      "id": "BL03",
+      "nameEN": "Fai Chai",
+      "nameTH": "ไฟฉาย",
+      "line": "MRT_BLUE"
+    },
+    "BL04": {
+      "id": "BL04",
+      "nameEN": "Bang Khun Non",
+      "nameTH": "บางขุนนนท์",
+      "line": "MRT_BLUE"
+    },
+    "BL05": {
+      "id": "BL05",
+      "nameEN": "Bang Yi Khan",
+      "nameTH": "บางยี่ขัน",
+      "line": "MRT_BLUE"
+    },
+    "BL06": {
+      "id": "BL06",
+      "nameEN": "Sirindhorn",
+      "nameTH": "สิรินธร",
+      "line": "MRT_BLUE"
+    },
+    "BL07": {
+      "id": "BL07",
+      "nameEN": "Bang Phlat",
+      "nameTH": "บางพลัด",
+      "line": "MRT_BLUE"
+    },
+    "BL08": {
+      "id": "BL08",
+      "nameEN": "Bang O",
+      "nameTH": "บางอ้อ",
+      "line": "MRT_BLUE"
+    },
+    "BL09": {
+      "id": "BL09",
+      "nameEN": "Bang Pho",
+      "nameTH": "บางโพ",
+      "line": "MRT_BLUE"
+    },
+    "BL10": {
+      "id": "BL10",
+      "nameEN": "Tao Poon",
+      "nameTH": "เตาปูน",
+      "line": "MRT_BLUE"
+    },
+    "BL11": {
+      "id": "BL11",
+      "nameEN": "Bang Sue",
+      "nameTH": "บางซื่อ",
+      "line": "MRT_BLUE"
+    },
+    "BL12": {
+      "id": "BL12",
+      "nameEN": "Kamphaeng Phet",
+      "nameTH": "กำแพงเพชร",
+      "line": "MRT_BLUE"
+    },
+    "BL13": {
+      "id": "BL13",
+      "nameEN": "Chatuchak Park",
+      "nameTH": "สวนจตุจักร",
+      "line": "MRT_BLUE"
+    },
+    "BL14": {
+      "id": "BL14",
+      "nameEN": "Phahon Yothin",
+      "nameTH": "พหลโยธิน",
+      "line": "MRT_BLUE"
+    },
+    "BL15": {
+      "id": "BL15",
+      "nameEN": "Lat Phrao",
+      "nameTH": "ลาดพร้าว",
+      "line": "MRT_BLUE"
+    },
+    "BL16": {
+      "id": "BL16",
+      "nameEN": "Ratchadaphisek",
+      "nameTH": "รัชดาภิเษก",
+      "line": "MRT_BLUE"
+    },
+    "BL17": {
+      "id": "BL17",
+      "nameEN": "Sutthisan",
+      "nameTH": "สุทธิสาร",
+      "line": "MRT_BLUE"
+    },
+    "BL18": {
+      "id": "BL18",
+      "nameEN": "Huai Khwang",
+      "nameTH": "ห้วยขวาง",
+      "line": "MRT_BLUE"
+    },
+    "BL19": {
+      "id": "BL19",
+      "nameEN": "Thailand Cultural Centre",
+      "nameTH": "ศูนย์วัฒนธรรมแห่งประเทศไทย",
+      "line": "MRT_BLUE"
+    },
+    "BL20": {
+      "id": "BL20",
+      "nameEN": "Phra Ram 9",
+      "nameTH": "พระราม 9",
+      "line": "MRT_BLUE"
+    },
+    "BL21": {
+      "id": "BL21",
+      "nameEN": "Phetchaburi",
+      "nameTH": "เพชรบุรี",
+      "line": "MRT_BLUE"
+    },
+    "BL22": {
+      "id": "BL22",
+      "nameEN": "Sukhumvit",
+      "nameTH": "สุขุมวิท",
+      "line": "MRT_BLUE"
+    },
+    "BL23": {
+      "id": "BL23",
+      "nameEN": "Queen Sirikit National Convention Centre",
+      "nameTH": "ศูนย์การประชุมแห่งชาติสิริกิติ์",
+      "line": "MRT_BLUE"
+    },
+    "BL24": {
+      "id": "BL24",
+      "nameEN": "Khlong Toei",
+      "nameTH": "คลองเตย",
+      "line": "MRT_BLUE"
+    },
+    "BL25": {
+      "id": "BL25",
+      "nameEN": "Lumphini",
+      "nameTH": "ลุมพินี",
+      "line": "MRT_BLUE"
+    },
+    "BL26": {
+      "id": "BL26",
+      "nameEN": "Si Lom",
+      "nameTH": "สีลม",
+      "line": "MRT_BLUE"
+    },
+    "BL27": {
+      "id": "BL27",
+      "nameEN": "Sam Yan",
+      "nameTH": "สามย่าน",
+      "line": "MRT_BLUE"
+    },
+    "BL28": {
+      "id": "BL28",
+      "nameEN": "Hua Lamphong",
+      "nameTH": "หัวลำโพง",
+      "line": "MRT_BLUE"
+    },
+    "BL29": {
+      "id": "BL29",
+      "nameEN": "Wat Mangkon",
+      "nameTH": "วัดมังกร",
+      "line": "MRT_BLUE"
+    },
+    "BL30": {
+      "id": "BL30",
+      "nameEN": "Sam Yot",
+      "nameTH": "สามยอด",
+      "line": "MRT_BLUE"
+    },
+    "BL31": {
+      "id": "BL31",
+      "nameEN": "Sanam Chai",
+      "nameTH": "สนามไชย",
+      "line": "MRT_BLUE"
+    },
+    "BL32": {
+      "id": "BL32",
+      "nameEN": "Itsaraphap",
+      "nameTH": "อิสรภาพ",
+      "line": "MRT_BLUE"
+    },
+    "BL33": {
+      "id": "BL33",
+      "nameEN": "Bang Phai",
+      "nameTH": "บางไผ่",
+      "line": "MRT_BLUE"
+    },
+    "BL34": {
+      "id": "BL34",
+      "nameEN": "Bang Wa",
+      "nameTH": "บางหว้า",
+      "line": "MRT_BLUE"
+    },
+    "BL35": {
+      "id": "BL35",
+      "nameEN": "Phetkasem 48",
+      "nameTH": "เพชรเกษม 48",
+      "line": "MRT_BLUE"
+    },
+    "BL36": {
+      "id": "BL36",
+      "nameEN": "Phasi Charoen",
+      "nameTH": "ภาษีเจริญ",
+      "line": "MRT_BLUE"
+    },
+    "BL37": {
+      "id": "BL37",
+      "nameEN": "Bang Khae",
+      "nameTH": "บางแค",
+      "line": "MRT_BLUE"
+    },
+    "BL38": {
+      "id": "BL38",
+      "nameEN": "Lak Song",
+      "nameTH": "หลักสอง",
+      "line": "MRT_BLUE"
+    },
+    "PP01": {
+      "id": "PP01",
+      "nameEN": "Khlong Bang Phai",
+      "nameTH": "คลองบางไผ่",
+      "line": "MRT_PURPLE"
+    },
+    "PP02": {
+      "id": "PP02",
+      "nameEN": "Talad Bang Yai",
+      "nameTH": "ตลาดบางใหญ่",
+      "line": "MRT_PURPLE"
+    },
+    "PP03": {
+      "id": "PP03",
+      "nameEN": "Sam Yaek Bang Yai",
+      "nameTH": "สามแยกบางใหญ่",
+      "line": "MRT_PURPLE"
+    },
+    "PP04": {
+      "id": "PP04",
+      "nameEN": "Bang Phlu",
+      "nameTH": "บางพลู",
+      "line": "MRT_PURPLE"
+    },
+    "PP05": {
+      "id": "PP05",
+      "nameEN": "Bang Rak Yai",
+      "nameTH": "บางรักใหญ่",
+      "line": "MRT_PURPLE"
+    },
+    "PP06": {
+      "id": "PP06",
+      "nameEN": "Bang Rak Noi Tha It",
+      "nameTH": "บางรักน้อย-ท่าอิฐ",
+      "line": "MRT_PURPLE"
+    },
+    "PP07": {
+      "id": "PP07",
+      "nameEN": "Sai Ma",
+      "nameTH": "ไทรม้า",
+      "line": "MRT_PURPLE"
+    },
+    "PP08": {
+      "id": "PP08",
+      "nameEN": "Phra Nangklao Bridge",
+      "nameTH": "สะพานพระนั่งเกล้า",
+      "line": "MRT_PURPLE"
+    },
+    "PP09": {
+      "id": "PP09",
+      "nameEN": "Yaek Nonthaburi 1",
+      "nameTH": "แยกนนทบุรี 1",
+      "line": "MRT_PURPLE"
+    },
+    "PP10": {
+      "id": "PP10",
+      "nameEN": "Bang Krasor",
+      "nameTH": "บางกระสอ",
+      "line": "MRT_PURPLE"
+    },
+    "PP11": {
+      "id": "PP11",
+      "nameEN": "Nonthaburi Civic Center",
+      "nameTH": "ศูนย์ราชการนนทบุรี",
+      "line": "MRT_PURPLE"
+    },
+    "PP12": {
+      "id": "PP12",
+      "nameEN": "Ministry of Public Health",
+      "nameTH": "กระทรวงสาธารณสุข",
+      "line": "MRT_PURPLE"
+    },
+    "PP13": {
+      "id": "PP13",
+      "nameEN": "Yaek Tiwanon",
+      "nameTH": "แยกติวานนท์",
+      "line": "MRT_PURPLE"
+    },
+    "PP14": {
+      "id": "PP14",
+      "nameEN": "Wong Sawang",
+      "nameTH": "วงศ์สว่าง",
+      "line": "MRT_PURPLE"
+    },
+    "PP15": {
+      "id": "PP15",
+      "nameEN": "Bang Son",
+      "nameTH": "บางซ่อน",
+      "line": "MRT_PURPLE"
+    },
+    "PP16": {
+      "id": "PP16",
+      "nameEN": "Tao Poon",
+      "nameTH": "เตาปูน",
+      "line": "MRT_PURPLE"
+    },
+    "YL01": {
+      "id": "YL01",
+      "nameEN": "Lat Phrao",
+      "nameTH": "ลาดพร้าว",
+      "line": "MRT_YELLOW"
+    },
+    "YL02": {
+      "id": "YL02",
+      "nameEN": "Phawana",
+      "nameTH": "ภาวนา",
+      "line": "MRT_YELLOW"
+    },
+    "YL03": {
+      "id": "YL03",
+      "nameEN": "Chok Chai 4",
+      "nameTH": "โชคชัย 4",
+      "line": "MRT_YELLOW"
+    },
+    "YL04": {
+      "id": "YL04",
+      "nameEN": "Lat Phrao 71",
+      "nameTH": "ลาดพร้าว 71",
+      "line": "MRT_YELLOW"
+    },
+    "YL05": {
+      "id": "YL05",
+      "nameEN": "Lat Phrao 83",
+      "nameTH": "ลาดพร้าว 83",
+      "line": "MRT_YELLOW"
+    },
+    "YL06": {
+      "id": "YL06",
+      "nameEN": "Mahatthai",
+      "nameTH": "มหาดไทย",
+      "line": "MRT_YELLOW"
+    },
+    "YL07": {
+      "id": "YL07",
+      "nameEN": "Lat Phrao 101",
+      "nameTH": "ลาดพร้าว 101",
+      "line": "MRT_YELLOW"
+    },
+    "YL08": {
+      "id": "YL08",
+      "nameEN": "Bang Kapi",
+      "nameTH": "บางกะปิ",
+      "line": "MRT_YELLOW"
+    },
+    "YL09": {
+      "id": "YL09",
+      "nameEN": "Yaek Lam Sali",
+      "nameTH": "แยกลำสาลี",
+      "line": "MRT_YELLOW"
+    },
+    "YL10": {
+      "id": "YL10",
+      "nameEN": "Si Kritha",
+      "nameTH": "ศรีกรีฑา",
+      "line": "MRT_YELLOW"
+    },
+    "YL11": {
+      "id": "YL11",
+      "nameEN": "Hua Mak",
+      "nameTH": "หัวหมาก",
+      "line": "MRT_YELLOW"
+    },
+    "YL12": {
+      "id": "YL12",
+      "nameEN": "Kalantan",
+      "nameTH": "กลันตัน",
+      "line": "MRT_YELLOW"
+    },
+    "YL13": {
+      "id": "YL13",
+      "nameEN": "Si Nut",
+      "nameTH": "ศรีนุช",
+      "line": "MRT_YELLOW"
+    },
+    "YL14": {
+      "id": "YL14",
+      "nameEN": "Srinagarindra 38",
+      "nameTH": "ศรีนครินทร์ 38",
+      "line": "MRT_YELLOW"
+    },
+    "YL15": {
+      "id": "YL15",
+      "nameEN": "Suan Luang Rama IX",
+      "nameTH": "สวนหลวง ร.9",
+      "line": "MRT_YELLOW"
+    },
+    "YL16": {
+      "id": "YL16",
+      "nameEN": "Si Udom",
+      "nameTH": "ศรีอุดม",
+      "line": "MRT_YELLOW"
+    },
+    "YL17": {
+      "id": "YL17",
+      "nameEN": "Si Iam",
+      "nameTH": "ศรีเอี่ยม",
+      "line": "MRT_YELLOW"
+    },
+    "YL18": {
+      "id": "YL18",
+      "nameEN": "Si La Salle",
+      "nameTH": "ศรีลาซาล",
+      "line": "MRT_YELLOW"
+    },
+    "YL19": {
+      "id": "YL19",
+      "nameEN": "Si Bearing",
+      "nameTH": "ศรีแบริ่ง",
+      "line": "MRT_YELLOW"
+    },
+    "YL20": {
+      "id": "YL20",
+      "nameEN": "Si Dan",
+      "nameTH": "ศรีด่าน",
+      "line": "MRT_YELLOW"
+    },
+    "YL21": {
+      "id": "YL21",
+      "nameEN": "Si Thepha",
+      "nameTH": "ศรีเทพา",
+      "line": "MRT_YELLOW"
+    },
+    "YL22": {
+      "id": "YL22",
+      "nameEN": "Thipphawan",
+      "nameTH": "ทิพวัล",
+      "line": "MRT_YELLOW"
+    },
+    "YL23": {
+      "id": "YL23",
+      "nameEN": "Samrong",
+      "nameTH": "สำโรง",
+      "line": "MRT_YELLOW"
+    },
+    "PK01": {
+      "id": "PK01",
+      "nameEN": "Nonthaburi Civic Center",
+      "nameTH": "ศูนย์ราชการนนทบุรี",
+      "line": "MRT_PINK"
+    },
+    "PK02": {
+      "id": "PK02",
+      "nameEN": "Khae Rai",
+      "nameTH": "แคราย",
+      "line": "MRT_PINK"
+    },
+    "PK03": {
+      "id": "PK03",
+      "nameEN": "Sanambin Nam",
+      "nameTH": "สนามบินน้ำ",
+      "line": "MRT_PINK"
+    },
+    "PK04": {
+      "id": "PK04",
+      "nameEN": "Samakkhi",
+      "nameTH": "สามัคคี",
+      "line": "MRT_PINK"
+    },
+    "PK05": {
+      "id": "PK05",
+      "nameEN": "Royal Irrigation Department",
+      "nameTH": "กรมชลประทาน",
+      "line": "MRT_PINK"
+    },
+    "PK06": {
+      "id": "PK06",
+      "nameEN": "Yaek Pak Kret",
+      "nameTH": "แยกปากเกร็ด",
+      "line": "MRT_PINK"
+    },
+    "PK07": {
+      "id": "PK07",
+      "nameEN": "Pak Kret Bypass",
+      "nameTH": "เลี่ยงเมืองปากเกร็ด",
+      "line": "MRT_PINK"
+    },
+    "PK08": {
+      "id": "PK08",
+      "nameEN": "Chaeng Watthana-Pak Kret 28",
+      "nameTH": "แจ้งวัฒนะ-ปากเกร็ด 28",
+      "line": "MRT_PINK"
+    },
+    "PK09": {
+      "id": "PK09",
+      "nameEN": "Si Rat",
+      "nameTH": "ศรีรัช",
+      "line": "MRT_PINK"
+    },
+    "PK10": {
+      "id": "PK10",
+      "nameEN": "Muang Thong Thani",
+      "nameTH": "เมืองทองธานี",
+      "line": "MRT_PINK"
+    },
+    "PK11": {
+      "id": "PK11",
+      "nameEN": "Chaeng Watthana 14",
+      "nameTH": "แจ้งวัฒนะ 14",
+      "line": "MRT_PINK"
+    },
+    "PK12": {
+      "id": "PK12",
+      "nameEN": "Government Complex",
+      "nameTH": "ศูนย์ราชการเฉลิมพระเกียรติ",
+      "line": "MRT_PINK"
+    },
+    "PK13": {
+      "id": "PK13",
+      "nameEN": "National Telecom",
+      "nameTH": "โทรคมนาคมแห่งชาติ",
+      "line": "MRT_PINK"
+    },
+    "PK14": {
+      "id": "PK14",
+      "nameEN": "Lak Si",
+      "nameTH": "หลักสี่",
+      "line": "MRT_PINK"
+    },
+    "PK15": {
+      "id": "PK15",
+      "nameEN": "Rajabhat Phranakhon",
+      "nameTH": "ราชภัฏพระนคร",
+      "line": "MRT_PINK"
+    },
+    "PK16": {
+      "id": "PK16",
+      "nameEN": "Wat Phra Sri Mahathat",
+      "nameTH": "วัดพระศรีมหาธาตุ",
+      "line": "MRT_PINK"
+    },
+    "PK17": {
+      "id": "PK17",
+      "nameEN": "Ram Inthra 3",
+      "nameTH": "รามอินทรา 3",
+      "line": "MRT_PINK"
+    },
+    "PK18": {
+      "id": "PK18",
+      "nameEN": "Lat Pla Khao",
+      "nameTH": "ลาดปลาเค้า",
+      "line": "MRT_PINK"
+    },
+    "PK19": {
+      "id": "PK19",
+      "nameEN": "Ram Inthra Kor Mor 4",
+      "nameTH": "รามอินทรา กม. 4",
+      "line": "MRT_PINK"
+    },
+    "PK20": {
+      "id": "PK20",
+      "nameEN": "Maiyalap",
+      "nameTH": "มัยลาภ",
+      "line": "MRT_PINK"
+    },
+    "PK21": {
+      "id": "PK21",
+      "nameEN": "Vacharaphol",
+      "nameTH": "วัชรพล",
+      "line": "MRT_PINK"
+    },
+    "PK22": {
+      "id": "PK22",
+      "nameEN": "Ram Inthra Kor Mor 6",
+      "nameTH": "รามอินทรา กม. 6",
+      "line": "MRT_PINK"
+    },
+    "PK23": {
+      "id": "PK23",
+      "nameEN": "Khu Bon",
+      "nameTH": "คู้บอน",
+      "line": "MRT_PINK"
+    },
+    "PK24": {
+      "id": "PK24",
+      "nameEN": "Ram Inthra Kor Mor 9",
+      "nameTH": "รามอินทรา กม. 9",
+      "line": "MRT_PINK"
+    },
+    "PK25": {
+      "id": "PK25",
+      "nameEN": "Outer Ring Road - Ram Inthra",
+      "nameTH": "วงแหวนรามอินทรา",
+      "line": "MRT_PINK"
+    },
+    "PK26": {
+      "id": "PK26",
+      "nameEN": "Nopparat",
+      "nameTH": "นพรัตน์",
+      "line": "MRT_PINK"
+    },
+    "PK27": {
+      "id": "PK27",
+      "nameEN": "Bang Chan",
+      "nameTH": "บางชัน",
+      "line": "MRT_PINK"
+    },
+    "PK28": {
+      "id": "PK28",
+      "nameEN": "Setthabutbamphen",
+      "nameTH": "เศรษฐบุตรบำเพ็ญ",
+      "line": "MRT_PINK"
+    },
+    "PK29": {
+      "id": "PK29",
+      "nameEN": "Min Buri Market",
+      "nameTH": "ตลาดมีนบุรี",
+      "line": "MRT_PINK"
+    },
+    "PK30": {
+      "id": "PK30",
+      "nameEN": "Min Buri",
+      "nameTH": "มีนบุรี",
+      "line": "MRT_PINK"
+    },
+    "A8": {
+      "id": "A8",
+      "nameEN": "Phaya Thai",
+      "nameTH": "พญาไท",
+      "line": "ARL"
+    },
+    "A7": {
+      "id": "A7",
+      "nameEN": "Ratchaprarop",
+      "nameTH": "ราชปรารภ",
+      "line": "ARL"
+    },
+    "A6": {
+      "id": "A6",
+      "nameEN": "Makkasan",
+      "nameTH": "มักกะสัน",
+      "line": "ARL"
+    },
+    "A5": {
+      "id": "A5",
+      "nameEN": "Ramkhamhaeng",
+      "nameTH": "รามคำแหง",
+      "line": "ARL"
+    },
+    "A4": {
+      "id": "A4",
+      "nameEN": "Hua Mak",
+      "nameTH": "หัวหมาก",
+      "line": "ARL"
+    },
+    "A3": {
+      "id": "A3",
+      "nameEN": "Ban Thap Chang",
+      "nameTH": "บ้านทับช้าง",
+      "line": "ARL"
+    },
+    "A2": {
+      "id": "A2",
+      "nameEN": "Lat Krabang",
+      "nameTH": "ลาดกระบัง",
+      "line": "ARL"
+    },
+    "A1": {
+      "id": "A1",
+      "nameEN": "Suvarnabhumi",
+      "nameTH": "สุวรรณภูมิ",
+      "line": "ARL"
+    },
+    "RN10": {
+      "id": "RN10",
+      "nameEN": "Rangsit",
+      "nameTH": "รังสิต",
+      "line": "SRT_RED"
+    },
+    "RN09": {
+      "id": "RN09",
+      "nameEN": "Lak Hok",
+      "nameTH": "หลักหก",
+      "line": "SRT_RED"
+    },
+    "RN08": {
+      "id": "RN08",
+      "nameEN": "Don Mueang",
+      "nameTH": "ดอนเมือง",
+      "line": "SRT_RED"
+    },
+    "RN07": {
+      "id": "RN07",
+      "nameEN": "Kan Kheha",
+      "nameTH": "การเคหะ",
+      "line": "SRT_RED"
+    },
+    "RN06": {
+      "id": "RN06",
+      "nameEN": "Lak Si",
+      "nameTH": "หลักสี่",
+      "line": "SRT_RED"
+    },
+    "RN05": {
+      "id": "RN05",
+      "nameEN": "Thung Song Hong",
+      "nameTH": "ทุ่งสองห้อง",
+      "line": "SRT_RED"
+    },
+    "RN04": {
+      "id": "RN04",
+      "nameEN": "Bang Khen",
+      "nameTH": "บางเขน",
+      "line": "SRT_RED"
+    },
+    "RN03": {
+      "id": "RN03",
+      "nameEN": "Wat Samian Nari",
+      "nameTH": "วัดเสมียนนารี",
+      "line": "SRT_RED"
+    },
+    "RN02": {
+      "id": "RN02",
+      "nameEN": "Chatuchak",
+      "nameTH": "จตุจักร",
+      "line": "SRT_RED"
+    },
+    "RW01": {
+      "id": "RW01",
+      "nameEN": "Krung Thep Aphiwat",
+      "nameTH": "กรุงเทพอภิวัฒน์",
+      "line": "SRT_RED"
+    },
+    "RW02": {
+      "id": "RW02",
+      "nameEN": "Bang Son",
+      "nameTH": "บางซ่อน",
+      "line": "SRT_RED"
+    },
+    "RW03": {
+      "id": "RW03",
+      "nameEN": "Bang Bamru",
+      "nameTH": "บางบำหรุ",
+      "line": "SRT_RED"
+    },
+    "RW05": {
+      "id": "RW05",
+      "nameEN": "Bang Ramat",
+      "nameTH": "บางระมาด",
+      "line": "SRT_RED"
+    },
+    "RW06": {
+      "id": "RW06",
+      "nameEN": "Taling Chan",
+      "nameTH": "ตลิ่งชัน",
+      "line": "SRT_RED"
+    }
   },
   "edges": [
-    { "from": "N24", "to": "N17", "weight": 14, "fare": 30 },
-    { "from": "N17", "to": "N8", "weight": 18, "fare": 34 },
-    { "from": "N8", "to": "N3", "weight": 10, "fare": 26 },
-    { "from": "N3", "to": "CEN_S", "weight": 6, "fare": 20 },
-    { "from": "CEN_S", "to": "E4", "weight": 8, "fare": 24 },
-    { "from": "E4", "to": "E9", "weight": 10, "fare": 26 },
-    { "from": "E9", "to": "E15", "weight": 12, "fare": 28 },
-    { "from": "E15", "to": "E23", "weight": 16, "fare": 34 },
-
-    { "from": "W1", "to": "CEN_L", "weight": 2, "fare": 17 },
-    { "from": "CEN_L", "to": "S2", "weight": 4, "fare": 20 },
-    { "from": "S2", "to": "S7", "weight": 10, "fare": 28 },
-    { "from": "S7", "to": "S12", "weight": 10, "fare": 28 },
-
-    { "from": "BL10", "to": "BL11", "weight": 2, "fare": 17 },
-    { "from": "BL11", "to": "BL13", "weight": 4, "fare": 20 },
-    { "from": "BL13", "to": "BL15", "weight": 4, "fare": 20 },
-    { "from": "BL15", "to": "BL21", "weight": 12, "fare": 32 },
-    { "from": "BL21", "to": "BL22", "weight": 2, "fare": 17 },
-    { "from": "BL22", "to": "BL26", "weight": 8, "fare": 24 },
-    { "from": "BL26", "to": "BL01", "weight": 10, "fare": 28 },
-    { "from": "BL01", "to": "BL34", "weight": 8, "fare": 24 },
-    { "from": "BL34", "to": "BL38", "weight": 8, "fare": 24 },
-    { "from": "BL10", "to": "BL01", "weight": 18, "fare": 38 },
-
-    { "from": "PP01", "to": "PP11", "weight": 20, "fare": 36 },
-    { "from": "PP11", "to": "PP16", "weight": 10, "fare": 24 },
-
-    { "from": "YL01", "to": "YL23", "weight": 44, "fare": 45 },
-
-    { "from": "PK01", "to": "PK14", "weight": 26, "fare": 38 },
-    { "from": "PK14", "to": "PK16", "weight": 4, "fare": 17 },
-    { "from": "PK16", "to": "PK30", "weight": 28, "fare": 40 },
-
-    { "from": "A8", "to": "A6", "weight": 4, "fare": 20 },
-    { "from": "A6", "to": "A1", "weight": 10, "fare": 35 },
-
-    { "from": "RN10", "to": "RN06", "weight": 8, "fare": 20 },
-    { "from": "RN06", "to": "RW01", "weight": 10, "fare": 20 },
-    { "from": "RW01", "to": "RW06", "weight": 6, "fare": 20 },
-
-    { "from": "N8", "to": "BL13", "weight": 3, "fare": 0, "type": "interchange" },
-    { "from": "E4", "to": "BL22", "weight": 3, "fare": 0, "type": "interchange" },
-    { "from": "S2", "to": "BL26", "weight": 3, "fare": 0, "type": "interchange" },
-    { "from": "N3", "to": "A8", "weight": 3, "fare": 0, "type": "interchange" },
-    { "from": "RW01", "to": "BL11", "weight": 4, "fare": 0, "type": "interchange" },
-    { "from": "A6", "to": "BL21", "weight": 4, "fare": 0, "type": "interchange" },
-    
-    { "from": "CEN_S", "to": "CEN_L", "weight": 1, "fare": 0, "type": "cross-platform" },
-    { "from": "BL10", "to": "PP16", "weight": 2, "fare": 0, "type": "cross-platform" },
-    { "from": "S12", "to": "BL34", "weight": 3, "fare": 0, "type": "interchange" },
-    
-    { "from": "YL01", "to": "BL15", "weight": 4, "fare": 0, "type": "interchange" },
-    { "from": "YL23", "to": "E15", "weight": 4, "fare": 0, "type": "interchange" },
-    
-    { "from": "PK01", "to": "PP11", "weight": 4, "fare": 0, "type": "interchange" },
-    { "from": "PK14", "to": "RN06", "weight": 4, "fare": 0, "type": "interchange" },
-    { "from": "PK16", "to": "N17", "weight": 4, "fare": 0, "type": "interchange" }
+    {
+      "from": "N24",
+      "to": "N23",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N23",
+      "to": "N22",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N22",
+      "to": "N21",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N21",
+      "to": "N20",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N20",
+      "to": "N19",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N19",
+      "to": "N18",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N18",
+      "to": "N17",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N17",
+      "to": "N16",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N16",
+      "to": "N15",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N15",
+      "to": "N14",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N14",
+      "to": "N13",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N13",
+      "to": "N12",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N12",
+      "to": "N11",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N11",
+      "to": "N10",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N10",
+      "to": "N9",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N9",
+      "to": "N8",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N8",
+      "to": "N7",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N7",
+      "to": "N5",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N5",
+      "to": "N4",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N4",
+      "to": "N3",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N3",
+      "to": "N2",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N2",
+      "to": "N1",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N1",
+      "to": "CEN_S",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "CEN_S",
+      "to": "E1",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E1",
+      "to": "E2",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E2",
+      "to": "E3",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E3",
+      "to": "E4",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E4",
+      "to": "E5",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E5",
+      "to": "E6",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E6",
+      "to": "E7",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E7",
+      "to": "E8",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E8",
+      "to": "E9",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E9",
+      "to": "E10",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E10",
+      "to": "E11",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E11",
+      "to": "E12",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E12",
+      "to": "E13",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E13",
+      "to": "E14",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E14",
+      "to": "E15",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E15",
+      "to": "E16",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E16",
+      "to": "E17",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E17",
+      "to": "E18",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E18",
+      "to": "E19",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E19",
+      "to": "E20",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E20",
+      "to": "E21",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E21",
+      "to": "E22",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "E22",
+      "to": "E23",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "W1",
+      "to": "CEN_L",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "CEN_L",
+      "to": "S1",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S1",
+      "to": "S2",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S2",
+      "to": "S3",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S3",
+      "to": "S4",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S4",
+      "to": "S5",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S5",
+      "to": "S6",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S6",
+      "to": "S7",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S7",
+      "to": "S8",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S8",
+      "to": "S9",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S9",
+      "to": "S10",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S10",
+      "to": "S11",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "S11",
+      "to": "S12",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL01",
+      "to": "BL02",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL02",
+      "to": "BL03",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL03",
+      "to": "BL04",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL04",
+      "to": "BL05",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL05",
+      "to": "BL06",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL06",
+      "to": "BL07",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL07",
+      "to": "BL08",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL08",
+      "to": "BL09",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL09",
+      "to": "BL10",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL10",
+      "to": "BL11",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL11",
+      "to": "BL12",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL12",
+      "to": "BL13",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL13",
+      "to": "BL14",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL14",
+      "to": "BL15",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL15",
+      "to": "BL16",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL16",
+      "to": "BL17",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL17",
+      "to": "BL18",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL18",
+      "to": "BL19",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL19",
+      "to": "BL20",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL20",
+      "to": "BL21",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL21",
+      "to": "BL22",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL22",
+      "to": "BL23",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL23",
+      "to": "BL24",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL24",
+      "to": "BL25",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL25",
+      "to": "BL26",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL26",
+      "to": "BL27",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL27",
+      "to": "BL28",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL28",
+      "to": "BL29",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL29",
+      "to": "BL30",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL30",
+      "to": "BL31",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL31",
+      "to": "BL32",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL32",
+      "to": "BL01",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL33",
+      "to": "BL34",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL34",
+      "to": "BL35",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL35",
+      "to": "BL36",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL36",
+      "to": "BL37",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "BL37",
+      "to": "BL38",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP01",
+      "to": "PP02",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP02",
+      "to": "PP03",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP03",
+      "to": "PP04",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP04",
+      "to": "PP05",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP05",
+      "to": "PP06",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP06",
+      "to": "PP07",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP07",
+      "to": "PP08",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP08",
+      "to": "PP09",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP09",
+      "to": "PP10",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP10",
+      "to": "PP11",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP11",
+      "to": "PP12",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP12",
+      "to": "PP13",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP13",
+      "to": "PP14",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP14",
+      "to": "PP15",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PP15",
+      "to": "PP16",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL01",
+      "to": "YL02",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL02",
+      "to": "YL03",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL03",
+      "to": "YL04",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL04",
+      "to": "YL05",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL05",
+      "to": "YL06",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL06",
+      "to": "YL07",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL07",
+      "to": "YL08",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL08",
+      "to": "YL09",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL09",
+      "to": "YL10",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL10",
+      "to": "YL11",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL11",
+      "to": "YL12",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL12",
+      "to": "YL13",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL13",
+      "to": "YL14",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL14",
+      "to": "YL15",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL15",
+      "to": "YL16",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL16",
+      "to": "YL17",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL17",
+      "to": "YL18",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL18",
+      "to": "YL19",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL19",
+      "to": "YL20",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL20",
+      "to": "YL21",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL21",
+      "to": "YL22",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "YL22",
+      "to": "YL23",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK01",
+      "to": "PK02",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK02",
+      "to": "PK03",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK03",
+      "to": "PK04",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK04",
+      "to": "PK05",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK05",
+      "to": "PK06",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK06",
+      "to": "PK07",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK07",
+      "to": "PK08",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK08",
+      "to": "PK09",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK09",
+      "to": "PK10",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK10",
+      "to": "PK11",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK11",
+      "to": "PK12",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK12",
+      "to": "PK13",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK13",
+      "to": "PK14",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK14",
+      "to": "PK15",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK15",
+      "to": "PK16",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK16",
+      "to": "PK17",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK17",
+      "to": "PK18",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK18",
+      "to": "PK19",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK19",
+      "to": "PK20",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK20",
+      "to": "PK21",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK21",
+      "to": "PK22",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK22",
+      "to": "PK23",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK23",
+      "to": "PK24",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK24",
+      "to": "PK25",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK25",
+      "to": "PK26",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK26",
+      "to": "PK27",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK27",
+      "to": "PK28",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK28",
+      "to": "PK29",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "PK29",
+      "to": "PK30",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "A8",
+      "to": "A7",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "A7",
+      "to": "A6",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "A6",
+      "to": "A5",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "A5",
+      "to": "A4",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "A4",
+      "to": "A3",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "A3",
+      "to": "A2",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "A2",
+      "to": "A1",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN10",
+      "to": "RN09",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN09",
+      "to": "RN08",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN08",
+      "to": "RN07",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN07",
+      "to": "RN06",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN06",
+      "to": "RN05",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN05",
+      "to": "RN04",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN04",
+      "to": "RN03",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN03",
+      "to": "RN02",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RN02",
+      "to": "RW01",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RW01",
+      "to": "RW02",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RW02",
+      "to": "RW03",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RW03",
+      "to": "RW05",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "RW05",
+      "to": "RW06",
+      "weight": 2,
+      "fare": 2
+    },
+    {
+      "from": "N8",
+      "to": "BL13",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "E4",
+      "to": "BL22",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "S2",
+      "to": "BL26",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "N3",
+      "to": "A8",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "RW01",
+      "to": "BL11",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "A6",
+      "to": "BL21",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "CEN_S",
+      "to": "CEN_L",
+      "weight": 1,
+      "fare": 0,
+      "type": "cross-platform"
+    },
+    {
+      "from": "BL10",
+      "to": "PP16",
+      "weight": 1,
+      "fare": 0,
+      "type": "cross-platform"
+    },
+    {
+      "from": "S12",
+      "to": "BL34",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "YL01",
+      "to": "BL15",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "YL23",
+      "to": "E15",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "PK01",
+      "to": "PP11",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "PK14",
+      "to": "RN06",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    },
+    {
+      "from": "PK16",
+      "to": "N17",
+      "weight": 4,
+      "fare": 0,
+      "type": "interchange"
+    }
   ]
 }

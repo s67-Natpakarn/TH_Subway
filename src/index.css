@@ -64,6 +64,8 @@
 
 /* Map hover animation styles */
 .map-station {
+  transform-box: fill-box;
+  transform-origin: center;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), r 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
