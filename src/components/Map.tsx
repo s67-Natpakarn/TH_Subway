@@ -414,64 +414,64 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 1120
   },
   "PP01": {
-    "x": 160,
-    "y": 480
-  },
-  "PP02": {
-    "x": 200,
-    "y": 480
-  },
-  "PP03": {
     "x": 240,
     "y": 480
   },
-  "PP04": {
+  "PP02": {
     "x": 280,
     "y": 480
   },
-  "PP05": {
+  "PP03": {
     "x": 320,
     "y": 480
   },
-  "PP06": {
+  "PP04": {
     "x": 360,
     "y": 480
   },
-  "PP07": {
+  "PP05": {
     "x": 400,
     "y": 480
   },
-  "PP08": {
+  "PP06": {
     "x": 440,
     "y": 480
   },
-  "PP09": {
+  "PP07": {
     "x": 480,
     "y": 480
   },
-  "PP10": {
+  "PP08": {
     "x": 520,
     "y": 480
   },
-  "PP11": {
+  "PP09": {
     "x": 560,
     "y": 480
   },
+  "PP10": {
+    "x": 600,
+    "y": 480
+  },
+  "PP11": {
+    "x": 640,
+    "y": 480
+  },
   "PP12": {
-    "x": 620,
+    "x": 720,
     "y": 480
   },
   "PP13": {
-    "x": 680,
-    "y": 480
+    "x": 773.3,
+    "y": 533.3
   },
   "PP14": {
-    "x": 746.7,
-    "y": 546.7
+    "x": 826.7,
+    "y": 586.7
   },
   "PP15": {
-    "x": 813.3,
-    "y": 613.3
+    "x": 880,
+    "y": 640
   },
   "PP16": {
     "x": 880,
@@ -570,55 +570,55 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 1160
   },
   "PK01": {
-    "x": 560,
+    "x": 640,
     "y": 480
   },
   "PK02": {
-    "x": 560,
+    "x": 640,
     "y": 440
   },
   "PK03": {
-    "x": 560,
+    "x": 640,
     "y": 400
   },
   "PK04": {
-    "x": 560,
+    "x": 640,
     "y": 360
   },
   "PK05": {
-    "x": 560,
-    "y": 320
-  },
-  "PK06": {
-    "x": 600,
-    "y": 320
-  },
-  "PK07": {
     "x": 640,
     "y": 320
   },
+  "PK06": {
+    "x": 671.1,
+    "y": 320
+  },
+  "PK07": {
+    "x": 702.2,
+    "y": 320
+  },
   "PK08": {
-    "x": 680,
+    "x": 733.3,
     "y": 320
   },
   "PK09": {
-    "x": 720,
+    "x": 764.4,
     "y": 320
   },
   "PK10": {
-    "x": 760,
+    "x": 795.6,
     "y": 320
   },
   "PK11": {
-    "x": 800,
+    "x": 826.7,
     "y": 320
   },
   "PK12": {
-    "x": 840,
+    "x": 857.8,
     "y": 320
   },
   "PK13": {
-    "x": 880,
+    "x": 888.9,
     "y": 320
   },
   "PK14": {
@@ -762,20 +762,20 @@ export const stationCoords: Record<string, { x: number; y: number }> = {
     "y": 680
   },
   "RW02": {
-    "x": 860,
-    "y": 680
+    "x": 880,
+    "y": 640
   },
   "RW03": {
     "x": 800,
-    "y": 680
+    "y": 640
   },
   "RW05": {
-    "x": 740,
-    "y": 680
+    "x": 720,
+    "y": 640
   },
   "RW06": {
-    "x": 680,
-    "y": 680
+    "x": 640,
+    "y": 640
   }
 };
 
@@ -845,7 +845,7 @@ export const Map: React.FC<MapProps> = ({
 
   <TransformWrapper
     initialScale={0.8}
-    minScale={0.5}
+    minScale={0.3}
     maxScale={4}
     centerOnInit={true}
     onTransform={(ref) => {
@@ -856,7 +856,7 @@ export const Map: React.FC<MapProps> = ({
       return (
         <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
           <svg
-            viewBox="100 -50 1600 1700"
+            viewBox="-100 -150 2000 2000"
             className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
             onClick={() => setPopupGroup(null)}
           >
