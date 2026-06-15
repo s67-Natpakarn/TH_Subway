@@ -855,7 +855,7 @@ export const Map: React.FC<MapProps> = ({
  key={`edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke="#94a3b8"
- strokeWidth={edge.type === 'cross-platform' ? "1.5" : "2.5"}
+ strokeWidth={edge.type === 'cross-platform' ? "2" : "3.5"}
  strokeDasharray={edge.type === 'cross-platform' ? "2 2" : "3 3"}
  />
  );
@@ -866,9 +866,9 @@ export const Map: React.FC<MapProps> = ({
  key={`edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke={getLineColor(lineName)}
- strokeWidth="4.5"
+ strokeWidth="6"
  strokeLinecap="round"
- className="opacity-25"
+ className="opacity-30"
  />
  );
  })}
@@ -891,7 +891,7 @@ export const Map: React.FC<MapProps> = ({
  key={`active-edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke="#f59e0b"
- strokeWidth={edge.type === 'cross-platform' ? "2.5" : "3.5"}
+ strokeWidth={edge.type === 'cross-platform' ? "3.5" : "5"}
  strokeDasharray={edge.type === 'cross-platform' ? "2 2" : "4 4"}
  />
  );
@@ -902,7 +902,7 @@ export const Map: React.FC<MapProps> = ({
  key={`active-edge-${i}`}
  x1={c1.x} y1={c1.y} x2={c2.x} y2={c2.y}
  stroke={getLineColor(lineName)}
- strokeWidth="5"
+ strokeWidth="7.5"
  strokeLinecap="round"
  className="map-line"
  />
@@ -928,10 +928,10 @@ export const Map: React.FC<MapProps> = ({
  <circle
  cx={coords.x}
  cy={coords.y}
- r="8" fill="none"
+ r="10" fill="none"
  stroke={isStart ? '#159E40' : '#003399'}
- strokeWidth="1.5"
- className="animate-ping opacity-35"
+ strokeWidth="2"
+ className="animate-ping opacity-40"
  style={{ animationDuration: '2s' }}
  />
  )}
@@ -940,21 +940,22 @@ export const Map: React.FC<MapProps> = ({
  <circle
  cx={coords.x}
  cy={coords.y}
- r={isStart || isEnd ? '4.5' : inRoute ? '3.5' : '2'}
+ r={isStart || isEnd ? '6' : inRoute ? '4.5' : '3'}
  fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
  stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
- strokeWidth={isStart || isEnd ? '2.5' : '1.5'}
+ strokeWidth={isStart || isEnd ? '3' : '2'}
  className="map-station"
  />
 
  {/* Station English Label */}
  <text
  x={coords.x}
- y={coords.y - 6}
+ y={coords.y - 7}
  textAnchor="middle"
- className={`text-[4.5px] font-bold tracking-tight select-none pointer-events-none fill-black/80 ${
- isStart || isEnd ? 'opacity-100 font-extrabold text-[5px]' : inRoute ? 'opacity-100' : 'opacity-40'
+ className={`text-[5.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 ${
+ isStart || isEnd ? 'opacity-100 font-extrabold text-[6.5px]' : inRoute ? 'opacity-100' : 'opacity-60'
  }`}
+ style={{ textShadow: '0 0 3px white, 0 0 3px white, 0 0 3px white' }}
  >
  {st.nameEN}
  </text>
@@ -962,11 +963,12 @@ export const Map: React.FC<MapProps> = ({
  {/* Station Thai Label */}
  <text
  x={coords.x}
- y={coords.y + 8}
+ y={coords.y + 9}
  textAnchor="middle"
- className={`text-[4.5px] font-semibold select-none pointer-events-none fill-black/60 ${
- isStart || isEnd ? 'opacity-100 font-bold text-[5px]' : inRoute ? 'opacity-100' : 'opacity-30'
+ className={`text-[5px] font-semibold select-none pointer-events-none fill-black/75 ${
+ isStart || isEnd ? 'opacity-100 font-bold text-[6px]' : inRoute ? 'opacity-100' : 'opacity-50'
  }`}
+ style={{ textShadow: '0 0 3px white, 0 0 3px white, 0 0 3px white' }}
  >
  {st.nameTH}
  </text>
