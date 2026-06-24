@@ -9,30 +9,35 @@ function App() {
  const [startStation, setStartStation] = useState<Station | null>(null);
  const [endStation, setEndStation] = useState<Station | null>(null);
  const [calculatedRoute, setCalculatedRoute] = useState<RouteResult | null>(null);
- 
+ const [selectionMode, setSelectionMode] = useState<'start' | 'end'>('start');
 
 
- const handleSelectStart = (station: Station | null) => {
- setStartStation(station);
+ const handleSelectStation = (station: Station) => {
  setCalculatedRoute(null);
- };
 
- const handleSelectEnd = (station: Station | null) => {
- setEndStation(station);
- setCalculatedRoute(null);
- };
-
- const handleSelectStationFromMap = (station: Station) => {
- if (!startStation) {
- setStartStation(station);
- } else if (!endStation && startStation.id !== station.id) {
- setEndStation(station);
- } else {
- // If both are filled or clicking start again, reset selection sequence
+ if (selectionMode === 'start' || !startStation) {
  setStartStation(station);
  setEndStation(null);
- setCalculatedRoute(null);
+ setSelectionMode('end');
+ return;
  }
+
+ if (station.id === startStation.id) {
+ setEndStation(null);
+ setSelectionMode('start');
+ return;
+ }
+
+ setEndStation(station);
+ setSelectionMode('end');
+ };
+
+ const handleSwapStations = () => {
+ if (!startStation || !endStation) return;
+ setStartStation(endStation);
+ setEndStation(startStation);
+ setSelectionMode('end');
+ setCalculatedRoute(null);
  };
 
  const handleFindRoute = () => {
@@ -46,6 +51,7 @@ function App() {
  setStartStation(null);
  setEndStation(null);
  setCalculatedRoute(null);
+ setSelectionMode('start');
  };
 
  return (
@@ -59,8 +65,9 @@ function App() {
  stations={stations}
  startStation={startStation}
  endStation={endStation}
- onSelectStart={handleSelectStart}
- onSelectEnd={handleSelectEnd}
+ selectionMode={selectionMode}
+ onSelectStation={handleSelectStation}
+ onSwapStations={handleSwapStations}
  calculatedRoute={calculatedRoute}
  onFindRoute={handleFindRoute}
  onClear={handleClear}
@@ -72,7 +79,7 @@ function App() {
  stations={stations}
  startStation={startStation}
  endStation={endStation}
- onSelectStation={handleSelectStationFromMap}
+ onSelectStation={handleSelectStation}
  calculatedRoute={calculatedRoute}
  />
  </div>

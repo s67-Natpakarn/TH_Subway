@@ -3,8 +3,6 @@
  * These export static info about each line (not station data, which stays in transitGraph.json).
  */
 
-import type { LineConfig } from '../../utils/lineConfig';
-
 // ──────────────────────────────────────────────
 // BTS Sukhumvit Line
 // ──────────────────────────────────────────────

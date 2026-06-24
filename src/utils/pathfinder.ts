@@ -175,7 +175,7 @@ export function findRoute(startId: string, endId: string): RouteResult | null {
   const interchanges: string[] = [];
 
   // Segment analysis for fare calculation
-  let segments: { operator: string; stops: number }[] = [];
+  const segments: { operator: string; stops: number }[] = [];
   let currentOperator = getOperator(path[0].line);
   let currentStops = 0;
 

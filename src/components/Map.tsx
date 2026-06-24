@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import type { Station, RouteResult } from '../utils/pathfinder';
+import type { Station, RouteResult, GraphData } from '../utils/pathfinder';
 import transitData from '../data/transitGraph.json';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+
+const transitGraph = transitData as GraphData;
 
 interface MapProps {
   stations: Station[];
@@ -11,772 +13,1045 @@ interface MapProps {
   calculatedRoute: RouteResult | null;
 }
 
-// Coordinate layout of all nodes inside SVG viewBox="0 0 1000 580"
-export const stationCoords: Record<string, { x: number; y: number }> = {
+// Coordinate layout of all nodes inside SVG viewBox="-100 -150 2000 2120"
+const stationCoords: Record<string, { x: number; y: number }> = {
   "N24": {
-    "x": 1000,
-    "y": 40
+    "x": 1260,
+    "y": 70
   },
   "N23": {
-    "x": 1000,
-    "y": 80
+    "x": 1228.6,
+    "y": 105.7
   },
   "N22": {
-    "x": 1000,
-    "y": 120
+    "x": 1197.1,
+    "y": 141.4
   },
   "N21": {
-    "x": 1000,
-    "y": 160
+    "x": 1165.7,
+    "y": 177.1
   },
   "N20": {
-    "x": 1000,
-    "y": 200
+    "x": 1134.3,
+    "y": 212.9
   },
   "N19": {
-    "x": 1000,
-    "y": 240
+    "x": 1102.9,
+    "y": 248.6
   },
   "N18": {
-    "x": 1000,
-    "y": 280
+    "x": 1071.4,
+    "y": 284.3
   },
   "N17": {
-    "x": 1000,
+    "x": 1040,
     "y": 320
   },
   "N16": {
-    "x": 1000,
-    "y": 360
+    "x": 1033.3,
+    "y": 364.4
   },
   "N15": {
-    "x": 1000,
-    "y": 400
+    "x": 1026.7,
+    "y": 408.9
   },
   "N14": {
-    "x": 1000,
-    "y": 440
+    "x": 1020,
+    "y": 453.3
   },
   "N13": {
-    "x": 1000,
-    "y": 480
+    "x": 1013.3,
+    "y": 497.8
   },
   "N12": {
-    "x": 1000,
-    "y": 520
+    "x": 1006.7,
+    "y": 542.2
   },
   "N11": {
     "x": 1000,
-    "y": 560
+    "y": 586.7
   },
   "N10": {
-    "x": 1000,
-    "y": 600
+    "x": 993.3,
+    "y": 631.1
   },
   "N9": {
-    "x": 1000,
-    "y": 640
+    "x": 986.7,
+    "y": 675.6
   },
   "N8": {
-    "x": 1000,
-    "y": 680
+    "x": 980,
+    "y": 720
   },
   "N7": {
-    "x": 1000,
-    "y": 730
+    "x": 980,
+    "y": 762.5
   },
   "N5": {
-    "x": 1000,
-    "y": 780
+    "x": 980,
+    "y": 805
   },
   "N4": {
-    "x": 1000,
-    "y": 830
+    "x": 980,
+    "y": 847.5
   },
   "N3": {
-    "x": 1000,
-    "y": 880
+    "x": 980,
+    "y": 890
   },
   "N2": {
-    "x": 1000,
-    "y": 920
+    "x": 980,
+    "y": 935
   },
   "N1": {
-    "x": 1000,
-    "y": 960
+    "x": 980,
+    "y": 980
   },
   "CEN_S": {
-    "x": 1000,
-    "y": 1000
+    "x": 980,
+    "y": 1025
   },
   "E1": {
-    "x": 1040,
-    "y": 1000
+    "x": 1025,
+    "y": 1025
   },
   "E2": {
-    "x": 1080,
-    "y": 1000
+    "x": 1070,
+    "y": 1025
   },
   "E3": {
-    "x": 1120,
-    "y": 1000
+    "x": 1115,
+    "y": 1025
   },
   "E4": {
     "x": 1160,
-    "y": 1000
+    "y": 1025
   },
   "E5": {
-    "x": 1200,
-    "y": 1000
+    "x": 1205,
+    "y": 1052
   },
   "E6": {
-    "x": 1240,
-    "y": 1000
+    "x": 1250,
+    "y": 1079
   },
   "E7": {
-    "x": 1280,
-    "y": 1000
+    "x": 1295,
+    "y": 1106
   },
   "E8": {
-    "x": 1320,
-    "y": 1000
+    "x": 1340,
+    "y": 1133
   },
   "E9": {
-    "x": 1360,
-    "y": 1000
-  },
-  "E10": {
-    "x": 1386.7,
-    "y": 1026.7
-  },
-  "E11": {
-    "x": 1413.3,
-    "y": 1053.3
-  },
-  "E12": {
-    "x": 1440,
-    "y": 1080
-  },
-  "E13": {
-    "x": 1466.7,
-    "y": 1106.7
-  },
-  "E14": {
-    "x": 1493.3,
-    "y": 1133.3
-  },
-  "E15": {
-    "x": 1520,
+    "x": 1385,
     "y": 1160
   },
+  "E10": {
+    "x": 1410,
+    "y": 1222
+  },
+  "E11": {
+    "x": 1435,
+    "y": 1284
+  },
+  "E12": {
+    "x": 1460,
+    "y": 1346
+  },
+  "E13": {
+    "x": 1485,
+    "y": 1408
+  },
+  "E14": {
+    "x": 1510,
+    "y": 1470
+  },
+  "E15": {
+    "x": 1510,
+    "y": 1550
+  },
   "E16": {
-    "x": 1520,
-    "y": 1200
+    "x": 1510,
+    "y": 1585
   },
   "E17": {
-    "x": 1520,
-    "y": 1240
+    "x": 1510,
+    "y": 1620
   },
   "E18": {
-    "x": 1520,
-    "y": 1280
+    "x": 1510,
+    "y": 1655
   },
   "E19": {
-    "x": 1520,
-    "y": 1320
+    "x": 1510,
+    "y": 1690
   },
   "E20": {
-    "x": 1520,
-    "y": 1360
+    "x": 1510,
+    "y": 1725
   },
   "E21": {
-    "x": 1520,
-    "y": 1400
+    "x": 1510,
+    "y": 1760
   },
   "E22": {
-    "x": 1520,
-    "y": 1440
+    "x": 1510,
+    "y": 1795
   },
   "E23": {
-    "x": 1520,
-    "y": 1480
+    "x": 1510,
+    "y": 1830
   },
   "W1": {
-    "x": 960,
-    "y": 1000
+    "x": 930,
+    "y": 1025
   },
   "CEN_L": {
-    "x": 1000,
-    "y": 1000
+    "x": 980,
+    "y": 1025
   },
   "S1": {
-    "x": 1000,
-    "y": 1040
+    "x": 980,
+    "y": 1070
   },
   "S2": {
-    "x": 1000,
-    "y": 1080
+    "x": 980,
+    "y": 1115
   },
   "S3": {
-    "x": 960,
-    "y": 1120
+    "x": 955,
+    "y": 1160
   },
   "S4": {
-    "x": 920,
-    "y": 1120
+    "x": 923.8,
+    "y": 1193.8
   },
   "S5": {
-    "x": 880,
-    "y": 1120
+    "x": 892.5,
+    "y": 1227.5
   },
   "S6": {
-    "x": 840,
-    "y": 1120
+    "x": 861.3,
+    "y": 1261.3
   },
   "S7": {
-    "x": 800,
-    "y": 1120
+    "x": 830,
+    "y": 1295
   },
   "S8": {
-    "x": 760,
-    "y": 1120
+    "x": 774,
+    "y": 1295
   },
   "S9": {
-    "x": 720,
-    "y": 1120
+    "x": 718,
+    "y": 1295
   },
   "S10": {
-    "x": 680,
-    "y": 1120
+    "x": 662,
+    "y": 1295
   },
   "S11": {
-    "x": 640,
-    "y": 1120
+    "x": 606,
+    "y": 1295
   },
   "S12": {
-    "x": 600,
-    "y": 1120
+    "x": 550,
+    "y": 1295
   },
   "BL01": {
-    "x": 720,
-    "y": 1120
+    "x": 650,
+    "y": 1295
   },
   "BL02": {
-    "x": 720,
-    "y": 1074.3
+    "x": 655.7,
+    "y": 1242.9
   },
   "BL03": {
-    "x": 720,
-    "y": 1028.6
+    "x": 661.4,
+    "y": 1190.7
   },
   "BL04": {
-    "x": 720,
-    "y": 982.9
+    "x": 667.1,
+    "y": 1138.6
   },
   "BL05": {
-    "x": 720,
-    "y": 937.1
+    "x": 672.9,
+    "y": 1086.4
   },
   "BL06": {
-    "x": 720,
-    "y": 891.4
+    "x": 678.6,
+    "y": 1034.3
   },
   "BL07": {
-    "x": 720,
-    "y": 845.7
+    "x": 684.3,
+    "y": 982.1
   },
   "BL08": {
-    "x": 720,
-    "y": 800
+    "x": 690,
+    "y": 930
   },
   "BL09": {
-    "x": 840,
-    "y": 680
+    "x": 780,
+    "y": 720
   },
   "BL10": {
-    "x": 880,
-    "y": 680
+    "x": 850,
+    "y": 700
   },
   "BL11": {
-    "x": 920,
-    "y": 680
+    "x": 900,
+    "y": 700
   },
   "BL12": {
-    "x": 960,
-    "y": 680
+    "x": 940,
+    "y": 710
   },
   "BL13": {
-    "x": 1000,
-    "y": 680
+    "x": 980,
+    "y": 720
   },
   "BL14": {
-    "x": 1040,
-    "y": 680
+    "x": 1045,
+    "y": 710
   },
   "BL15": {
-    "x": 1080,
-    "y": 680
+    "x": 1110,
+    "y": 700
   },
   "BL16": {
     "x": 1160,
     "y": 760
   },
   "BL17": {
-    "x": 1160,
-    "y": 800
+    "x": 1162,
+    "y": 808
   },
   "BL18": {
-    "x": 1160,
-    "y": 840
+    "x": 1164,
+    "y": 856
   },
   "BL19": {
-    "x": 1160,
-    "y": 880
+    "x": 1166,
+    "y": 904
   },
   "BL20": {
-    "x": 1160,
-    "y": 920
+    "x": 1168,
+    "y": 952
   },
   "BL21": {
-    "x": 1160,
-    "y": 960
+    "x": 1170,
+    "y": 1000
   },
   "BL22": {
     "x": 1160,
-    "y": 1000
+    "y": 1025
   },
   "BL23": {
     "x": 1160,
-    "y": 1040
+    "y": 1070
   },
   "BL24": {
-    "x": 1120,
-    "y": 1080
+    "x": 1115,
+    "y": 1115
   },
   "BL25": {
-    "x": 1060,
-    "y": 1080
+    "x": 1047.5,
+    "y": 1115
   },
   "BL26": {
-    "x": 1000,
-    "y": 1080
+    "x": 980,
+    "y": 1115
   },
   "BL27": {
-    "x": 960,
-    "y": 1080
+    "x": 930,
+    "y": 1115
   },
   "BL28": {
-    "x": 920,
-    "y": 1080
+    "x": 880,
+    "y": 1115
   },
   "BL29": {
-    "x": 880,
-    "y": 1080
+    "x": 830,
+    "y": 1115
   },
   "BL30": {
-    "x": 840,
-    "y": 1080
+    "x": 780,
+    "y": 1115
   },
   "BL31": {
-    "x": 800,
-    "y": 1120
+    "x": 735,
+    "y": 1160
   },
   "BL32": {
-    "x": 760,
-    "y": 1120
+    "x": 700,
+    "y": 1230
   },
   "BL01_2": {
-    "x": 720,
-    "y": 1120
+    "x": 650,
+    "y": 1295
   },
   "BL33": {
-    "x": 660,
-    "y": 1120
+    "x": 600,
+    "y": 1295
   },
   "BL34": {
-    "x": 600,
-    "y": 1120
+    "x": 550,
+    "y": 1295
   },
   "BL35": {
-    "x": 560,
-    "y": 1120
+    "x": 500,
+    "y": 1295
   },
   "BL36": {
-    "x": 520,
-    "y": 1120
+    "x": 450,
+    "y": 1295
   },
   "BL37": {
-    "x": 480,
-    "y": 1120
+    "x": 400,
+    "y": 1295
   },
   "BL38": {
-    "x": 440,
-    "y": 1120
+    "x": 350,
+    "y": 1295
   },
   "PP01": {
-    "x": 240,
-    "y": 480
+    "x": 120,
+    "y": 520
   },
   "PP02": {
-    "x": 280,
-    "y": 480
+    "x": 175,
+    "y": 520
   },
   "PP03": {
-    "x": 320,
-    "y": 480
+    "x": 230,
+    "y": 520
   },
   "PP04": {
-    "x": 360,
-    "y": 480
+    "x": 285,
+    "y": 520
   },
   "PP05": {
-    "x": 400,
-    "y": 480
+    "x": 340,
+    "y": 520
   },
   "PP06": {
-    "x": 440,
-    "y": 480
+    "x": 395,
+    "y": 520
   },
   "PP07": {
-    "x": 480,
-    "y": 480
+    "x": 450,
+    "y": 520
   },
   "PP08": {
-    "x": 520,
-    "y": 480
+    "x": 505,
+    "y": 520
   },
   "PP09": {
     "x": 560,
-    "y": 480
+    "y": 520
   },
   "PP10": {
-    "x": 600,
-    "y": 480
+    "x": 615,
+    "y": 520
   },
   "PP11": {
-    "x": 640,
-    "y": 480
+    "x": 670,
+    "y": 520
   },
   "PP12": {
-    "x": 720,
-    "y": 480
+    "x": 735,
+    "y": 520
   },
   "PP13": {
     "x": 773.3,
-    "y": 533.3
+    "y": 566.7
   },
   "PP14": {
-    "x": 826.7,
-    "y": 586.7
+    "x": 811.7,
+    "y": 613.3
   },
   "PP15": {
-    "x": 880,
-    "y": 640
+    "x": 850,
+    "y": 660
   },
   "PP16": {
-    "x": 880,
-    "y": 680
+    "x": 850,
+    "y": 700
   },
   "YL01": {
-    "x": 1080,
-    "y": 680
+    "x": 1110,
+    "y": 700
   },
   "YL02": {
-    "x": 1111.1,
-    "y": 680
+    "x": 1155,
+    "y": 700
   },
   "YL03": {
-    "x": 1142.2,
-    "y": 680
+    "x": 1200,
+    "y": 700
   },
   "YL04": {
-    "x": 1173.3,
-    "y": 680
+    "x": 1245,
+    "y": 700
   },
   "YL05": {
-    "x": 1204.4,
-    "y": 680
+    "x": 1290,
+    "y": 700
   },
   "YL06": {
-    "x": 1235.6,
-    "y": 680
+    "x": 1334,
+    "y": 740
   },
   "YL07": {
-    "x": 1266.7,
-    "y": 680
+    "x": 1378,
+    "y": 780
   },
   "YL08": {
-    "x": 1297.8,
-    "y": 680
+    "x": 1422,
+    "y": 820
   },
   "YL09": {
-    "x": 1328.9,
-    "y": 680
+    "x": 1466,
+    "y": 860
   },
   "YL10": {
-    "x": 1360,
-    "y": 680
+    "x": 1510,
+    "y": 900
   },
   "YL11": {
-    "x": 1400,
-    "y": 720
+    "x": 1510,
+    "y": 950
   },
   "YL12": {
-    "x": 1440,
-    "y": 760
+    "x": 1510,
+    "y": 1000
   },
   "YL13": {
-    "x": 1480,
-    "y": 800
+    "x": 1510,
+    "y": 1050
   },
   "YL14": {
-    "x": 1520,
-    "y": 840
+    "x": 1510,
+    "y": 1100
   },
   "YL15": {
-    "x": 1520,
-    "y": 875.6
+    "x": 1510,
+    "y": 1150
   },
   "YL16": {
-    "x": 1520,
-    "y": 911.1
+    "x": 1510,
+    "y": 1200
   },
   "YL17": {
-    "x": 1520,
-    "y": 946.7
+    "x": 1510,
+    "y": 1250
   },
   "YL18": {
-    "x": 1520,
-    "y": 982.2
+    "x": 1510,
+    "y": 1300
   },
   "YL19": {
-    "x": 1520,
-    "y": 1017.8
+    "x": 1510,
+    "y": 1350
   },
   "YL20": {
-    "x": 1520,
-    "y": 1053.3
+    "x": 1510,
+    "y": 1400
   },
   "YL21": {
-    "x": 1520,
-    "y": 1088.9
+    "x": 1510,
+    "y": 1450
   },
   "YL22": {
-    "x": 1520,
-    "y": 1124.4
+    "x": 1510,
+    "y": 1500
   },
   "YL23": {
-    "x": 1520,
-    "y": 1160
+    "x": 1510,
+    "y": 1550
   },
   "PK01": {
-    "x": 640,
-    "y": 480
+    "x": 670,
+    "y": 520
   },
   "PK02": {
-    "x": 640,
-    "y": 440
+    "x": 647.5,
+    "y": 480
   },
   "PK03": {
-    "x": 640,
-    "y": 400
+    "x": 625,
+    "y": 440
   },
   "PK04": {
-    "x": 640,
-    "y": 360
+    "x": 602.5,
+    "y": 400
   },
   "PK05": {
-    "x": 640,
-    "y": 320
+    "x": 580,
+    "y": 360
   },
   "PK06": {
-    "x": 671.1,
-    "y": 320
+    "x": 617.8,
+    "y": 357.2
   },
   "PK07": {
-    "x": 702.2,
-    "y": 320
+    "x": 655.6,
+    "y": 354.4
   },
   "PK08": {
-    "x": 733.3,
-    "y": 320
+    "x": 693.3,
+    "y": 351.7
   },
   "PK09": {
-    "x": 764.4,
-    "y": 320
+    "x": 731.1,
+    "y": 348.9
   },
   "PK10": {
-    "x": 795.6,
-    "y": 320
+    "x": 768.9,
+    "y": 346.1
   },
   "PK11": {
-    "x": 826.7,
-    "y": 320
+    "x": 806.7,
+    "y": 343.3
   },
   "PK12": {
-    "x": 857.8,
-    "y": 320
+    "x": 844.4,
+    "y": 340.6
   },
   "PK13": {
-    "x": 888.9,
-    "y": 320
+    "x": 882.2,
+    "y": 337.8
   },
   "PK14": {
     "x": 920,
-    "y": 320
+    "y": 335
   },
   "PK15": {
-    "x": 960,
-    "y": 320
+    "x": 980,
+    "y": 327.5
   },
   "PK16": {
-    "x": 1000,
+    "x": 1040,
     "y": 320
   },
   "PK17": {
-    "x": 1040,
-    "y": 320
+    "x": 1090,
+    "y": 321.9
   },
   "PK18": {
-    "x": 1080,
-    "y": 320
+    "x": 1140,
+    "y": 323.8
   },
   "PK19": {
-    "x": 1120,
-    "y": 320
+    "x": 1190,
+    "y": 325.6
   },
   "PK20": {
-    "x": 1160,
-    "y": 320
+    "x": 1240,
+    "y": 327.5
   },
   "PK21": {
-    "x": 1200,
-    "y": 320
+    "x": 1290,
+    "y": 329.4
   },
   "PK22": {
-    "x": 1240,
-    "y": 320
+    "x": 1340,
+    "y": 331.3
   },
   "PK23": {
-    "x": 1280,
-    "y": 320
+    "x": 1390,
+    "y": 333.1
   },
   "PK24": {
-    "x": 1320,
-    "y": 320
+    "x": 1440,
+    "y": 335
   },
   "PK25": {
-    "x": 1360,
-    "y": 320
+    "x": 1481.7,
+    "y": 372.5
   },
   "PK26": {
-    "x": 1400,
-    "y": 320
+    "x": 1523.3,
+    "y": 410
   },
   "PK27": {
-    "x": 1440,
-    "y": 320
+    "x": 1565,
+    "y": 447.5
   },
   "PK28": {
-    "x": 1480,
-    "y": 320
+    "x": 1606.7,
+    "y": 485
   },
   "PK29": {
-    "x": 1520,
-    "y": 320
+    "x": 1648.3,
+    "y": 522.5
   },
   "PK30": {
-    "x": 1560,
-    "y": 320
+    "x": 1690,
+    "y": 560
   },
   "A8": {
-    "x": 1000,
-    "y": 920
+    "x": 980,
+    "y": 890
   },
   "A7": {
     "x": 1040,
-    "y": 960
+    "y": 950
   },
   "A6": {
-    "x": 1160,
-    "y": 960
+    "x": 1170,
+    "y": 1000
   },
   "A5": {
-    "x": 1216,
-    "y": 960
+    "x": 1260,
+    "y": 1000
   },
   "A4": {
-    "x": 1272,
-    "y": 960
+    "x": 1350,
+    "y": 1000
   },
   "A3": {
-    "x": 1328,
-    "y": 960
+    "x": 1440,
+    "y": 1000
   },
   "A2": {
-    "x": 1384,
-    "y": 960
+    "x": 1530,
+    "y": 1000
   },
   "A1": {
-    "x": 1440,
-    "y": 960
+    "x": 1620,
+    "y": 1000
   },
   "RN10": {
     "x": 920,
-    "y": 160
+    "y": 80
   },
   "RN09": {
     "x": 920,
-    "y": 200
+    "y": 130
   },
   "RN08": {
     "x": 920,
-    "y": 240
+    "y": 180
   },
   "RN07": {
     "x": 920,
-    "y": 280
+    "y": 230
   },
   "RN06": {
     "x": 920,
-    "y": 320
+    "y": 335
   },
   "RN05": {
     "x": 920,
-    "y": 392
+    "y": 413.8
   },
   "RN04": {
     "x": 920,
-    "y": 464
+    "y": 492.5
   },
   "RN03": {
     "x": 920,
-    "y": 536
+    "y": 571.3
   },
   "RN02": {
     "x": 920,
-    "y": 608
+    "y": 650
   },
   "RW01": {
-    "x": 920,
-    "y": 680
+    "x": 900,
+    "y": 700
   },
   "RW02": {
-    "x": 880,
-    "y": 640
+    "x": 850,
+    "y": 660
   },
   "RW03": {
-    "x": 800,
-    "y": 640
+    "x": 760,
+    "y": 660
   },
   "RW05": {
-    "x": 720,
-    "y": 640
+    "x": 670,
+    "y": 660
   },
   "RW06": {
-    "x": 640,
-    "y": 640
+    "x": 580,
+    "y": 660
   }
+};
+
+type Coord = { x: number; y: number };
+type LabelSide = 'above' | 'below' | 'left' | 'right';
+type LabelAnchor = 'start' | 'middle' | 'end';
+
+interface LabelLine {
+  text: string;
+  kind: 'th' | 'en';
+}
+
+interface LabelBox {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+}
+
+interface LabelPlacement {
+  key: string;
+  x: number;
+  top: number;
+  anchor: LabelAnchor;
+  lines: LabelLine[];
+  selected: boolean;
+}
+
+const LABEL_OFFSET = 17;
+const LABEL_GAP = 5;
+const LINE_HEIGHT = 7.4;
+
+const getIdNumber = (id: string) => Number(id.match(/\d+/)?.[0] ?? 0);
+
+const uniqueValues = (values: string[]) => [...new Set(values.filter(Boolean))];
+
+const cleanEnglishName = (name: string) =>
+  name.replace(/\s+\((Sukhumvit|Silom)\)$/i, '').trim();
+
+const wrapText = (text: string, maxChars: number) => {
+  const normalized = text.replace(/\s*\/\s*/g, ' / ').trim();
+  const words = normalized.includes(' ')
+    ? normalized.split(/\s+/).filter(Boolean)
+    : normalized.match(new RegExp(`.{1,${maxChars}}`, 'g')) ?? [normalized];
+
+  const lines: string[] = [];
+  let current = '';
+
+  words.forEach((word) => {
+    const chunks = word.length > maxChars && word !== '/'
+      ? word.match(new RegExp(`.{1,${maxChars}}`, 'g')) ?? [word]
+      : [word];
+
+    chunks.forEach((chunk) => {
+      const next = current ? `${current} ${chunk}` : chunk;
+      if (next.length > maxChars && current) {
+        lines.push(current);
+        current = chunk;
+      } else {
+        current = next;
+      }
+    });
+  });
+
+  if (current) lines.push(current);
+  return lines;
+};
+
+const isDenseLabelArea = (station: Station, coords: Coord) => {
+  const id = station.id;
+  return (
+    id.startsWith('PK') ||
+    (id.startsWith('PP') && coords.y <= 560) ||
+    (id.startsWith('YL') && coords.y <= 920) ||
+    (id.startsWith('BL') && (coords.y <= 730 || coords.y >= 1110)) ||
+    id.startsWith('A')
+  );
+};
+
+const buildLabelLines = (group: Station[], coords: Coord): LabelLine[] => {
+  const dense = isDenseLabelArea(group[0], coords);
+  const thMax = dense ? 11 : 13;
+  const enMax = dense ? 13 : 16;
+  const thNames = uniqueValues(group.map((station) => station.nameTH));
+  const enNames = uniqueValues(group.map((station) => cleanEnglishName(station.nameEN)));
+  const thText = thNames.join(' / ');
+  const enText = enNames.join(' / ');
+
+  return [
+    ...wrapText(thText, thMax).map((text) => ({ text, kind: 'th' as const })),
+    ...wrapText(enText, enMax).map((text) => ({ text, kind: 'en' as const })),
+  ];
+};
+
+const estimateLabelBox = (lines: LabelLine[]) => {
+  const width = Math.max(
+    28,
+    ...lines.map((line) => line.text.length * (line.kind === 'th' ? 4.2 : 3.7)),
+  );
+
+  return {
+    width: Math.min(width, 96),
+    height: Math.max(10, lines.length * LINE_HEIGHT),
+  };
+};
+
+const getPreferredSides = (station: Station, group: Station[], coords: Coord): LabelSide[] => {
+  const ids = group.map((item) => item.id);
+  const id = station.id;
+  const n = getIdNumber(id);
+  const alternate: LabelSide[] = n % 2 === 0 ? ['above', 'below'] : ['below', 'above'];
+
+  if (coords.x >= 1500) return ['left', ...alternate, 'right'];
+  if (coords.x <= 160) return ['right', ...alternate, 'left'];
+  if (ids.some((item) => item.startsWith('CEN'))) return ['left', 'below', 'above', 'right'];
+  if (ids.includes('N3') || ids.includes('A8')) return ['left', 'right', 'above', 'below'];
+  if (ids.includes('S12') || ids.includes('BL34')) return ['below', 'left', 'above', 'right'];
+  if (ids.includes('BL15') || ids.includes('YL01')) return ['above', 'right', 'below', 'left'];
+
+  if (id.startsWith('PK')) {
+    if (n <= 5) return ['left', 'right', ...alternate];
+    if (n >= 25) return ['right', 'left', ...alternate];
+    return [...alternate, 'right', 'left'];
+  }
+
+  if (id.startsWith('PP')) {
+    if (coords.y <= 540) return [...alternate, 'left', 'right'];
+    return ['left', 'right', ...alternate];
+  }
+
+  if (id.startsWith('RN')) return ['left', 'right', 'above', 'below'];
+  if (id.startsWith('RW')) return ['above', 'below', 'left', 'right'];
+
+  if (id.startsWith('N')) {
+    if (n >= 17) return ['right', 'left', 'above', 'below'];
+    if (n <= 5) return ['left', 'right', 'above', 'below'];
+    return ['right', 'left', 'below', 'above'];
+  }
+
+  if (id.startsWith('E')) {
+    if (n <= 4) return [...alternate, 'right', 'left'];
+    if (n >= 15) return ['left', 'right', 'above', 'below'];
+    return ['right', 'left', ...alternate];
+  }
+
+  if (id.startsWith('S')) {
+    if (n <= 2) return ['right', 'left', 'below', 'above'];
+    return [...alternate, 'left', 'right'];
+  }
+
+  if (id.startsWith('BL')) {
+    if (coords.x <= 660) return ['left', 'right', 'above', 'below'];
+    if (coords.y <= 730) return [...alternate, 'right', 'left'];
+    if (coords.x >= 1140) return ['right', 'left', ...alternate];
+    if (coords.y >= 1110) return [...alternate, 'left', 'right'];
+    return ['left', 'right', ...alternate];
+  }
+
+  if (id.startsWith('YL')) {
+    if (coords.y <= 920) return [...alternate, 'right', 'left'];
+    return ['right', 'left', ...alternate];
+  }
+
+  if (id.startsWith('A')) return [...alternate, 'left', 'right'];
+  return [...alternate, 'right', 'left'];
+};
+
+const uniqueSides = (sides: LabelSide[]) =>
+  sides.filter((side, index) => sides.indexOf(side) === index);
+
+const createLabelBox = (
+  coords: Coord,
+  side: LabelSide,
+  size: { width: number; height: number },
+  offset: number,
+) => {
+  let x = coords.x;
+  let top = coords.y - size.height / 2;
+  let anchor: LabelAnchor = 'middle';
+
+  if (side === 'above') {
+    top = coords.y - LABEL_OFFSET - size.height - offset;
+  } else if (side === 'below') {
+    top = coords.y + LABEL_OFFSET + offset;
+  } else if (side === 'left') {
+    x = coords.x - LABEL_OFFSET;
+    top += offset;
+    anchor = 'end';
+  } else {
+    x = coords.x + LABEL_OFFSET;
+    top += offset;
+    anchor = 'start';
+  }
+
+  const left = anchor === 'middle' ? x - size.width / 2 : anchor === 'end' ? x - size.width : x;
+
+  return {
+    x,
+    top,
+    anchor,
+    box: {
+      left,
+      top,
+      right: left + size.width,
+      bottom: top + size.height,
+    },
+  };
+};
+
+const boxesOverlap = (a: LabelBox, b: LabelBox) =>
+  a.left < b.right + LABEL_GAP &&
+  a.right + LABEL_GAP > b.left &&
+  a.top < b.bottom + LABEL_GAP &&
+  a.bottom + LABEL_GAP > b.top;
+
+const placeStationLabels = (
+  stations: Station[],
+  stationsByCoord: Record<string, Station[]>,
+  startId?: string,
+  endId?: string,
+): LabelPlacement[] => {
+  const seenCoords = new Set<string>();
+  const placedBoxes: LabelBox[] = [];
+
+  return stations
+    .flatMap((station) => {
+      const coords = stationCoords[station.id];
+      if (!coords) return [];
+
+      const coordKey = `${coords.x},${coords.y}`;
+      if (seenCoords.has(coordKey)) return [];
+      seenCoords.add(coordKey);
+
+      const group = stationsByCoord[coordKey] ?? [station];
+      return [{ station: group[0], group, coords, coordKey }];
+    })
+    .sort((a, b) => {
+      const groupRank = b.group.length - a.group.length;
+      if (groupRank !== 0) return groupRank;
+      if (a.coords.y !== b.coords.y) return a.coords.y - b.coords.y;
+      return a.coords.x - b.coords.x;
+    })
+    .map(({ station, group, coords, coordKey }) => {
+      const lines = buildLabelLines(group, coords);
+      const size = estimateLabelBox(lines);
+      const sideOrder = uniqueSides([
+        ...getPreferredSides(station, group, coords),
+        'above',
+        'below',
+        'left',
+        'right',
+      ]);
+
+      const candidates = sideOrder.flatMap((side) => {
+        const offsets = side === 'left' || side === 'right'
+          ? [0, -14, 14, -28, 28, -42, 42]
+          : [0, 10, 22, 34];
+        return offsets.map((offset) => createLabelBox(coords, side, size, offset));
+      });
+      const selected = candidates.find((candidate) =>
+        !placedBoxes.some((box) => boxesOverlap(candidate.box, box)),
+      ) ?? candidates[0];
+
+      placedBoxes.push(selected.box);
+
+      return {
+        key: coordKey,
+        x: selected.x,
+        top: selected.top,
+        anchor: selected.anchor,
+        lines,
+        selected: group.some((item) => item.id === startId || item.id === endId),
+      };
+    });
 };
 
 export const Map: React.FC<MapProps> = ({
@@ -798,53 +1073,7 @@ export const Map: React.FC<MapProps> = ({
     stationsByCoord[key].push(st);
   });
   const interchangeGroups = Object.values(stationsByCoord).filter(g => g.length > 1);
-
-  // Smart label placement: determine label direction based on line orientation
-  // For each station, determine label side (above/below/left/right) based on coords
-  const getLabelDirection = (stId: string): { dx: number; dy: number; anchor: string } => {
-    const c = stationCoords[stId];
-    if (!c) return { dx: 0, dy: -18, anchor: 'middle' };
-    // Determine orientation by checking which lines run through this coord
-    const group = stationsByCoord[`${c.x},${c.y}`];
-    const isInterchange = group && group.length > 1;
-
-    // Stations on the far right edge of the map → label to the left
-    if (c.x >= 1480) return { dx: -14, dy: 3, anchor: 'end' };
-    // Stations on the far left edge → label to the right
-    if (c.x <= 260) return { dx: 14, dy: 3, anchor: 'start' };
-    // Stations on a purely horizontal line (y is uniform along a stretch)
-    // BTS Sukhumvit (N series) runs vertically on x=1000
-    if (c.x === 1000 && c.y <= 1000 && c.y >= 40) return { dx: -14, dy: 3, anchor: 'end' };
-    // BTS Silom S series
-    if (stId.startsWith('S') && !stId.startsWith('S1') && c.y === 1120) return { dx: 0, dy: -18, anchor: 'middle' };
-    if (stId.startsWith('S') && c.y === 1120) return { dx: 0, dy: -18, anchor: 'middle' };
-    // MRT Blue top row (horizontal)
-    if (stId.startsWith('BL') && c.y === 680) return { dx: 0, dy: -18, anchor: 'middle' };
-    if (stId.startsWith('BL') && c.y === 1120) return { dx: 0, dy: 16, anchor: 'middle' };
-    if (stId.startsWith('BL') && c.x === 1160) return { dx: 14, dy: 3, anchor: 'start' };
-    if (stId.startsWith('BL') && c.x === 720) return { dx: -14, dy: 3, anchor: 'end' };
-    // Pink line (PK) horizontal on y=320, y=480
-    if (stId.startsWith('PK') && c.y === 320) return { dx: 0, dy: -18, anchor: 'middle' };
-    if (stId.startsWith('PK') && c.y === 480) return { dx: 0, dy: -18, anchor: 'middle' };
-    // MRT Purple (PP)
-    if (stId.startsWith('PP') && c.y === 480) return { dx: 0, dy: 16, anchor: 'middle' };
-    // MRT Yellow (YL)
-    if (stId.startsWith('YL') && c.y === 680) return { dx: 0, dy: 16, anchor: 'middle' };
-    if (stId.startsWith('YL') && c.x === 1520) return { dx: -14, dy: 3, anchor: 'end' };
-    // SRT Red (RN series) vertical
-    if (stId.startsWith('RN') && c.x === 920) return { dx: -14, dy: 3, anchor: 'end' };
-    // SRT Red (RW series) horizontal
-    if (stId.startsWith('RW')) return { dx: 0, dy: -18, anchor: 'middle' };
-    // ARL stations
-    if (stId.startsWith('A') && !stId.startsWith('An')) return { dx: 0, dy: 16, anchor: 'middle' };
-    // E series (BTS Sukhumvit east branch)
-    if (stId.startsWith('E') && c.y === 1000) return { dx: 0, dy: -18, anchor: 'middle' };
-    if (stId.startsWith('E') && c.x === 1520) return { dx: -14, dy: 3, anchor: 'end' };
-    // W series
-    if (stId.startsWith('W')) return { dx: 0, dy: -18, anchor: 'middle' };
-    // Default: alternate up/down based on parity
-    return { dx: 0, dy: -18, anchor: 'middle' };
-  };
+  const labelPlacements = placeStationLabels(stations, stationsByCoord, startStation?.id, endStation?.id);
 
   const isStationInRoute = (stationId: string) => {
     if (!calculatedRoute) return false;
@@ -889,7 +1118,7 @@ export const Map: React.FC<MapProps> = ({
       </div>
 
       <TransformWrapper
-        initialScale={0.8}
+        initialScale={0.88}
         minScale={0.3}
         maxScale={4}
         centerOnInit={true}
@@ -901,8 +1130,8 @@ export const Map: React.FC<MapProps> = ({
           return (
             <TransformComponent wrapperClass="w-full h-full cursor-grab active:cursor-grabbing" contentClass="w-full h-full flex items-center justify-center">
               <svg
-                viewBox="-100 -150 2000 2000"
-                className="w-full h-full min-w-[1400px] min-h-[740px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
+                viewBox="-100 -150 2000 2120"
+                className="w-full h-full min-w-[1400px] min-h-[820px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.04)] transition-colors duration-500"
                 onClick={() => setPopupGroup(null)}
               >
                 <defs>
@@ -910,16 +1139,16 @@ export const Map: React.FC<MapProps> = ({
                     <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-black/[0.015]" />
                   </pattern>
                 </defs>
-                <rect x="0" y="-100" width="1800" height="1800" fill="url(#grid)" rx="20" />
+                <rect x="0" y="-100" width="1800" height="2050" fill="url(#grid)" rx="20" />
 
                 {/* --- STAGE 1: Standard Rail Tracks (Static) --- */}
-                {transitData.edges.map((edge, i) => {
+                {transitGraph.edges.map((edge, i) => {
                   const c1 = stationCoords[edge.from];
                   const c2 = stationCoords[edge.to];
                   if (!c1 || !c2) return null;
 
-                  const fromSt = (transitData.stations as any)[edge.from];
-                  const toSt = (transitData.stations as any)[edge.to];
+                  const fromSt = transitGraph.stations[edge.from];
+                  const toSt = transitGraph.stations[edge.to];
                   const isInterchange = edge.type === 'interchange' || edge.type === 'cross-platform' || (fromSt && toSt && fromSt.line !== toSt.line);
                   const lineName = (fromSt && toSt && fromSt.line === toSt.line) ? fromSt.line : 'INTERCHANGE';
 
@@ -949,7 +1178,7 @@ export const Map: React.FC<MapProps> = ({
                 })}
 
                 {/* --- STAGE 2: Route Overlay Highlighting (Pulsing flow paths) --- */}
-                {calculatedRoute && transitData.edges.map((edge, i) => {
+                {calculatedRoute && transitGraph.edges.map((edge, i) => {
                   const c1 = stationCoords[edge.from];
                   const c2 = stationCoords[edge.to];
                   if (!c1 || !c2) return null;
@@ -1029,8 +1258,7 @@ export const Map: React.FC<MapProps> = ({
                         className="drop-shadow-sm"
                       />
                       {/* Color segments using clipPath */}
-                      {segmentColors.map((color, si) => {
-                        const frac = 1 / n;
+                      {segmentColors.map((_, si) => {
                         if (isVertical) {
                           const startY = c.y - RY + si * (2 * RY / n);
                           const segH = 2 * RY / n;
@@ -1083,7 +1311,7 @@ export const Map: React.FC<MapProps> = ({
                 })}
 
                 {/* --- STAGE 3: Station Circles & Hover Details --- */}
-                {stations.map((st, i) => {
+                {stations.map((st) => {
                   const coords = stationCoords[st.id];
                   if (!coords) return null;
 
@@ -1150,78 +1378,29 @@ export const Map: React.FC<MapProps> = ({
                         </text>
                       ) : null}
 
-                      {/* Smart Station Labels - only show first station in interchange group */}
-                      {(() => {
-                        const groupAtCoord = stationsByCoord[`${coords.x},${coords.y}`];
-                        // For interchange stations, only show label for the first entry
-                        if (groupAtCoord && groupAtCoord.length > 1 && groupAtCoord[0].id !== st.id) return null;
-                        const labelDir = getLabelDirection(st.id);
-                        const labelX = coords.x + labelDir.dx;
-                        const isAbove = labelDir.dy < 0;
-                        const baseY = coords.y + labelDir.dy;
-                        const isInterchangeSt = groupAtCoord && groupAtCoord.length > 1;
-
-                        // Build unique name lists for interchange stations
-                        const uniqueNamesEN = isInterchangeSt
-                          ? [...new Set(groupAtCoord.map(s => s.nameEN))]
-                          : [st.nameEN];
-                        const uniqueNamesTH = isInterchangeSt
-                          ? [...new Set(groupAtCoord.map(s => s.nameTH))]
-                          : [st.nameTH];
-                        // If names are all same, just show one
-                        const enLines = uniqueNamesEN.length === 1 ? [uniqueNamesEN[0]] : uniqueNamesEN;
-                        const thLines = uniqueNamesTH.length === 1 ? [uniqueNamesTH[0]] : uniqueNamesTH;
-
-                        // Calculate Y offsets for stacked labels
-                        const enLineHeight = 8;
-                        const thLineHeight = 7;
-                        const totalLines = enLines.length + thLines.length;
-                        const startEnY = isAbove
-                          ? baseY - (totalLines - enLines.length) * enLineHeight
-                          : baseY;
-
-                        return (
-                          <>
-                            {/* EN Lines */}
-                            {enLines.map((name, li) => (
-                              <text
-                                key={`en-${li}`}
-                                x={labelX}
-                                y={isAbove ? startEnY - (enLines.length - 1 - li) * enLineHeight : baseY + li * enLineHeight}
-                                textAnchor={labelDir.anchor as any}
-                                stroke="white"
-                                strokeWidth="2.5"
-                                strokeLinejoin="round"
-                                paintOrder="stroke"
-                                className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${isStart || isEnd ? 'font-extrabold text-[10px]' : ''} ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
-                              >
-                                {name}
-                              </text>
-                            ))}
-                            {/* TH Lines */}
-                            {thLines.map((name, li) => (
-                              <text
-                                key={`th-${li}`}
-                                x={labelX}
-                                y={isAbove
-                                  ? startEnY - enLines.length * enLineHeight - (thLines.length - 1 - li) * thLineHeight
-                                  : baseY + enLines.length * enLineHeight + li * thLineHeight}
-                                textAnchor={labelDir.anchor as any}
-                                stroke="white"
-                                strokeWidth="2"
-                                strokeLinejoin="round"
-                                paintOrder="stroke"
-                                className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 transition-opacity duration-300 ${isStart || isEnd ? 'font-bold text-[8.5px]' : ''} ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
-                              >
-                                {name}
-                              </text>
-                            ))}
-                          </>
-                        );
-                      })()}
                     </g>
                   );
                 })}
+                {/* --- STAGE 3.5: Collision-aware station labels --- */}
+                {labelPlacements.map((label) => (
+                  <g key={`label-${label.key}`} className="pointer-events-none select-none">
+                    {label.lines.map((line, lineIndex) => (
+                      <text
+                        key={`${label.key}-${line.kind}-${lineIndex}`}
+                        x={label.x}
+                        y={label.top + 6 + lineIndex * LINE_HEIGHT}
+                        textAnchor={label.anchor}
+                        stroke="white"
+                        strokeWidth={line.kind === 'th' ? '2.4' : '2.1'}
+                        strokeLinejoin="round"
+                        paintOrder="stroke"
+                        className={`${line.kind === 'th' ? 'text-[7px] font-bold fill-black/90' : 'text-[6.1px] font-semibold fill-black/75'} ${label.selected ? 'font-extrabold fill-black' : ''} ${isZoomedIn ? 'opacity-100' : 'opacity-90'} transition-opacity duration-300`}
+                      >
+                        {line.text}
+                      </text>
+                    ))}
+                  </g>
+                ))}
                 {/* --- STAGE 4: Interchange Line Selector Popup --- */}
                 {popupGroup && (
                   <foreignObject

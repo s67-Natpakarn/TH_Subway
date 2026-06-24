@@ -50,15 +50,12 @@ function buildSegments(steps: PathStep[]): LineSegment[] {
 
 const SegmentCard: React.FC<{
   segment: LineSegment;
-  segmentIndex: number;
-  isLast: boolean;
-}> = ({ segment, segmentIndex, isLast }) => {
+}> = ({ segment }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const isTransfer = segment.line.startsWith('__TRANSFER__');
 
   if (isTransfer) {
-    const transferStep = segment.stations[0].step;
     const isCross = segment.line.includes('cross-platform');
     return (
       <div className="flex items-center gap-3 py-2 px-3 my-1 rounded-xl bg-amber-50 border border-amber-200/60">
@@ -236,8 +233,6 @@ export const RouteCard: React.FC<RouteCardProps> = ({ route, onClear }) => {
           <SegmentCard
             key={`seg-${i}`}
             segment={seg}
-            segmentIndex={i}
-            isLast={i === segments.length - 1}
           />
         ))}
 

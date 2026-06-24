@@ -1689,6 +1689,12 @@
       "fare": 2
     },
     {
+      "from": "BL01",
+      "to": "BL33",
+      "weight": 2,
+      "fare": 2
+    },
+    {
       "from": "BL33",
       "to": "BL34",
       "weight": 2,
