@@ -1013,8 +1013,8 @@ export const Map: React.FC<MapProps> = ({
                     if (c.x === 920 && c.y < 700) return false;
                     return false;
                   })();
-                  const RX = isVertical ? 10 : 18;
-                  const RY = isVertical ? 18 : 10;
+                  const RX = isVertical ? 11 : 15;
+                  const RY = isVertical ? 15 : 11;
                   const segmentColors = group.map(st => getLineColor(st.line));
 
                   return (
