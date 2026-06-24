@@ -797,9 +797,54 @@ export const Map: React.FC<MapProps> = ({
     if (!stationsByCoord[key]) stationsByCoord[key] = [];
     stationsByCoord[key].push(st);
   });
-  const interchangeCoords = Object.values(stationsByCoord)
-    .filter(g => g.length > 1)
-    .map(g => stationCoords[g[0].id]);
+  const interchangeGroups = Object.values(stationsByCoord).filter(g => g.length > 1);
+
+  // Smart label placement: determine label direction based on line orientation
+  // For each station, determine label side (above/below/left/right) based on coords
+  const getLabelDirection = (stId: string): { dx: number; dy: number; anchor: string } => {
+    const c = stationCoords[stId];
+    if (!c) return { dx: 0, dy: -18, anchor: 'middle' };
+    // Determine orientation by checking which lines run through this coord
+    const group = stationsByCoord[`${c.x},${c.y}`];
+    const isInterchange = group && group.length > 1;
+
+    // Stations on the far right edge of the map → label to the left
+    if (c.x >= 1480) return { dx: -14, dy: 3, anchor: 'end' };
+    // Stations on the far left edge → label to the right
+    if (c.x <= 260) return { dx: 14, dy: 3, anchor: 'start' };
+    // Stations on a purely horizontal line (y is uniform along a stretch)
+    // BTS Sukhumvit (N series) runs vertically on x=1000
+    if (c.x === 1000 && c.y <= 1000 && c.y >= 40) return { dx: -14, dy: 3, anchor: 'end' };
+    // BTS Silom S series
+    if (stId.startsWith('S') && !stId.startsWith('S1') && c.y === 1120) return { dx: 0, dy: -18, anchor: 'middle' };
+    if (stId.startsWith('S') && c.y === 1120) return { dx: 0, dy: -18, anchor: 'middle' };
+    // MRT Blue top row (horizontal)
+    if (stId.startsWith('BL') && c.y === 680) return { dx: 0, dy: -18, anchor: 'middle' };
+    if (stId.startsWith('BL') && c.y === 1120) return { dx: 0, dy: 16, anchor: 'middle' };
+    if (stId.startsWith('BL') && c.x === 1160) return { dx: 14, dy: 3, anchor: 'start' };
+    if (stId.startsWith('BL') && c.x === 720) return { dx: -14, dy: 3, anchor: 'end' };
+    // Pink line (PK) horizontal on y=320, y=480
+    if (stId.startsWith('PK') && c.y === 320) return { dx: 0, dy: -18, anchor: 'middle' };
+    if (stId.startsWith('PK') && c.y === 480) return { dx: 0, dy: -18, anchor: 'middle' };
+    // MRT Purple (PP)
+    if (stId.startsWith('PP') && c.y === 480) return { dx: 0, dy: 16, anchor: 'middle' };
+    // MRT Yellow (YL)
+    if (stId.startsWith('YL') && c.y === 680) return { dx: 0, dy: 16, anchor: 'middle' };
+    if (stId.startsWith('YL') && c.x === 1520) return { dx: -14, dy: 3, anchor: 'end' };
+    // SRT Red (RN series) vertical
+    if (stId.startsWith('RN') && c.x === 920) return { dx: -14, dy: 3, anchor: 'end' };
+    // SRT Red (RW series) horizontal
+    if (stId.startsWith('RW')) return { dx: 0, dy: -18, anchor: 'middle' };
+    // ARL stations
+    if (stId.startsWith('A') && !stId.startsWith('An')) return { dx: 0, dy: 16, anchor: 'middle' };
+    // E series (BTS Sukhumvit east branch)
+    if (stId.startsWith('E') && c.y === 1000) return { dx: 0, dy: -18, anchor: 'middle' };
+    if (stId.startsWith('E') && c.x === 1520) return { dx: -14, dy: 3, anchor: 'end' };
+    // W series
+    if (stId.startsWith('W')) return { dx: 0, dy: -18, anchor: 'middle' };
+    // Default: alternate up/down based on parity
+    return { dx: 0, dy: -18, anchor: 'middle' };
+  };
 
   const isStationInRoute = (stationId: string) => {
     if (!calculatedRoute) return false;
@@ -953,19 +998,89 @@ export const Map: React.FC<MapProps> = ({
                   return null;
                 })}
 
-                {/* --- STAGE 2.5: Interchange Background Connectors --- */}
-                {interchangeCoords.map((c, i) => (
-                  <circle
-                    key={`interchange-bg-${i}`}
-                    cx={c.x}
-                    cy={c.y}
-                    r="16"
-                    fill="#ffffff"
-                    stroke="#cbd5e1"
-                    strokeWidth="2.5"
-                    className="pointer-events-none drop-shadow-sm"
-                  />
-                ))}
+                {/* --- STAGE 2.5: Interchange Multi-Color Pill Markers --- */}
+                {interchangeGroups.map((group, gi) => {
+                  const c = stationCoords[group[0].id];
+                  if (!c) return null;
+                  const n = group.length;
+                  // Determine pill orientation based on line direction at this point
+                  // Horizontal pill for horizontal-running lines, vertical for vertical ones
+                  const isVertical = (() => {
+                    const id = group[0].id;
+                    if (id.startsWith('N') || id.startsWith('CEN') || id.startsWith('BL') && c.x === 720) return true;
+                    if (c.x === 1000) return true;
+                    if (c.x === 1160 && c.y !== 680) return true;
+                    if (c.x === 920 && c.y < 700) return false;
+                    return false;
+                  })();
+                  const RX = isVertical ? 10 : 18;
+                  const RY = isVertical ? 18 : 10;
+                  const segmentColors = group.map(st => getLineColor(st.line));
+
+                  return (
+                    <g key={`interchange-pill-${gi}`} className="pointer-events-none">
+                      {/* White background pill */}
+                      <ellipse
+                        cx={c.x} cy={c.y}
+                        rx={RX + 3} ry={RY + 3}
+                        fill="white"
+                        stroke="#e2e8f0"
+                        strokeWidth="1.5"
+                        className="drop-shadow-sm"
+                      />
+                      {/* Color segments using clipPath */}
+                      {segmentColors.map((color, si) => {
+                        const frac = 1 / n;
+                        if (isVertical) {
+                          const startY = c.y - RY + si * (2 * RY / n);
+                          const segH = 2 * RY / n;
+                          return (
+                            <clipPath key={`clip-${gi}-${si}`} id={`seg-clip-${gi}-${si}`}>
+                              <rect x={c.x - RX} y={startY} width={2 * RX} height={segH} />
+                            </clipPath>
+                          );
+                        } else {
+                          const startX = c.x - RX + si * (2 * RX / n);
+                          const segW = 2 * RX / n;
+                          return (
+                            <clipPath key={`clip-${gi}-${si}`} id={`seg-clip-${gi}-${si}`}>
+                              <rect x={startX} y={c.y - RY} width={segW} height={2 * RY} />
+                            </clipPath>
+                          );
+                        }
+                      })}
+                      {segmentColors.map((color, si) => (
+                        <ellipse
+                          key={`seg-${gi}-${si}`}
+                          cx={c.x} cy={c.y}
+                          rx={RX} ry={RY}
+                          fill={color}
+                          clipPath={`url(#seg-clip-${gi}-${si})`}
+                          opacity="0.9"
+                        />
+                      ))}
+                      {/* Divider lines between segments */}
+                      {segmentColors.slice(0, -1).map((_, si) => {
+                        const frac = (si + 1) / n;
+                        if (isVertical) {
+                          const lineY = c.y - RY + frac * (2 * RY);
+                          return <line key={`div-${gi}-${si}`} x1={c.x - RX} y1={lineY} x2={c.x + RX} y2={lineY} stroke="white" strokeWidth="1.5" />;
+                        } else {
+                          const lineX = c.x - RX + frac * (2 * RX);
+                          return <line key={`div-${gi}-${si}`} x1={lineX} y1={c.y - RY} x2={lineX} y2={c.y + RY} stroke="white" strokeWidth="1.5" />;
+                        }
+                      })}
+                      {/* Outer border on top */}
+                      <ellipse
+                        cx={c.x} cy={c.y}
+                        rx={RX} ry={RY}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="2"
+                      />
+                    </g>
+                  );
+                })}
 
                 {/* --- STAGE 3: Station Circles & Hover Details --- */}
                 {stations.map((st, i) => {
@@ -992,69 +1107,118 @@ export const Map: React.FC<MapProps> = ({
                         }
                       }}
                     >
-                      {/* Ripple Glow */}
+                      {/* Ripple Glow - for selected start/end stations */}
                       {(isStart || isEnd) && (
                         <circle
                           cx={coords.x}
                           cy={coords.y}
-                          r="18" fill="none"
+                          r="22" fill="none"
                           stroke={isStart ? '#159E40' : '#003399'}
                           strokeWidth="3"
                           className="opacity-40"
                         />
                       )}
 
-                      {/* Station Circle Body */}
-                      <circle
-                        cx={coords.x}
-                        cy={coords.y}
-                        r={isStart || isEnd ? '11' : inRoute ? '9' : '7.5'}
-                        fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
-                        stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
-                        strokeWidth={isStart || isEnd ? '4' : '2.5'}
-                        className="map-station"
-                      />
+                      {/* Station Circle Body - hidden for interchange (pill from Stage 2.5 shows instead) */}
+                      {(() => {
+                        const grp = stationsByCoord[`${coords.x},${coords.y}`];
+                        const isInterchangeNode = grp && grp.length > 1;
+                        if (isInterchangeNode && !isStart && !isEnd) return null;
+                        return (
+                          <circle
+                            cx={coords.x}
+                            cy={coords.y}
+                            r={isStart || isEnd ? '11' : inRoute ? '9' : '7.5'}
+                            fill={isStart || isEnd ? '#ffffff' : inRoute ? strokeColor : '#ffffff'}
+                            stroke={isStart || isEnd ? (isStart ? '#159E40' : '#003399') : strokeColor}
+                            strokeWidth={isStart || isEnd ? '4' : '2.5'}
+                            className="map-station"
+                          />
+                        );
+                      })()}
 
-                      {/* Station Code inside the dot */}
-                      <text
-                        x={coords.x}
-                        y={coords.y + 1.6}
-                        textAnchor="middle"
-                        className={`text-[5px] font-extrabold select-none pointer-events-none transition-opacity ${isStart || isEnd ? (isStart ? 'fill-[#159E40]' : 'fill-[#003399]') : inRoute ? 'fill-white' : 'fill-black/80'
-                          }`}
-                      >
-                        {st.id.split('_')[0]}
-                      </text>
+                      {/* Station Code inside the dot - hidden for interchange (pill shows instead) */}
+                      {!stationsByCoord[`${coords.x},${coords.y}`]?.length || stationsByCoord[`${coords.x},${coords.y}`].length <= 1 ? (
+                        <text
+                          x={coords.x}
+                          y={coords.y + 1.6}
+                          textAnchor="middle"
+                          className={`text-[5px] font-extrabold select-none pointer-events-none transition-opacity ${isStart || isEnd ? (isStart ? 'fill-[#159E40]' : 'fill-[#003399]') : inRoute ? 'fill-white' : 'fill-black/80'
+                            }`}
+                        >
+                          {st.id.split('_')[0]}
+                        </text>
+                      ) : null}
 
-                      {/* Station EN Label */}
-                      <text
-                        x={coords.x}
-                        y={coords.y + (i % 2 === 0 ? -16 : 15)}
-                        textAnchor="middle"
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinejoin="round"
-                        paintOrder="stroke"
-                        className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${isStart || isEnd ? 'font-extrabold text-[10px]' : ''
-                          } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
-                      >
-                        {st.nameEN}
-                      </text>
+                      {/* Smart Station Labels - only show first station in interchange group */}
+                      {(() => {
+                        const groupAtCoord = stationsByCoord[`${coords.x},${coords.y}`];
+                        // For interchange stations, only show label for the first entry
+                        if (groupAtCoord && groupAtCoord.length > 1 && groupAtCoord[0].id !== st.id) return null;
+                        const labelDir = getLabelDirection(st.id);
+                        const labelX = coords.x + labelDir.dx;
+                        const isAbove = labelDir.dy < 0;
+                        const baseY = coords.y + labelDir.dy;
+                        const isInterchangeSt = groupAtCoord && groupAtCoord.length > 1;
 
-                      {/* Station Thai Label */}
-                      <text
-                        x={coords.x}
-                        y={coords.y + (i % 2 === 0 ? -9 : 21)}
-                        textAnchor="middle"
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinejoin="round"
-                        paintOrder="stroke"
-                        className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 transition-opacity duration-300 ${isStart || isEnd ? 'font-bold text-[8.5px]' : ''
-                          } ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
-                      >
-                        {st.nameTH}
-                      </text>
+                        // Build unique name lists for interchange stations
+                        const uniqueNamesEN = isInterchangeSt
+                          ? [...new Set(groupAtCoord.map(s => s.nameEN))]
+                          : [st.nameEN];
+                        const uniqueNamesTH = isInterchangeSt
+                          ? [...new Set(groupAtCoord.map(s => s.nameTH))]
+                          : [st.nameTH];
+                        // If names are all same, just show one
+                        const enLines = uniqueNamesEN.length === 1 ? [uniqueNamesEN[0]] : uniqueNamesEN;
+                        const thLines = uniqueNamesTH.length === 1 ? [uniqueNamesTH[0]] : uniqueNamesTH;
+
+                        // Calculate Y offsets for stacked labels
+                        const enLineHeight = 8;
+                        const thLineHeight = 7;
+                        const totalLines = enLines.length + thLines.length;
+                        const startEnY = isAbove
+                          ? baseY - (totalLines - enLines.length) * enLineHeight
+                          : baseY;
+
+                        return (
+                          <>
+                            {/* EN Lines */}
+                            {enLines.map((name, li) => (
+                              <text
+                                key={`en-${li}`}
+                                x={labelX}
+                                y={isAbove ? startEnY - (enLines.length - 1 - li) * enLineHeight : baseY + li * enLineHeight}
+                                textAnchor={labelDir.anchor as any}
+                                stroke="white"
+                                strokeWidth="2.5"
+                                strokeLinejoin="round"
+                                paintOrder="stroke"
+                                className={`text-[8.5px] font-bold tracking-tight select-none pointer-events-none fill-black/90 transition-opacity duration-300 ${isStart || isEnd ? 'font-extrabold text-[10px]' : ''} ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
+                              >
+                                {name}
+                              </text>
+                            ))}
+                            {/* TH Lines */}
+                            {thLines.map((name, li) => (
+                              <text
+                                key={`th-${li}`}
+                                x={labelX}
+                                y={isAbove
+                                  ? startEnY - enLines.length * enLineHeight - (thLines.length - 1 - li) * thLineHeight
+                                  : baseY + enLines.length * enLineHeight + li * thLineHeight}
+                                textAnchor={labelDir.anchor as any}
+                                stroke="white"
+                                strokeWidth="2"
+                                strokeLinejoin="round"
+                                paintOrder="stroke"
+                                className={`text-[7px] font-semibold select-none pointer-events-none fill-black/80 transition-opacity duration-300 ${isStart || isEnd ? 'font-bold text-[8.5px]' : ''} ${isZoomedIn ? 'opacity-100' : 'opacity-0'}`}
+                              >
+                                {name}
+                              </text>
+                            ))}
+                          </>
+                        );
+                      })()}
                     </g>
                   );
                 })}
