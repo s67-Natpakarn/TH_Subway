@@ -16,12 +16,17 @@ interface SidebarProps {
   onClear: () => void;
 }
 
+// Per-line filter tabs — each line gets its own color-named button
 const LINE_TABS = [
-  { key: 'all', label: 'ทั้งหมด', color: '#6b7280' },
-  { key: 'bts', label: 'BTS', color: '#159E40' },
-  { key: 'mrt', label: 'MRT', color: '#003399' },
-  { key: 'arl', label: 'ARL', color: '#800000' },
-  { key: 'srt', label: 'SRT', color: '#E60000' },
+  { key: 'all',           labelTH: 'ทั้งหมด',       labelEN: 'All Lines',       color: '#6b7280' },
+  { key: 'BTS_SUKHUMVIT', labelTH: 'สายสีเขียว',    labelEN: 'Green Line',      color: '#159E40' },
+  { key: 'BTS_SILOM',     labelTH: 'สายสีเขียวเข้ม',labelEN: 'Dark Green',      color: '#006432' },
+  { key: 'MRT_BLUE',      labelTH: 'สายสีน้ำเงิน',  labelEN: 'Blue Line',       color: '#003399' },
+  { key: 'MRT_PURPLE',    labelTH: 'สายสีม่วง',     labelEN: 'Purple Line',     color: '#800080' },
+  { key: 'MRT_YELLOW',    labelTH: 'สายสีเหลือง',   labelEN: 'Yellow Line',     color: '#C8A000' },
+  { key: 'MRT_PINK',      labelTH: 'สายสีชมพู',     labelEN: 'Pink Line',       color: '#FF66B2' },
+  { key: 'ARL',           labelTH: 'สายสีแดงเข้ม',  labelEN: 'Airport Rail',    color: '#800000' },
+  { key: 'SRT_RED',       labelTH: 'สายสีแดง',      labelEN: 'Red Line',        color: '#E60000' },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -36,7 +41,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'all' | 'bts' | 'mrt' | 'arl' | 'srt'>('all');
+  const [activeTab, setActiveTab] = useState<string>('all');
 
   // Get line configs for selected stations
   const startCfg = startStation ? getLineConfig(startStation.line) : null;
@@ -54,13 +59,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         station.id.toLowerCase().includes(searchQuery.toLowerCase());
 
       if (!matchesSearch) return false;
-
       if (activeTab === 'all') return true;
-      if (activeTab === 'bts') return station.line.startsWith('BTS_');
-      if (activeTab === 'mrt') return station.line.startsWith('MRT_');
-      if (activeTab === 'arl') return station.line === 'ARL';
-      if (activeTab === 'srt') return station.line === 'SRT_RED';
-      return true;
+      // Each tab key = exact line ID
+      return station.line === activeTab;
     });
   }, [stations, searchQuery, activeTab]);
 
@@ -98,12 +99,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
           >
             <Train className="w-5 h-5" />
           </div>
-          <div>
+          <div className="flex-1 min-w-0">
             <h1 className="text-lg font-bold tracking-tight m-0 leading-none">ThaiTransit</h1>
             {startCfg ? (
-              <span className="text-[10px] font-semibold" style={{ color: headerColor }}>
-                {startCfg.nameTH}
-              </span>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                {/* Colored pill with line color name */}
+                <span
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold text-white"
+                  style={{ backgroundColor: headerColor }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
+                  {LINE_TABS.find(t => t.key === startStation?.line)?.labelEN ?? startCfg.nameEN}
+                </span>
+              </div>
             ) : (
               <span className="text-[10px] opacity-50 font-medium">ระบบคำนวณเส้นทางรถไฟฟ้า 8 สาย</span>
             )}
@@ -246,31 +254,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   />
                 </div>
 
-                {/* Colored Tabs */}
-                <div className="flex gap-1 p-0.5 rounded-lg bg-black/[0.03] border border-black/5">
-                  {LINE_TABS.map((tab) => (
-                    <button
-                      key={tab.key}
-                      onClick={() => setActiveTab(tab.key as any)}
-                      className="flex-1 py-1 text-[9px] font-bold rounded transition-all flex items-center justify-center gap-1"
-                      style={
-                        activeTab === tab.key
-                          ? { backgroundColor: tab.color, color: 'white' }
-                          : { color: tab.color }
-                      }
-                    >
-                      {tab.key !== 'all' && (
-                        <span
-                          className="w-1.5 h-1.5 rounded-full"
-                          style={{
-                            backgroundColor: activeTab === tab.key ? 'white' : tab.color,
-                            opacity: activeTab === tab.key ? 0.8 : 1,
-                          }}
-                        />
-                      )}
-                      {tab.label}
-                    </button>
-                  ))}
+                {/* Line Filter — horizontal scrollable pill row */}
+                <div className="flex gap-1.5 overflow-x-auto pb-0.5 -mx-0.5 px-0.5" style={{ scrollbarWidth: 'none' }}>
+                  {LINE_TABS.map((tab) => {
+                    const isActive = activeTab === tab.key;
+                    const isAll = tab.key === 'all';
+                    return (
+                      <button
+                        key={tab.key}
+                        onClick={() => setActiveTab(tab.key)}
+                        className="shrink-0 flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[9px] font-bold transition-all border whitespace-nowrap"
+                        style={
+                          isActive
+                            ? { backgroundColor: tab.color, borderColor: tab.color, color: 'white' }
+                            : { backgroundColor: tab.color + '12', borderColor: tab.color + '35', color: isAll ? '#6b7280' : tab.color }
+                        }
+                      >
+                        {!isAll && (
+                          <span
+                            className="w-1.5 h-1.5 rounded-full shrink-0"
+                            style={{ backgroundColor: isActive ? 'rgba(255,255,255,0.75)' : tab.color }}
+                          />
+                        )}
+                        {tab.labelEN}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
